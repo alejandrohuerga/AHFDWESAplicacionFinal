@@ -39,6 +39,11 @@
         header('Location: indexLoginLogoff.php');
         exit;
     }
+
+    // Codigo que se ejecuta cuando pulsamos el boton REST.
+    if(isset($_REQUEST['rest'])){
+        
+    }
     
     // Código que se ejecuta al pulsar el botón de mantenimiento de departamentos.
     if(isset($_REQUEST['mantenimientoDep'])){

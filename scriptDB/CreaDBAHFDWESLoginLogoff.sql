@@ -7,9 +7,9 @@
  * Created: 20 nov. 2025
  */
 
-CREATE DATABASE IF NOT EXISTS DBAHFDWESLoginLogoff;
+CREATE DATABASE IF NOT EXISTS DBAHFDWESAplicacionFinal;
 
-USE DBAHFDWESLoginLogoff;
+USE DBAHFDWESAplicacionFinal;
 
 CREATE TABLE IF NOT EXISTS T_01Usuario (
     T01_CodUsuario VARCHAR(25) PRIMARY KEY,
@@ -32,6 +32,6 @@ CREATE TABLE IF NOT EXISTS T_02Departamento (
 
 
 /* Creación del usuario y permisos */
-CREATE USER IF NOT EXISTS "userAHFDWESLoginLogoff"@"%" IDENTIFIED by "paso";
-GRANT ALL PRIVILEGES on *.* TO "userAHFDWESLoginLogoff"@"%" WITH GRANT OPTION;
+CREATE USER IF NOT EXISTS "userAHFDWESAplicacionFinal"@"%" IDENTIFIED by "paso";
+GRANT ALL PRIVILEGES on *.* TO "userAHFDWESAplicacionFinal"@"%" WITH GRANT OPTION;
 FLUSH PRIVILEGES;

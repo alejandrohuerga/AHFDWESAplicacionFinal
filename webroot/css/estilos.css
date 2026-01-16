@@ -190,7 +190,24 @@ input[name="mantenimientoDep"]{
     border-radius: 4px;
 }
 
-input[name="error"]:hover{
+input[name="mantenimientoDep"]:hover{
+    background-color: rgb(80,80,80);
+}
+
+input[name="rest"]{
+    height: 32px;
+    font-family: Play,sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: inherit;
+    color: rgb(241,241,241);
+    padding: 8px 24px;
+    background-color: rgb(56,56,56);
+    border: none;
+    border-radius: 4px;
+}
+
+input[name="rest"]:hover{
     background-color: rgb(80,80,80);
 }
 

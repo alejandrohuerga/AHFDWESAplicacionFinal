@@ -7,7 +7,7 @@
  * Created: 20 nov. 2025
  */
 
-USE DBAHFDWESLoginLogoff;
+USE DBAHFDWESAplicacionFinal;
 
 INSERT INTO T_01Usuario (T01_CodUsuario,T01_Password,T01_DescUsuario,T01_ImagenUsuario)
                 VALUES
