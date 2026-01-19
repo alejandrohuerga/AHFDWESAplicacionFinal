@@ -42,7 +42,10 @@
 
     // Codigo que se ejecuta cuando pulsamos el boton REST.
     if(isset($_REQUEST['rest'])){
-        
+        $_SESSION['paginaAnterior'] = $_SESSION['paginaEnCurso'];
+        $_SESSION['paginaEnCurso'] = 'api';
+        header('Location: indexLoginLogoff.php');
+        exit;
     }
     
     // Código que se ejecuta al pulsar el botón de mantenimiento de departamentos.

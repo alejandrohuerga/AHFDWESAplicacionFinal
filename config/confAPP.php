@@ -8,6 +8,8 @@
     require_once 'model/UsuarioPDO.php';
     require_once 'model/AppError.php';
     require_once 'model/DBPDO.php';
+    require_once 'model/REST.php';
+    require_once 'model/FotoNasa.php';
     require_once 'core/231018libreriaValidacion.php';
 
     $controller = [
@@ -16,7 +18,8 @@
         'inicioPrivado' => 'controller/cInicioPrivado.php',
         'detalle' => 'controller/cDetalle.php',
         'departamento' => 'controller/cWip.php',
-        'error' => 'controller/cError.php'
+        'error' => 'controller/cError.php',
+        'api'=>'controller/cREST.php'
     ];
 
     $view = [
@@ -26,6 +29,7 @@
         'inicioPrivado' => 'view/vInicioPrivado.php',
         'detalle' => 'view/vDetalle.php',
         'departamento' => 'view/vWip.php',
-        'error' => 'view/vError.php'
+        'error' => 'view/vError.php',
+        'api' => 'view/vREST.php'
     ];
 ?>
