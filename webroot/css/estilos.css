@@ -538,6 +538,19 @@ main.detalle table.tableSG th {
     margin-bottom: 30px;
 }
 
+.formulariosApi{
+    background: lightgoldenrodyellow;
+    width: 150px;
+}
+
+#descripcionNasa{
+    font-size: small;
+}
+
+/* Titulo de la foto de la Nasa */
+#tituloFotoNasa{
+    margin-top: 8px;
+}
 #urlNasa{
     color: white;
 }

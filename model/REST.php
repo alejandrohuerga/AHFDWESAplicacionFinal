@@ -16,14 +16,23 @@
 
         public static function apiNasa($fecha){
             // Accedemos a la URL de la Nasa
-            $resultado=file_get_contents("https://api.nasa.gov/planetary/apod?api_key=" . self::API_KEY_NASA);
+            $resultado=file_get_contents("https://api.nasa.gov/planetary/apod?api_key=" . self::API_KEY_NASA . "&date=" . $fecha);
             $archivoApi=json_decode($resultado,true);
 
             // Si el archivo se ha decodificado correctamente devuelve la foto.
             if(isset($archivoApi)){
-                $fotoNasa=new FotoNasa($archivoApi['title'],$archivoApi['url'],$archivoApi['date']);
+                $fotoNasa=new FotoNasa(
+                    $archivoApi['title'],
+                    $archivoApi['explanation'] ?? '',
+                    $archivoApi['media_type'] ?? '',
+                    $archivoApi['service_version'] ?? '',
+                    $archivoApi['url'],
+                    $archivoApi['date']
+                );
                 return $fotoNasa;
             }
+
+            return null;
         }
 
         public static function apiPokemon($nombre){

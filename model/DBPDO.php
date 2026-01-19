@@ -22,7 +22,7 @@ class DBPDO{  // Clase para la conexión con la base de datos y poder ejecutar c
 
             );
 
-            header('Location: indexLoginLogoff.php');
+            header('Location: index.php');
             exit;
         }
 

@@ -13,14 +13,14 @@
         $_SESSION['paginaAnterior'] = $_SESSION['paginaEnCurso'];
         // Si se pulsa le damos el valor a la página solicitada a la variable $_SESSION
         $_SESSION['paginaEnCurso']='inicioPublico';
-        header("location: indexLoginLogoff.php");  
+        header("location: index.php");  
         exit;
     }
 
     // Código que se ejecuta al pulsar el botón volver.
     if(isset($_REQUEST['volver'])){
         $_SESSION['paginaEnCurso']='inicioPrivado';
-        header("location: indexLoginLogoff.php");  
+        header("location: index.php");  
         exit;
     }
 
@@ -37,36 +37,73 @@
     ];
     */
 
-    $aErroresNasa=[
-        'fechaFoto' =>''
+    $aErroresNasa = [
+        'fechaFoto' => ''
     ];
 
-    $aRespuestasNasa=[
+    $aRespuestasNasa = [
         'fechaFoto' => null
     ];
 
-    $entradaOK=true;
+    // Inicializamos la foto de hoy
+    $fechaHoy = date('Y-m-d');
+    $oFotoNasaHoy = REST::apiNasa($fechaHoy); // Llama a la API con la fecha de hoy
+    $avRestNasa = [
+        'fotoNasa' => $oFotoNasaHoy
+    ];
 
-    $fechaMaxima=new DateTime('Y-m-d');
-    
+    define('OBLIGATORIO', 1);
+    $entradaOK = true;
 
-    if(isset($_REQUEST['enviar'])){ // Código que se ejecuta cuando se envia el formulario.
-        $aErroresNasa['fechaFoto']=validacionFormularios::validarFecha($fechaMaxima,"01/01/1900",1);
+    // Fecha de hoy por defecto si no hay formulario enviado
+    $fechaFoto = $_REQUEST['fechaFoto'] ?? $fechaHoy;
 
-        // Si en el array de errores encuentra un error $entradaOK pasa a un valor falso.
-        foreach($aErroresNasa as $campo => $valor){
-            if($valor != null){ // Si ha habido algun error $entradaOK es falso.
-                $entradaOK=false;
-            }else{
-                $aRespuestasNasa[$campo]=$_REQUEST[$campo];
+    // Si el formulario se envía
+    if (isset($_REQUEST['enviar'])) {
+        /**
+         *  Function preg_match()
+         *  Enlace a la documentación oficial: https://www.php.net/manual/en/function.preg-match.php
+         *  
+         *  Esta función se utiliza para validar el formato de la fecha introducida por el usuario.
+         *  @param String $pattern Patrón que queremos que siga lo ingresado.
+         *  @param String $fechaFoto Cadena de texto que le pasamos para comprobar el patrón.
+         *  @return int Devuelve 1 si coincide con el patrón, 0 si no coincide.
+         */
+        
+        if (!preg_match('/^\d{4}-\d{2}-\d{2}$/', $fechaFoto)) {
+            $aErroresNasa['fechaFoto'] = "Formato de fecha inválido. YYYY-mm-dd";
+            $entradaOK = false;
+        } else {
+            // Validar rango de fechas usando tu librería
+            $aErroresNasa['fechaFoto'] = validacionFormularios::validarFecha(
+                $fechaFoto,
+                date('d-m-Y'),  // Fecha máxima = hoy
+                '01/01/1995',   // Fecha mínima
+                OBLIGATORIO
+            );
+
+            // Comprobar errores
+            foreach ($aErroresNasa as $campo => $error) {
+                if ($error !== null) {
+                    $entradaOK = false;
+                } else {
+                    $aRespuestasNasa[$campo] = $fechaFoto;
+                }
             }
         }
-    }else{
-        $entradaOK=false; // Si el formulario no se ha rellando nunca.
     }
 
-    if($entradaOK){
-        $aRespuestasNasa['fechaFoto']=$_REQUEST['fechaNasa'];
+    // Llamamos a la API si la fecha es válida o si es la primera carga
+    if ($entradaOK || !isset($_REQUEST['enviar'])) {
+        $oFotoNasa = REST::apiNasa($fechaFoto);
+
+        if ($oFotoNasa !== null) {
+            $avRestNasa['fotoNasa'] = $oFotoNasa;
+        } else {
+            // Si no hay imagen para la fecha
+            $aErroresNasa['fechaFoto'] = 'No hay imagen disponible para esta fecha';
+            $avRestNasa['fotoNasa'] = null;
+        }
     }
     
     require_once $view['layout'];

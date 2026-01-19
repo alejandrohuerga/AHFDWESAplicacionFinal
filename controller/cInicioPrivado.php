@@ -5,7 +5,7 @@
         $_SESSION['paginaAnterior'] = $_SESSION['paginaEnCurso'];
         // Redirige a la página de inicio.
         $_SESSION['paginaEnCurso'] = 'inicioPublico';
-        header("location: indexLoginLogoff.php");  
+        header("location: index.php");  
         exit;
     }
     
@@ -17,7 +17,7 @@
         $_SESSION['paginaAnterior'] = $_SESSION['paginaEnCurso'];
         // Si se pulsa le damos el valor a la página solicitada a la variable $_SESSION
         $_SESSION['paginaEnCurso']='inicioPublico';
-        header("location: indexLoginLogoff.php");  
+        header("location: index.php");  
         exit;
     }
     
@@ -25,7 +25,7 @@
     if(isset($_REQUEST['detalle'])){
         $_SESSION['paginaAnterior'] =$_SESSION['paginaEnCurso'];
         $_SESSION['paginaEnCurso']='detalle';
-        header("location: indexLoginLogoff.php");  
+        header("location: index.php");  
         exit;
     }
 
@@ -36,7 +36,7 @@
         $consultaError = "SELECT * FROM T03_Cuestion";
         DBPDO::ejecutarConsulta($consultaError);
         $_SESSION['paginaEnCurso'] = 'error';
-        header('Location: indexLoginLogoff.php');
+        header('Location: index.php');
         exit;
     }
 
@@ -44,7 +44,7 @@
     if(isset($_REQUEST['rest'])){
         $_SESSION['paginaAnterior'] = $_SESSION['paginaEnCurso'];
         $_SESSION['paginaEnCurso'] = 'api';
-        header('Location: indexLoginLogoff.php');
+        header('Location: index.php');
         exit;
     }
     
@@ -52,7 +52,7 @@
     if(isset($_REQUEST['mantenimientoDep'])){
         $_SESSION['paginaAnterior']= $_SESSION['paginaEnCurso'];
         $_SESSION['paginaEnCurso'] = 'departamento';
-        header('Location: indexLoginLogoff.php');
+        header('Location: index.php');
         exit;
     }
 

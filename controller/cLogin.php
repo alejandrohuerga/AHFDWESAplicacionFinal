@@ -3,7 +3,7 @@
     // Si pulsa el boton volver , volvemos a la pagina anterior.
     if (isset($_REQUEST["cancelar"])) {
         $_SESSION['paginaEnCurso']='inicioPublico';
-        header("location: indexLoginLogoff.php");  
+        header("location: index.php");  
         exit;
     }
 

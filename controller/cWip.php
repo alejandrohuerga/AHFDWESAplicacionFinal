@@ -4,7 +4,7 @@
         $_SESSION['paginaAnterior'] = $_SESSION['paginaEnCurso'];
         // Redirige a la página de inicio.
         $_SESSION['paginaEnCurso'] = 'inicioPublico';
-        header("location: indexLoginLogoff.php");  
+        header("location: index.php");  
         exit;
     }
     
@@ -13,14 +13,14 @@
         $_SESSION['paginaAnterior'] = $_SESSION['paginaEnCurso'];
         // Si se pulsa le damos el valor a la página solicitada a la variable $_SESSION
         $_SESSION['paginaEnCurso']='inicioPublico';
-        header("location: indexLoginLogoff.php");  
+        header("location: index.php");  
         exit;
     }
 
     // Código que se ejecuta al pulsar el botón volver.
     if(isset($_REQUEST['volver'])){
         $_SESSION['paginaEnCurso']='inicioPrivado';
-        header("location: indexLoginLogoff.php");  
+        header("location: index.php");  
         exit;
     }
     

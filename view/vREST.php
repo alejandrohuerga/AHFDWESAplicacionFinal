@@ -11,13 +11,19 @@
             <h2>NASA</h2>
             <div class="tituloRest">
                 <form name="formularioNasa" method="post">
-                    <input style="background-color:lightgoldenrodyellow;" type="date" name="fechaNasa"  value='<?php echo (empty($aErrores['fechaOb'])) ? ($_REQUEST['fechaOb'] ?? '') : ''; ?>'/>
+                    <input class="formulariosApi" type="text" name="fechaFoto" value="<?= date('Y-m-d') ?? $_REQUEST['fechaFoto']; ?>"/>
                     <input type="submit" name="enviar" value="enviar">
+                    <a style="color:red;">
+                        <?php echo (isset($_REQUEST['enviar'])) ? $aErroresNasa['fechaFoto'] : ''; ?>
+                    </a>
                 </form>
-                <?php echo $avRest['fotoNasa']->getTitulo(); ?>
+                <?php echo '<h2 id="tituloFotoNasa">' . $avRestNasa['fotoNasa'] -> getTitulo(); '</h2>' ?>
             </div>
             <div class="infoRest">
-                <img src="<?php echo $avRest['fotoNasa']->getFoto(); ?>" alt="Foto de la NASA" width="300px" height="200px">
+                <img src="<?php echo $avRestNasa['fotoNasa']->getFoto(); ?>" alt="Foto de la NASA" width="300px" height="200px">
+            </div>
+            <div id="descripcionFotoNasa">
+                <?php echo '<p id="descripcionNasa">' .  $avRestNasa['fotoNasa'] -> getExplicacion(); '</p>'?>
             </div>
             <div class="infoApi">
                 <p><b>Instrucciones de uso:</b> <a target="blank" href=" https://api.nasa.gov" id="urlNasa"> https://api.nasa.gov</a></p>

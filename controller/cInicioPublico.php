@@ -8,19 +8,19 @@
   if (isset($_REQUEST["iniciarSesion"])) {
     $_SESSION['paginaAnterior'] = $_SESSION['paginaEnCurso'];
     $_SESSION['paginaEnCurso']='login';
-    header("location: indexLoginLogoff.php");  
+    header("location: index.php");  
     exit;
   }
 
   if (!isset($_COOKIE['idioma'])) {
         setcookie("idioma", "es", time()+604.800); // caducidad 1 semana
-        header('Location: indexLoginLogoff.php');
+        header('Location: index.php');
         exit;
   }
     
   if (isset($_REQUEST['idioma'])) {
     setcookie("idioma", $_REQUEST['idioma'], time()+604.800); // caducidad 1 semana
-    header('Location: indexLoginLogoff.php');
+    header('Location: index.php');
     exit;
   }
 
