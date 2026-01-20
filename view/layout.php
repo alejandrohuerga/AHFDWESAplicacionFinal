@@ -21,7 +21,7 @@
     <footer>
         <p class="nombre"><a href="https://alejandrohuefer.ieslossauces.es/">Alejandro De la Huerga Fernández</a><p>
         <p class="webImitada"><a href="https://www.faceit.com/es" target="_blank">Página Web imitada</a><p>
-        <p class="webImitada"><a href="../webroot/images/Curriculum.pdf" target="_blank">Curriculum</a><p>
+        <p class="webImitada"><a href="/webroot/images/Curriculum.pdf" target="_blank">Curriculum</a><p>
         <a href="https://github.com/alejandrohuerga/AHFDWESLoginLogoff.git" target="_blank">
             <img src="webroot/images/icone-github-grise.png"> 
         </a>

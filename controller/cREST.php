@@ -38,7 +38,7 @@
     */
 
     $aErroresNasa = [
-        'fechaFoto' => ''
+        'fechaNasa' => ''
     ];
 
     $aRespuestasNasa = [
