@@ -13,10 +13,28 @@
     class REST{
         // ApiKey de la Api de la Nasa de foto del dia.
         const API_KEY_NASA = '6qXdzrHPJ6rIaOMcGJDAePcNlUMFoAtOdcjy8yZg';
+        
+        /**
+         * Function __apiNasa(&fecha)
+         * Funcion la cual conecta y hace la petición de la foto de la fecha proporcinada.
+         * 
+         * @param String $fecha Fecha para recibir la foto de esa fecha.
+         * @return &oFotoNasa | null Devuelve una instancia del objeto FotoNasa o null.
+         * 
+         * @author Alejandro De la Huerga.
+         * @version 1.0.0
+         * @since 20/01/2026
+         */
 
         public static function apiNasa($fecha){
             // Accedemos a la URL de la Nasa
-            $resultado=file_get_contents("https://api.nasa.gov/planetary/apod?api_key=" . self::API_KEY_NASA . "&date=" . $fecha);
+            // El @ evita que salga el warning por pantalla
+            $resultado=@file_get_contents("https://api.nasa.gov/planetary/apod?api_key=" . self::API_KEY_NASA);
+
+            if($resultado === false){
+                return null;
+            }
+
             $archivoApi=json_decode($resultado,true);
 
             // Si el archivo se ha decodificado correctamente devuelve la foto.
