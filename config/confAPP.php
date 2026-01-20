@@ -11,6 +11,7 @@
     require_once 'model/REST.php';
     require_once 'model/FotoNasa.php';
     require_once 'core/231018libreriaValidacion.php';
+    require_once 'model/Pokemon.php';
 
     $controller = [
         'inicioPublico' => 'controller/cInicioPublico.php',

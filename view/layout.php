@@ -15,13 +15,15 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bitcount+Grid+Double:wght@100..900&family=Play:wght@400;700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+    <script nomodule src="https://unpkg.com/@google/model-viewer/dist/model-viewer-legacy.js"></script>
 </head>
 <body>
     <?php require_once $view[$_SESSION['paginaEnCurso']];?>
     <footer>
         <p class="nombre"><a href="https://alejandrohuefer.ieslossauces.es/">Alejandro De la Huerga Fernández</a><p>
         <p class="webImitada"><a href="https://www.faceit.com/es" target="_blank">Página Web imitada</a><p>
-        <p class="webImitada"><a href="/webroot/images/Curriculum.pdf" target="_blank">Curriculum</a><p>
+        <p class="webImitada"><a href="/AHFDWESAplicacionFinal/webroot/images/Curriculum.pdf" target="_blank">Curriculum</a><p>
         <a href="https://github.com/alejandrohuerga/AHFDWESLoginLogoff.git" target="_blank">
             <img src="webroot/images/icone-github-grise.png"> 
         </a>

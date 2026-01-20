@@ -58,6 +58,49 @@
         'explicacionNasa' => ($oFotoNasa) ? $oFotoNasa->getExplicacion() : "",
         'errorNasa' => $aErrores['fechaNasa'],
     ];
+
+    // Controlador de la Api de Pokemon.
+
+    $aErroresPokemon=[
+        'nombrePokemon' => null
+    ];
+
+    $aRespuestasPokemon =[
+        'nombrePokemon' => null
+    ];
+    $entradaOk = false;
+    $nombrePokemon = $_REQUEST['pokemonNombre'] ?? 'Bulbasaur';
+
+    $oPokemon = new Pokemon ("Bulbasaur","https://raw.githubusercontent.com/Pokemon-3D-api/assets/refs/heads/main/models/opt/regular/1.glb","shiny");
+
+    // Si se envia el formulario.
+    if(isset($_REQUEST['enviarPokemon'])){
+        $entradaOk = true;
+
+        //Validación del campo de entrada.
+        $aErroresPokemon['nombrePokemon'] = validacionFormularios::comprobarAlfabetico($nombrePokemon,1000,1);
+
+        if($aErroresPokemon['nombrePokemon'] != null){
+            $entradaOk= false;
+        }else{
+            $aRespuestasPokemon['nombrePokemon'] = $_REQUEST['pokemonNombre'];
+            $nombrePokemon = $_REQUEST['pokemonNombre'];
+        }
+    }
     
+    // Si el nombre esta bien.
+    if($entradaOk){
+        // Llamamos a la Api.
+        $oPokemon = REST::apiPokemon3DPorNombre($nombrePokemon);
+    }
+
+    //Preparaos el array para la vista.
+    $avRestPokemon = [
+        'nombrePokemon' => ($oPokemon) ? $oPokemon -> getNombre(): "No hay datos",
+        'modelo3D' => ($oPokemon) ? $oPokemon -> getModelo3D(): "",
+        'forma' => ($oPokemon) ? $oPokemon ->getForma(): "",
+        'errorPokemon' => $aErroresPokemon['nombrePokemon'],
+    ];
+
     require_once $view['layout'];
 ?>
