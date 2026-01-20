@@ -4,7 +4,7 @@
         $_SESSION['paginaAnterior'] = $_SESSION['paginaEnCurso'];
         // Redirige a la página de inicio.
         $_SESSION['paginaEnCurso'] = 'inicioPublico';
-        header("location: indexLoginLogoff.php");  
+        header("location: index.php");  
         exit;
     }
 
@@ -24,87 +24,40 @@
         exit;
     }
 
-    /*
-    //se obtiene la fecha de hoy
-    $fechaHoy = new DateTime();
-    $fechaHoyFormateada = $fechaHoy->format('Y-m-d');
-    //se llama a la api con la fecha formateada
-    $oFotoNasa = REST::apiNasa($fechaHoyFormateada);
-
-    //Se crea un array con los datos del usuario para pasarlos a la vista
-    $avRest = [
-        'fotoNasa'=>$oFotoNasa
-    ];
-    */
-
-    $aErroresNasa = [
-        'fechaNasa' => ''
+    $aErrores = [
+        'fechaNasa' => null
     ];
 
-    $aRespuestasNasa = [
-        'fechaFoto' => null
-    ];
+    $oFotoNasa = null;
 
-    // Inicializamos la foto de hoy
-    $fechaHoy = date('Y-m-d');
-    $oFotoNasaHoy = REST::apiNasa($fechaHoy); // Llama a la API con la fecha de hoy
-    $avRestNasa = [
-        'fotoNasa' => $oFotoNasaHoy
-    ];
+    // Obtenemos la fecha de hoy para valores por defecto.
+    $fechaHoy=new DateTime();
+    $fechaHoyFormateada=$fechaHoy -> format('Y-m-d');
+    $fechaNasa = $fechaHoyFormateada;
 
-    define('OBLIGATORIO', 1);
-    $entradaOK = true;
+    // Validación al darle al botón enviar de la Nasa
+    if(isset($_REQUEST['enviar'])){
+        $entradaOK = true;
+        $aErrores['fechaNasa'] = validacionFormularios::validarFecha($_REQUEST['fechaNasa'], $fechaHoyFormateada, '1995-06-16', 1);
 
-    // Fecha de hoy por defecto si no hay formulario enviado
-    $fechaFoto = $_REQUEST['fechaFoto'] ?? $fechaHoy;
-
-    // Si el formulario se envía
-    if (isset($_REQUEST['enviar'])) {
-        /**
-         *  Function preg_match()
-         *  Enlace a la documentación oficial: https://www.php.net/manual/en/function.preg-match.php
-         *  
-         *  Esta función se utiliza para validar el formato de la fecha introducida por el usuario.
-         *  @param String $pattern Patrón que queremos que siga lo ingresado.
-         *  @param String $fechaFoto Cadena de texto que le pasamos para comprobar el patrón.
-         *  @return int Devuelve 1 si coincide con el patrón, 0 si no coincide.
-         */
-        
-        if (!preg_match('/^\d{4}-\d{2}-\d{2}$/', $fechaFoto)) {
-            $aErroresNasa['fechaFoto'] = "Formato de fecha inválido. YYYY-mm-dd";
+        if ($aErrores['fechaNasa'] != null) {
             $entradaOK = false;
-        } else {
-            // Validar rango de fechas usando tu librería
-            $aErroresNasa['fechaFoto'] = validacionFormularios::validarFecha(
-                $fechaFoto,
-                date('d-m-Y'),  // Fecha máxima = hoy
-                '01/01/1995',   // Fecha mínima
-                OBLIGATORIO
-            );
+        }
 
-            // Comprobar errores
-            foreach ($aErroresNasa as $campo => $error) {
-                if ($error !== null) {
-                    $entradaOK = false;
-                } else {
-                    $aRespuestasNasa[$campo] = $fechaFoto;
-                }
-            }
+        if ($entradaOK) {
+            $fechaNasa = $_REQUEST['fechaNasa'];
         }
     }
 
-    // Llamamos a la API si la fecha es válida o si es la primera carga
-    if ($entradaOK || !isset($_REQUEST['enviar'])) {
-        $oFotoNasa = REST::apiNasa($fechaFoto);
+    $oFotoNasa=REST::apiNasa($fechaNasa);
 
-        if ($oFotoNasa !== null) {
-            $avRestNasa['fotoNasa'] = $oFotoNasa;
-        } else {
-            // Si no hay imagen para la fecha
-            $aErroresNasa['fechaFoto'] = 'No hay imagen disponible para esta fecha';
-            $avRestNasa['fotoNasa'] = null;
-        }
-    }
+    $avRestNasa =[
+        'tituloNasa' => ($oFotoNasa) ? $oFotoNasa->getTitulo() : "No hay datos",
+        'fotoNasa' => ($oFotoNasa) ? $oFotoNasa->getFoto() : "",
+        'fechaNasa' => $fechaNasa,
+        'explicacionNasa' => ($oFotoNasa) ? $oFotoNasa->getExplicacion() : "",
+        'errorNasa' => $aErrores['fechaNasa'],
+    ];
     
     require_once $view['layout'];
 ?>

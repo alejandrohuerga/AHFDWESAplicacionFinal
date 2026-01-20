@@ -1,6 +1,6 @@
 <header>
     <p>LOGIN LOGOFF</p>
-    <h2>ERROR</h2>
+    <h2>REST</h2>
     <form>
         <input type="submit" name="cerrarSesion" value="Cerrar Sesion" />
     </form>
@@ -11,19 +11,18 @@
             <h2>NASA</h2>
             <div class="tituloRest">
                 <form name="formularioNasa" method="post">
-                    <input class="formulariosApi" type="text" name="fechaFoto" value="<?= date('Y-m-d') ?? $_REQUEST['fechaFoto']; ?>"/>
+                    <label for="fechaNasa">Fecha: </label>
+                    <input class="formulariosApi" type="date" name="fechaNasa" value="<?php echo $avRestNasa['fechaNasa']?>"/>
+                    <span style="color: red;" class="error rojo"><?php echo $avRestNasa['errorNasa'] ?></span>
                     <input type="submit" name="enviar" value="enviar">
-                    <a style="color:red;">
-                        <?php echo (isset($_REQUEST['enviar'])) ? $aErroresNasa['fechaFoto'] : ''; ?>
-                    </a>
                 </form>
-                <?php echo '<h2 id="tituloFotoNasa">' . $avRestNasa['fotoNasa'] -> getTitulo(); '</h2>' ?>
+                <?php echo '<h2 id="tituloFotoNasa">' . $avRestNasa['tituloNasa']. '</h2>' ?>
             </div>
             <div class="infoRest">
-                <img src="<?php echo $avRestNasa['fotoNasa']->getFoto(); ?>" alt="Foto de la NASA" width="300px" height="200px">
+                <img src="<?php echo $avRestNasa['fotoNasa']?>" alt="Foto de la NASA" width="300px" height="200px">
             </div>
             <div id="descripcionFotoNasa">
-                <?php echo '<p id="descripcionNasa">' .  $avRestNasa['fotoNasa'] -> getExplicacion(); '</p>'?>
+                <?php echo '<p id="descripcionNasa">' .  $avRestNasa['explicacionNasa']. '</p>'?>
             </div>
             <div class="infoApi">
                 <p><b>Instrucciones de uso:</b> <a target="blank" href=" https://api.nasa.gov" id="urlNasa"> https://api.nasa.gov</a></p>
