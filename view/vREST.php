@@ -35,7 +35,7 @@
             <div class="tituloRest">
                 <form name="formularioPokemon" method="post">
                     <label for="pokemonNombre">Nombre: </label>
-                    <input class="formulariosApi" type="text" name="pokemonNombre" value="<?php echo $avRestPokemon['nombrePokemon']?>"/>
+                    <input class="formulariosApi" type="text" name="pokemonNombre" value="Bulbasaur"/>
                     <span style="color: red;" class="error rojo"><?php echo $avRestPokemon['errorPokemon'] ?></span>
                     <input type="submit" name="enviarPokemon" value="enviar">
                 </form>

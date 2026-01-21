@@ -78,7 +78,7 @@
         $entradaOk = true;
 
         //Validación del campo de entrada.
-        $aErroresPokemon['nombrePokemon'] = validacionFormularios::comprobarAlfabetico($nombrePokemon,1000,1);
+        $aErroresPokemon['nombrePokemon'] = validacionFormularios::comprobarAlfaNumerico($nombrePokemon,1000,1);
 
         if($aErroresPokemon['nombrePokemon'] != null){
             $entradaOk= false;
