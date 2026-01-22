@@ -29,7 +29,7 @@
         public static function apiNasa($fecha){
             // Accedemos a la URL de la Nasa
             // El @ evita que salga el warning por pantalla
-            $resultado=@file_get_contents("https://api.nasa.gov/planetary/apod?api_key=" . self::API_KEY_NASA);
+            $resultado=file_get_contents("https://api.nasa.gov/planetary/apod?api_key=" . self::API_KEY_NASA);
 
             if($resultado === false){
                 return null;
@@ -49,36 +49,7 @@
                 );
                 return $fotoNasa;
             }
-
-            return null;
         }
 
-        public static function apiPokemon3DPorNombre($nombre){
-            $resultadoPokemon=@file_get_contents("https://pokemon-3d-api.onrender.com/v1/pokemon");
-
-            if($resultadoPokemon === false){
-                return null;
-            }
-
-            $archivoApiPokemon=json_decode($resultadoPokemon,true);
-
-            if(!is_array($archivoApiPokemon)){
-                return null;
-            }
-
-            foreach ($archivoApiPokemon as $pokemon) {
-                foreach ($pokemon['forms'] as $forma) {
-                    if (strtolower($forma['name']) === strtolower($nombre)) {
-                        return new Pokemon(
-                            $forma['name'],
-                            $forma['model'],
-                            $forma['formName']
-                        );
-                    }
-                }
-            }
-
-            return null;
-        }
     }
 ?>
