@@ -54,7 +54,7 @@
     if(isset($_REQUEST['volver'])){
         // Si se pulsa le damos el valor de la página solicitada a la variable $_SESSION.
         $_SESSION['paginaEnCurso'] = $_SESSION['paginaAnterior'];
-        header('Location: indexLoginLogoff.php');
+        header('Location: index.php');
         exit;
     }
 

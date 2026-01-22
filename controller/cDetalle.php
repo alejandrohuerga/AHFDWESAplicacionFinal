@@ -5,7 +5,7 @@
         $_SESSION['paginaAnterior'] = $_SESSION['paginaEnCurso'];
         // Redirige a la página de inicio.
         $_SESSION['paginaEnCurso'] = 'inicioPublico';
-        header("location: indexLoginLogoff.php");  
+        header("location: index.php");  
         exit;
     }
 

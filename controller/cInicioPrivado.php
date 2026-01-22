@@ -56,7 +56,6 @@
         exit;
     }
 
-
     $avInicioPrivado=[ // Array que almacena los datos que obtenemos del objeto usuario.
         "descUsuario" => $_SESSION['usuarioDAW202LoginLogoff'] -> getDescUsuario(),
         "numAccesos" => $_SESSION['usuarioDAW202LoginLogoff'] -> getNumAccesos(),
@@ -70,56 +69,23 @@
         'ultimaConexion' =>''
     ];
 
-    switch($idioma){
-        case 'es':
-            $avMensajeBienvenida['bienvenida'] = "Bienvenido " . $avInicioPrivado['descUsuario'];
-            if($avInicioPrivado['numAccesos']<=1){
-                $avMensajeBienvenida['conexiones'] = "! Esta es la primera vez que te conectas !";
-            }else{
-                // Si fechaAnterior ya es un objeto DateTime no hace falta hacer el "new DateTime", se puede usar:
-                if($avInicioPrivado['fechaHoraUltimaConexionAnterior'] instanceof DateTime){
-                    // Formatear la fecha y hora según la configuración regional española
-                    // IntlDateFormatter::FULL - muestra la fecha completa (día de la semana, día, mes y año)
-                    // IntlDateFormatter::LONG - mostraría la fecha (día, mes y año)
-                    // IntlDateFormatter::MEDIUM - mostraría la fecha abreviada (ejemplo:12 ene 2025)
-                    // IntlDateFormatter::NONE - no muestra la hora
-                    $oFormatoFecha=new IntlDateFormatter('es_ES', IntlDateFormatter::FULL, IntlDateFormatter::NONE);
-                    $fecha=$oFormatoFecha->format($avInicioPrivado['fechaHoraUltimaConexionAnterior']);
-                    $hora = $avInicioPrivado['fechaHoraUltimaConexionAnterior']->format('H:i');
-                    $avMensajeBienvenida['conexiones'] = "Esta es la " . $avInicioPrivado['numAccesos'] . " vez que te conectas";
-                    $avMensajeBienvenida['ultimaConexion'] = "Usted se conecto por última vez el   " . $fecha . " a las ". $hora;
-                }
-                
-            }
-            break;
-        case 'en':
-            $avMensajeBienvenida['bienvenida'] = "Welcome " . $avInicioPrivado['descUsuario'];
-            if($avInicioPrivado['numAccesos']<=1){
-                $avMensajeBienvenida['conexiones'] = "This is your first conection !";
-            }else{
-                if($avInicioPrivado['fechaHoraUltimaConexionAnterior'] instanceof DateTime){
-                    $oFormatoFecha=new IntlDateFormatter('en_GB', IntlDateFormatter::FULL, IntlDateFormatter::NONE);
-                    $fecha=$oFormatoFecha->format($avInicioPrivado['fechaHoraUltimaConexionAnterior']);
-                    $hora = $avInicioPrivado['fechaHoraUltimaConexionAnterior']->format('H:i');
-                    $avMensajeBienvenida['conexiones'] = "This is " . $avInicioPrivado['numAccesos'] . " time you have conected";
-                    $avMensajeBienvenida['ultimaConexion'] = "You last concted on " . $fecha . " at ". $hora;
-                }
-            }
-            break;
-        case 'pt':
-            $avMensajeBienvenida['bienvenida'] = "Bem-vindo " . $avInicioPrivado['descUsuario'];
-            if($avInicioPrivado['numAccesos']<=1){
-                $avMensajeBienvenida['conexiones'] = "Esta é a sua primeira ligação !";
-            }else{
-                if($avInicioPrivado['fechaHoraUltimaConexionAnterior'] instanceof DateTime){
-                    $oFormatoFecha=new IntlDateFormatter('pt_PT', IntlDateFormatter::FULL, IntlDateFormatter::NONE);
-                    $fecha=$oFormatoFecha->format($avInicioPrivado['fechaHoraUltimaConexionAnterior']);
-                    $hora = $avInicioPrivado['fechaHoraUltimaConexionAnterior']->format('H:i');
-                    $avMensajeBienvenida['conexiones'] = "Esta é a " . $avInicioPrivado['numAccesos'] . " que ele se conecta";
-                    $avMensajeBienvenida['ultimaConexion'] = "Você fez login pela última vez em " . $fecha . " em ". $hora;
-                }
-            }
-            break;
+    $avMensajeBienvenida['bienvenida'] = "Bienvenido " . $avInicioPrivado['descUsuario'];
+    if($avInicioPrivado['numAccesos']<=1){
+        $avMensajeBienvenida['conexiones'] = "! Esta es la primera vez que te conectas !";
+    }else{
+        // Si fechaAnterior ya es un objeto DateTime no hace falta hacer el "new DateTime", se puede usar:
+        if($avInicioPrivado['fechaHoraUltimaConexionAnterior'] instanceof DateTime){
+            // Formatear la fecha y hora según la configuración regional española
+            // IntlDateFormatter::FULL - muestra la fecha completa (día de la semana, día, mes y año)
+            // IntlDateFormatter::LONG - mostraría la fecha (día, mes y año)
+            // IntlDateFormatter::MEDIUM - mostraría la fecha abreviada (ejemplo:12 ene 2025)
+            // IntlDateFormatter::NONE - no muestra la hora
+            $oFormatoFecha=new IntlDateFormatter('es_ES', IntlDateFormatter::FULL, IntlDateFormatter::NONE);
+            $fecha=$oFormatoFecha->format($avInicioPrivado['fechaHoraUltimaConexionAnterior']);
+            $hora = $avInicioPrivado['fechaHoraUltimaConexionAnterior']->format('H:i');
+            $avMensajeBienvenida['conexiones'] = "Esta es la " . $avInicioPrivado['numAccesos'] . " vez que te conectas";
+            $avMensajeBienvenida['ultimaConexion'] = "Usted se conecto por última vez el   " . $fecha . " a las ". $hora;
+        }
     }
     
     require_once $view['layout'];

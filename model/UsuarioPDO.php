@@ -39,13 +39,17 @@ class UsuarioPDO{
         
         if($resultadoConsulta->rowCount()>0){ // si la consulta me devuelve algun resultado
             $oRegistroUsuario = $resultadoConsulta->fetchObject(); // guardo en la variable el resultado de la consulta en forma de objeto.
+            //Se convierte la fecha en datetime
+            $fechaBD = $oRegistroUsuario ->T01_FechaHoraUltimaConexion;
+            $oFechaValida = ($fechaBD) ? new DateTime($fechaBD) : null;
+
             $oUsuario = new Usuario(
                 $oRegistroUsuario->T01_CodUsuario, 
                 $oRegistroUsuario->T01_Password, 
                 $oRegistroUsuario->T01_DescUsuario, 
                 $oRegistroUsuario->T01_NumConexiones, 
-                $oRegistroUsuario->T01_FechaHoraUltimaConexion,
-                $oRegistroUsuario -> T01_FechaHoraUltimaConexionAnterior = null,
+                $oFechaValida,
+                null,
                 $oRegistroUsuario->T01_Perfil, 
                 $oRegistroUsuario->T01_ImagenUsuario
             ); 
@@ -67,19 +71,27 @@ class UsuarioPDO{
      */
 
     public static function registrarUltimaConexion ($oUsuario){
-        
         $codUsuario = $oUsuario->getCodUsuario();
-        // Actualizamos número de conexiones y fecha/hora
-        $sentenciaUpdate = "UPDATE T_01Usuario SET T01_NumConexiones = T01_NumConexiones + 1, T01_FechaHoraUltimaConexion = NOW() WHERE T01_CodUsuario = ?";
-        $resultadoUpdate = DBPDO::ejecutarConsulta($sentenciaUpdate, [$codUsuario]);
-        // Actualizamos el objeto usuario.
-        // Cambiamos la fecha que tenia de última conexion por la de ahora.
-        $oUsuario->setFechaHoraUltimaConexionAnterior($oUsuario->getFechaHoraUltimaConexion());
-        $oUsuario->setNumAccesos($oUsuario->getNumAccesos()+1);
-
-        // Establecer la nueva fecha de conexión (ahora)
-        date_default_timezone_set('Europe/Madrid');
-        $oUsuario->setFechaHoraUltimaConexion(new DateTime());  
+        // Si NO es la primera conexión, guardamos la fecha anterior
+        if ($oUsuario->getNumAccesos() > 0) {
+            $oUsuario->setFechaHoraUltimaConexionAnterior(
+                $oUsuario->getFechaHoraUltimaConexion()
+            );
+        } else {
+            // Primera conexión
+            $oUsuario->setFechaHoraUltimaConexionAnterior(null);
+        }
+        // Actualizamos BD
+        $sentenciaUpdate = "
+            UPDATE T_01Usuario 
+            SET T01_NumConexiones = T01_NumConexiones + 1,
+                T01_FechaHoraUltimaConexion = NOW()
+            WHERE T01_CodUsuario = ?
+        ";
+        DBPDO::ejecutarConsulta($sentenciaUpdate, [$codUsuario]);
+        // Actualizamos objeto
+        $oUsuario->setNumAccesos($oUsuario->getNumAccesos() + 1);
+        $oUsuario->setFechaHoraUltimaConexion(new DateTime()); 
     }
 }
 ?>

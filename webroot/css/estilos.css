@@ -573,3 +573,12 @@ main.detalle table.tableSG th {
     height: 250px;              /* Alto del modelo 3D */
     margin-bottom: 50px;
 }
+
+/* ESTILOS MENSAJE DE ERROR */
+
+.error-valor{
+    background-color: red;  /* Fondo rojo */
+    color: white;           /* Texto blanco */
+    padding: 2px 6px;       /* Pequeño espacio alrededor del texto */
+    border-radius: 3px;     /* Bordes ligeramente redondeados */
+}

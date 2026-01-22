@@ -32,11 +32,11 @@
          */
 
         public function __construct($codError,$descError, $archivoError,$lineaError,$paginaSiguiente ){
-            $this->$codError = $codError;
-            $this->$descError = $descError;
-            $this->$archivoError = $archivoError;
-            $this->$lineaError = $lineaError;
-            $this->$paginaSiguiente = $paginaSiguiente;
+            $this->codError = $codError;
+            $this->descError = $descError;
+            $this->archivoError = $archivoError;
+            $this->lineaError = $lineaError;
+            $this->paginaSiguiente = $paginaSiguiente;
         }
 
         /**
