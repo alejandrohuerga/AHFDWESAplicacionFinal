@@ -46,12 +46,13 @@
 
         if ($entradaOK) {
             $fechaNasa = $_REQUEST['fechaNasa'];
+            $_SESSION['fechaDetalleNasa'] = $fechaNasa;
+            $oFotoNasa = REST::apiNasa($fechaNasa);
+            $_SESSION['InfoNasa'] = $oFotoNasa;
+        } else{
+            $oFotoNasa = $_SESSION['InfoNasa'] ?? null;
         }
     }
-
-    $oFotoNasa=REST::apiNasa($fechaNasa);
-
-    
 
     $avRestNasa =[
         'fechaHoy' => $fechaHoyFormateada,
@@ -61,8 +62,6 @@
         'explicacionNasa' => ($oFotoNasa) ? $oFotoNasa->getExplicacion() : "",
         'errorNasa' => $aErrores['fechaNasa'],
     ];
-
-    
 
     require_once $view['layout'];
 ?>

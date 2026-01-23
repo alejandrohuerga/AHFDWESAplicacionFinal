@@ -12,7 +12,7 @@
             <div class="tituloRest">
                 <form name="formularioNasa" method="post">
                     <label for="fechaNasa">Fecha: </label>
-                    <input class="formulariosApi" type="date" name="fechaNasa" value="<?php echo $avRestNasa['fechaHoy']?>"/>
+                    <input class="formulariosApi" type="date" name="fechaNasa" value="<?php echo $avRestNasa['fechaNasa']?>"/>
                     <span style="color: red;" class="error rojo"><?php echo $avRestNasa['errorNasa'] ?></span>
                     <input type="submit" name="enviarNasa" value="BUSCAR">
                 </form>
