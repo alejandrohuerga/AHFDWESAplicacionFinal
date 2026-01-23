@@ -1,5 +1,5 @@
 <header>
-    <p>LOGIN LOGOFF</p>
+    <p>APLICACIÓN FINAL</p>
     <h2 id="inicioPublico">INICIO PÚBLICO</h2>
     
     <form method="post">

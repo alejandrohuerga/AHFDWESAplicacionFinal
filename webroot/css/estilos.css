@@ -158,6 +158,24 @@ input[name="cerrarSesion"]{
     border-radius: 4px;
 }
 
+/* BUSQUEDA DE DEPARTAMENTO FORMULARIO */
+input[name="codBuscado"]{
+    height: 32px;
+    font-family: Play,sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: inherit;
+    color: rgb(241,241,241);
+    padding: 8px 24px;
+    background-color: rgb(255, 108, 32);
+    border: none;
+    border-radius: 4px;
+}
+
+input[name="CodDepBuscado"]{
+    width: 500px;
+    height: 32px;
+}
 
 
 input[name="detalle"]{

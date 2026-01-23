@@ -5,7 +5,7 @@
 */
 ?>
 <header>
-    <p>LOGIN LOGOFF</p>
+    <p>APLICACIÓN FINAL</p>
     <h2 id="login">LOGIN</h2>
 </header>
 <main id="mainLogin">

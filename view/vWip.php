@@ -1,6 +1,6 @@
 <header>
     <p>LOGIN LOGOFF</p>
-    <h2>MANTENIMIENTO DEPARTAMENTOS</h2>
+    <h2>WORK IN PROGRESS</h2>
     <form>
         <input type="submit" name="cerrarSesion" value="Cerrar Sesion" />
     </form>

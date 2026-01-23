@@ -1,5 +1,5 @@
 <header>
-    <p>LOGIN LOGOFF</p>
+    <p>APLICACIÓN FINAL</p>
     <h2>REST</h2>
     <form>
         <input type="submit" name="cerrarSesion" value="Cerrar Sesion" />

@@ -1,5 +1,5 @@
 <header>
-    <p>LOGIN LOGOFF</p>
+    <p>APLICACIÓN FINAL</p>
     <h2>INICIAR PRIVADO</h2>
     <form>
         <input type="submit" name="cerrarSesion" value="Cerrar Sesion" />
@@ -14,7 +14,7 @@
     ?> 
     <form>
         <input type="submit" name="detalle" value="Detalle" />
-        <input type="submit" name="mantenimientoDep" value="Mentenimiento Departamentos"/>
+        <input type="submit" name="mantenimientoDep" value="Mantenimiento Departamentos"/>
         <input type="submit" name="error" value="Error">
         <input type="submit" name="rest" value="Rest">
     </form>

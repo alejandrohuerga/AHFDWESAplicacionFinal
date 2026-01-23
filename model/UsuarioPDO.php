@@ -1,6 +1,5 @@
 <?php
-require_once 'model/DBPDO.php'; // Importamos la clase DBPDO.
-require_once 'model/Usuario.php'; // Importamos la clase Usuario.php.
+
 /**
  * Clase UsuarioPDO
  * 

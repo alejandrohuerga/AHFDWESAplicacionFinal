@@ -13,13 +13,16 @@
     require_once 'model/FotoNasa.php';
     require_once 'core/231018libreriaValidacion.php';
     require_once 'model/Pokemon.php';
+    require_once 'model/Departamento.php';
+    require_once 'model/DepartamentoPDO.php';
 
     $controller = [
         'inicioPublico' => 'controller/cInicioPublico.php',
         'login' => 'controller/cLogin.php',
         'inicioPrivado' => 'controller/cInicioPrivado.php',
         'detalle' => 'controller/cDetalle.php',
-        'departamento' => 'controller/cWip.php',
+        'departamento' => 'controller/cMtoDepartamentos.php',
+        'wip' => 'controller/cWip.php',
         'error' => 'controller/cError.php',
         'api'=>'controller/cREST.php'
     ];
@@ -30,7 +33,8 @@
         'login' => 'view/vLogin.php',
         'inicioPrivado' => 'view/vInicioPrivado.php',
         'detalle' => 'view/vDetalle.php',
-        'departamento' => 'view/vWip.php',
+        'departamento' => 'view/vMtoDepartamentos.php',
+        'wip' => 'view/vWip.php',
         'error' => 'view/vError.php',
         'api' => 'view/vREST.php'
     ];
