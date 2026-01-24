@@ -28,11 +28,9 @@
          */
 
         public static function buscaDepartamentoPorCod($codDepartamento){
-
             $aDepartamentos=[]; //Array que almacena los objetos Departamento que se encuentren.
-
             // Consulta para buscar departamentos por el código.
-            $consulta ="SELECT * FROM T_02Departamento WHERE T02_CodDepartamento LIKE '%$codDepartamento%';";
+            $consulta ="SELECT * FROM T_02Departamento WHERE T02_CodDepartamento LIKE '%{$codDepartamento}%';";
             $resultadoConsulta=DBPDO::ejecutarConsulta($consulta,$codDepartamento);
 
             if($resultadoConsulta ->rowCount()>0){ // Si la consulta nos devuelve algún resultado.
@@ -45,9 +43,7 @@
                     $oBusquedaDepartamento -> T02_VolumenDeNegocio,
                     $oBusquedaDepartamento -> T02_FechaBajaDepartamento
                 );
-
             }
-
             return $oDepartamento;
         }
     }

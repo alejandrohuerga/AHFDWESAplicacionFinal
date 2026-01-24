@@ -52,7 +52,7 @@ class UsuarioPDO{
                 $oRegistroUsuario->T01_Perfil, 
                 $oRegistroUsuario->T01_ImagenUsuario
             ); 
-            self::registrarUltimaConexion($oUsuario); // Actualizamos la última conexión.
+            
         }
         return $oUsuario;    
     }
@@ -71,15 +71,6 @@ class UsuarioPDO{
 
     public static function registrarUltimaConexion ($oUsuario){
         $codUsuario = $oUsuario->getCodUsuario();
-        // Si NO es la primera conexión, guardamos la fecha anterior
-        if ($oUsuario->getNumAccesos() > 0) {
-            $oUsuario->setFechaHoraUltimaConexionAnterior(
-                $oUsuario->getFechaHoraUltimaConexion()
-            );
-        } else {
-            // Primera conexión
-            $oUsuario->setFechaHoraUltimaConexionAnterior(null);
-        }
         // Actualizamos BD
         $sentenciaUpdate = "
             UPDATE T_01Usuario 
