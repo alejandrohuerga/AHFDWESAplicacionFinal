@@ -28,30 +28,31 @@
         'CodDepartamentoBuscar' => ''
     ];
 
+    $aDepartamentos=[]; // Array que almacena los objetos Departamento para pasarlos a la vista.
+
+    // Inicializamos el array con todos los departamentos.
+    $aDepartamentos=DepartamentoPDO::buscarTodosDepartamentos();
+
     define('OBLIGATORIO', 0);
 
     $entradaOK=true;
     $oDepartamento=null;
 
     if(isset($_REQUEST['codBuscado'])){
-        $aErrores['CodDepartamentoBuscar'] =validacionFormularios::comprobarAlfabetico($_REQUEST['codBuscado'],3,3,OBLIGATORIO);
+        $aErrores['CodDepartamentoBuscar'] =validacionFormularios::comprobarAlfabetico($_REQUEST['CodDepBuscado'],3,3,OBLIGATORIO);
         
         if($aErrores['CodDepartamentoBuscar'] != null){
             $entradaOK = false;
         }
 
         if($entradaOK){
-            $oDepartamento=DepartamentoPDO::buscaDepartamentoPorCod($_REQUEST['codBuscado']);
+            $aDepartamentos=DepartamentoPDO::buscaDepartamentoPorCod($_REQUEST['CodDepBuscado']);
+            
+            if(empty($aDepartamentos)){
+                $aDepartamentos=DepartamentoPDO::buscarTodosDepartamentos();
+            }
         }
     }
-
-    $avRestDepartamento =[
-        'codigoDep' => ($oDepartamento) ? $oDepartamento -> getCodDepartamento(): "No se encontro el departamento",
-        'descDep' => ($oDepartamento) ? $oDepartamento -> getDescDepartamento(): "No se encontro departamento",
-        'fechaCreacionDep' => ($oDepartamento) ? $oDepartamento -> getFechaCreacionDepartamento(): "No hay datos",
-        'volumenDep' => ($oDepartamento) ? $oDepartamento  -> getVolumenNegocio(): "No hay datos",
-        'fechaBajaDep' => ($oDepartamento) ? $oDepartamento -> getFechaBajaDepartamento(): "No hay datos"
-    ];
     
     // Cargamos el layout principal que cargara cada página a parte de la estructura principal.
     require_once $view['layout'];

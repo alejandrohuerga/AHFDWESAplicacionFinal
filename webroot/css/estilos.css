@@ -598,5 +598,17 @@ main.detalle table.tableSG th {
     background-color: red;  /* Fondo rojo */
     color: white;           /* Texto blanco */
     padding: 2px 6px;       /* Pequeño espacio alrededor del texto */
-    border-radius: 3px;     /* Bordes ligeramente redondeados */
+    border-radius: 3px;  /* Bordes ligeramente redondeados */
+}
+
+/* ESTILOS TABLA MTO DEPARTAMENTOS */
+
+#tablaBuscarDep{
+    border: 2px solid black;
+    margin-top: 1%;
+    background: #f0972b;
+    color: black;
+    & td{
+        border: 2px solid black;
+    }
 }

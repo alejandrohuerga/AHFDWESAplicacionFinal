@@ -13,7 +13,7 @@
         </label>
         <br />
     </form>
-    <table>
+    <table id="tablaBuscarDep">
         <tr>
             <th>Codigo Departamento</th>
             <th>Descripcion del Departamento</th>
@@ -21,13 +21,15 @@
             <th>Volumen del Negocio</th>
             <th>Fecha Baja</th>
         </tr>
-        <tr>
-            <?php echo '<td>'.$avRestDepartamento['codigoDep'] .'</td>' ?>
-            <?php echo '<td>'.$avRestDepartamento['descDep'] .'</td>' ?>
-            <?php echo '<td>'.$avRestDepartamento['fechaCreacionDep'] .'</td>' ?>
-            <?php echo '<td>'.$avRestDepartamento['volumenDep'] .'</td>' ?>
-            <?php echo '<td>'.$avRestDepartamento['fechaBajaDep'] .'</td>' ?>
-        </tr>
+        <?php foreach ($aDepartamentos as $oDepartamento): ?>
+            <tr>
+                <td><?= $oDepartamento->getCodDepartamento() ?></td>
+                <td><?= $oDepartamento->getDescDepartamento() ?></td>
+                <td><?= $oDepartamento->getFechaCreacionDepartamento() ?></td>
+                <td><?= $oDepartamento->getVolumenNegocio() ?></td>
+                <td><?= $oDepartamento->getFechaBajaDepartamento() ?? '—' ?></td>
+            </tr>
+        <?php endforeach; ?>
     </table>
     <form>
         <input type="submit" name="volver" value="Volver" />

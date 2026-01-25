@@ -17,9 +17,8 @@
          * Parámetros: Código.
          * 
          * @param String $codDepartamento , código del departamento a buscar.
-         * @return Objeto Departemento|null|PDOException.
-         * Devuelve un objeto Departamento si existe.
-         * Devuelve null si no ha encontrado al departamento.
+         * @return Array $aDepartamento , array con los objetos departamento encontradffos
+         * Devuelve un array con los objetos departamento.
          * Devuelve PDOException si ha habido algún error.
          * 
          * @author Alejandro De la Huerga.
@@ -29,22 +28,56 @@
 
         public static function buscaDepartamentoPorCod($codDepartamento){
             $aDepartamentos=[]; //Array que almacena los objetos Departamento que se encuentren.
+            
             // Consulta para buscar departamentos por el código.
-            $consulta ="SELECT * FROM T_02Departamento WHERE T02_CodDepartamento LIKE '%{$codDepartamento}%';";
-            $resultadoConsulta=DBPDO::ejecutarConsulta($consulta,$codDepartamento);
+            $consulta = "SELECT * FROM T_02Departamento WHERE T02_CodDepartamento LIKE ?";
+            $resultadoConsulta = DBPDO::ejecutarConsulta($consulta,["%$codDepartamento%"]);
 
-            if($resultadoConsulta ->rowCount()>0){ // Si la consulta nos devuelve algún resultado.
-                $oBusquedaDepartamento=$resultadoConsulta->fetchObject();
-
-                $oDepartamento= new Departamento(
-                    $oBusquedaDepartamento -> T02_CodDepartamento,
-                    $oBusquedaDepartamento -> T02_DescDepartamento,
-                    $oBusquedaDepartamento -> T02_FechaCreacionDepartamento,
-                    $oBusquedaDepartamento -> T02_VolumenDeNegocio,
-                    $oBusquedaDepartamento -> T02_FechaBajaDepartamento
+            while($oRegistro = $resultadoConsulta -> fetchObject()){
+                $aDepartamentos[] = new Departamento(
+                    $oRegistro  -> T02_CodDepartamento,
+                    $oRegistro -> T02_DescDepartamento,
+                    $oRegistro -> T02_FechaCreacionDepartamento,
+                    $oRegistro -> T02_VolumenDeNegocio,
+                    $oRegistro -> T02_FechaBajaDepartamento
                 );
             }
-            return $oDepartamento;
+            
+            return $aDepartamentos;
+        }
+
+        /**
+         * Función para buscar todos los departamentos en la base de datos.
+         * Parámetros: Ninguno.
+         * 
+         * @return Array $aDepartamentos , array con todos los objetos
+         * departamentos de la base de datos.
+         * Devuelve un array con los objetos departamento que hay en la base de datos.
+         * Devuelve PDOException si ha habido algún error.
+         * 
+         * @author Alejandro De la Huerga.
+         * @version 1.0.0 Fecha Última modificación: 25/01/2026.
+         * @since 23/01/2025
+         */
+
+        public static function buscarTodosDepartamentos (){
+            // Array para almacenar todos los objetos Departamento que hay en la base de datos.
+            $aTodosDepartamentos=[];
+            
+            $consulta="SELECT * FROM T_02Departamento"; 
+            $resultadoConsulta = DBPDO::ejecutarConsulta($consulta);
+
+            while($oRegistro = $resultadoConsulta -> fetchObject()){
+                $aTodosDepartamentos[] = new Departamento(
+                    $oRegistro  -> T02_CodDepartamento,
+                    $oRegistro -> T02_DescDepartamento,
+                    $oRegistro -> T02_FechaCreacionDepartamento,
+                    $oRegistro -> T02_VolumenDeNegocio,
+                    $oRegistro -> T02_FechaBajaDepartamento
+                );
+            }
+            
+            return $aTodosDepartamentos;
         }
     }
 ?>
