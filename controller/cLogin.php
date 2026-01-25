@@ -1,9 +1,16 @@
 <?php
-
+    // Si se pulsa el botón de registro , vamos a dar de alta un usuario.
+    /*
+    if(isset($_REQUEST['registrarse'])){
+        $_SESSION['paginaEnCurso'] = 'registro';
+        header('Location: index.php');
+        exit;
+    }
+    */
     // Si pulsa el boton volver , volvemos a la pagina anterior.
     if (isset($_REQUEST["cancelar"])) {
         $_SESSION['paginaEnCurso']='inicioPublico';
-        header("location: index.php");  
+        header("Location: index.php");  
         exit;
     }
 

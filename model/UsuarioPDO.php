@@ -83,5 +83,99 @@ class UsuarioPDO{
         $oUsuario->setNumAccesos($oUsuario->getNumAccesos() + 1);
         $oUsuario->setFechaHoraUltimaConexion(new DateTime()); 
     }
+
+    /**
+     * Función para dar de alta un Usuario.
+     * Función que da de alta un nuevo usuario.
+     * Parámetros: Código Password y Descripción.
+     * 
+     * @param String $codUsuario , código del usuario a validar.
+     * @param String $password , password sin codificar y sin unir el código del usuario.
+     * @param String $descUsuario , descripción del usuario.
+     * @return Objeto Usuario|null.
+     * Devuelve un objeto Usuario si existe.
+     * Devuelve null si no ha encontrado al usuario.
+     * Devuelve PDOException si ha habido algún error.
+     * 
+     * @author Alejandro De la Huerga.
+     * @version 1.0.0 Fecha Última modificación: 18/12/2025.
+     * @since 25/01/2025
+     */
+
+    public static function altaUsuario($codUsuario,$password,$descUsuario){
+        $oUsuario = null;
+        /**
+         * SQL para insertar el nuevo registro.
+         * La fecha de la ultima conexion a NOW() , momento del registro.
+         * Numero de conexiones a 1 , empieza al hacer el registro.
+        */
+        $sql = <<<SQL
+            INSERT INTO T01_Usuario 
+            (T01_CodUsuario, 
+            T01_Password, 
+            T01_DescUsuario, 
+            T01_FechaHoraUltimaConexion,
+            T01_NumConexiones,
+            T01_Perfil) 
+            VALUES 
+            (:codUsuario, 
+            SHA2(:password, 256), 
+            :descUsuario,
+            now(),
+            1,
+            'usuario')
+        SQL;
+
+        try {
+            $consulta = DBPDO::ejecutarConsulta($sql, [
+                ':codUsuario' => $codUsuario,
+                ':password' => $codUsuario . $password,
+                ':descUsuario' => $descUsuario
+            ]);
+            
+            if ($consulta) {
+                $oUsuario = self::validarUsuario($codUsuario, $password);
+            }
+        } catch (Exception $e) {
+            return null;
+        }
+        return $oUsuario;
+    }
+
+    /**
+     * Función para validar si un codigo existe o no.
+     * Parámetros: Código.
+     * 
+     * @param String $codUsuario , código del usuario a validar.
+     * @return Objeto Usuario|null.
+     * Devuelve un objeto Usuario si existe.
+     * Devuelve null si no ha encontrado al usuario.
+     * Devuelve PDOException si ha habido algún error.
+     * 
+     * @author Alejandro De la Huerga.
+     * @version 1.0.0 Fecha Última modificación: 18/12/2025.
+     * @since 25/01/2025
+     */
+
+    public static function validarCodNoExiste($codUsuario){
+        $codExiste=false; // Inicializamos la variable a false.
+        $consulta = "SELECT * FROM T_01Usuario WHERE T01_CodUsuario LIKE ?";
+
+        try{
+            /**
+             * Buscamos el codigo en la base de datos.
+             * Si nos devuelve alguna tupla es que ese codigo ya existe
+             * $codExiste =true
+             */
+            $resultadoConsulta = DBPDO::ejecutarConsulta($consulta,["%$codUsuario%"]);
+            if($resultadoConsulta ->rowCount()>0){ // Si hay alguna coincidencia.
+                $codExiste = true; // Existe igual a true
+            }
+        }catch(Exception $ex){
+            $codExiste=false;
+        }
+
+        return $codExiste;
+    }
 }
 ?>

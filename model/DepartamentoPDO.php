@@ -59,7 +59,6 @@
          * @version 1.0.0 Fecha Última modificación: 25/01/2026.
          * @since 23/01/2025
          */
-
         public static function buscarTodosDepartamentos (){
             // Array para almacenar todos los objetos Departamento que hay en la base de datos.
             $aTodosDepartamentos=[];
