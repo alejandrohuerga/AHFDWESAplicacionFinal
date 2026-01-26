@@ -36,6 +36,10 @@
         $aErrores['confirmarPassword'] = validacionFormularios::validarPassword($_REQUEST['confirmarPassword'], 8, 4, 1, 1);
         $aErrores['descripcion'] = validacionFormularios::comprobarAlfaNumerico($_REQUEST['descripcion'], 255, 4, 1);
         
+        if($_REQUEST['password'] !== $_REQUEST['confirmarPassword']){
+            $aErrores['confirmarPassword'] = "Las contraseñas deben coincidir";
+            $entradaOK=false;
+        }
 
         // Guardamos las respuestas para mostrarlas en case de algun campo fallido.
         $aRespuestas['usuario'] = $_REQUEST['usuario'];
@@ -80,6 +84,7 @@
                     $_SESSION['usuarioDAW202LoginLogoff'] = $oUsuario;
                 } else {
                     // Login correcto
+                    $_SESSION['usuarioAHFDAW202LoginLogoff'] =$oUsuario;
                     $_SESSION['paginaEnCurso'] = 'inicioPrivado';
                     header('Location: index.php');
                     exit;

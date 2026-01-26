@@ -10,28 +10,27 @@
      */
 
     class DepartamentoPDO{
-
         /**
          * Función para buscar un departamento por código.
          * Función que busca un departamento por el codigo.
          * Parámetros: Código.
          * 
-         * @param String $codDepartamento , código del departamento a buscar.
-         * @return Array $aDepartamento , array con los objetos departamento encontradffos
+         * @param String $descDepartamento , descripción del departamento a buscar.
+         * @return Array $aDepartamento , array con los objetos departamento encontrados
          * Devuelve un array con los objetos departamento.
          * Devuelve PDOException si ha habido algún error.
          * 
          * @author Alejandro De la Huerga.
-         * @version 1.0.0 Fecha Última modificación: 23/01/2026.
+         * @version 1.0.0 Fecha Última modificación: 26/01/2026.
          * @since 23/01/2025
          */
 
-        public static function buscaDepartamentoPorCod($codDepartamento){
+        public static function buscaDepartamentoPorDesc($descDepartamento){
             $aDepartamentos=[]; //Array que almacena los objetos Departamento que se encuentren.
             
             // Consulta para buscar departamentos por el código.
-            $consulta = "SELECT * FROM T_02Departamento WHERE T02_CodDepartamento LIKE ?";
-            $resultadoConsulta = DBPDO::ejecutarConsulta($consulta,["%$codDepartamento%"]);
+            $consulta = "SELECT * FROM T_02Departamento WHERE T02_DescDepartamento LIKE ?";
+            $resultadoConsulta = DBPDO::ejecutarConsulta($consulta,["%$descDepartamento%"]);
 
             while($oRegistro = $resultadoConsulta -> fetchObject()){
                 $aDepartamentos[] = new Departamento(

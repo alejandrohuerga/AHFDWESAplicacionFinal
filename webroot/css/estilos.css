@@ -278,7 +278,7 @@ input[name="cerrarSesion"]{
 }
 
 /* BUSQUEDA DE DEPARTAMENTO FORMULARIO */
-input[name="codBuscado"]{
+input[name="descBuscado"]{
     height: 32px;
     font-family: Play,sans-serif;
     font-size: 14px;
@@ -291,9 +291,16 @@ input[name="codBuscado"]{
     border-radius: 4px;
 }
 
-input[name="CodDepBuscado"]{
+input[name="DescDepBuscado"]{
     width: 500px;
     height: 32px;
+    font-family: Play,sans-serif;
+    font-weight: bold;
+    text-decoration: inherit;
+    border: 1px solid grey;
+    border-radius: 4px;
+    background: white;
+    color: black;
 }
 
 

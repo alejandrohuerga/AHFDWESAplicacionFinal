@@ -25,11 +25,12 @@
     }
 
     $aErrores =[
-        'CodDepartamentoBuscar' => ''
+        'DescDepartamentoBuscar' => ''
     ];
 
-    $aDepartamentos=[]; // Array que almacena los objetos Departamento para pasarlos a la vista.
-
+    // Array que almacena los objetos Departamento para pasarlos a la vista.
+    $aDepartamentos=[];
+    
     // Inicializamos el array con todos los departamentos.
     $aDepartamentos=DepartamentoPDO::buscarTodosDepartamentos();
 
@@ -37,22 +38,27 @@
 
     $entradaOK=true;
     $oDepartamento=null;
+    $descDepartamento="";
+    $_SESSION['descBuscada'] = "";
 
-    if(isset($_REQUEST['codBuscado'])){
-        $aErrores['CodDepartamentoBuscar'] =validacionFormularios::comprobarAlfabetico($_REQUEST['CodDepBuscado'],3,3,OBLIGATORIO);
+    if(isset($_REQUEST['descBuscado'])){
+        $aErrores['DescDepartamentoBuscar'] =validacionFormularios::comprobarAlfabetico($_REQUEST['DescDepBuscado'],30,1,OBLIGATORIO);
         
-        if($aErrores['CodDepartamentoBuscar'] != null){
+        if($aErrores['DescDepartamentoBuscar'] != null){
             $entradaOK = false;
         }
 
-        if($entradaOK){
-            $aDepartamentos=DepartamentoPDO::buscaDepartamentoPorCod($_REQUEST['CodDepBuscado']);
-            
+        if($entradaOK){  
+            $aDepartamentos=DepartamentoPDO::buscaDepartamentoPorDesc($_REQUEST['DescDepBuscado']);
+            $_SESSION['depBuscados'] = $aDepartamentos; // Metemos en la sesión los departamentos encontrados.
+            $_SESSION['descBuscada'] = $_REQUEST['DescDepBuscado']; // Metemos en la SESSION la descBuscada para mantenerla en el input text.
             if(empty($aDepartamentos)){
                 $aDepartamentos=DepartamentoPDO::buscarTodosDepartamentos();
             }
-        }
+        } 
     }
+    
+    $descBuscada = $_SESSION['descBuscada'];
     
     // Cargamos el layout principal que cargara cada página a parte de la estructura principal.
     require_once $view['layout'];

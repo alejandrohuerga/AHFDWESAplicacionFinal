@@ -7,17 +7,17 @@
 </header>
 <main>
     <form name="formulario">
-        <label class="buscar" for="Codigo Departamento">
-            <input type="text" name="CodDepBuscado" class="buscar"/>
-            <input type="submit" name="codBuscado" value="Buscar">
+        <label class="buscar" for="Descripción Departamento">
+            <input type="text" name="DescDepBuscado" class="buscar" value="<?php  if($descBuscada != ""){echo $descBuscada ;} ?>"/>
+            <input type="submit" name="descBuscado" value="Buscar">
         </label>
-        <br />
+        <br/>
     </form>
     <table id="tablaBuscarDep">
         <tr>
             <th>Codigo Departamento</th>
             <th>Descripcion del Departamento</th>
-            <th> Fecha Alta</th>
+            <th>Fecha Alta</th>
             <th>Volumen del Negocio</th>
             <th>Fecha Baja</th>
         </tr>
