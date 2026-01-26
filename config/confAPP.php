@@ -20,12 +20,12 @@
         'inicioPublico' => 'controller/cInicioPublico.php',
         'login' => 'controller/cLogin.php',
         'inicioPrivado' => 'controller/cInicioPrivado.php',
-        'registro' => 'controller/cRegistro.php',
         'detalle' => 'controller/cDetalle.php',
         'departamento' => 'controller/cMtoDepartamentos.php',
         'wip' => 'controller/cWip.php',
         'error' => 'controller/cError.php',
-        'api'=>'controller/cREST.php'
+        'api'=>'controller/cREST.php',
+        'registro' => 'controller/cRegistro.php'
     ];
 
     $view = [
@@ -33,11 +33,11 @@
         'layout' => 'view/layout.php',
         'login' => 'view/vLogin.php',
         'inicioPrivado' => 'view/vInicioPrivado.php',
-        'registro' => 'view/vRegistro.php',
         'detalle' => 'view/vDetalle.php',
         'departamento' => 'view/vMtoDepartamentos.php',
         'wip' => 'view/vWip.php',
         'error' => 'view/vError.php',
-        'api' => 'view/vREST.php'
+        'api' => 'view/vREST.php',
+        'registro' => 'view/vRegistro.php'
     ];
 ?>

@@ -7,7 +7,12 @@
         exit;
     }
 
-    
+    // Si pulsa crear cuenta nos lleva al registro.
+    if (isset($_REQUEST['crearCuenta'])) {
+        $_SESSION['paginaEnCurso'] = 'registro';
+        header('Location: index.php');
+        exit;
+    }
     // Arrays para errores y respuestas , llamarlos como en la base de datos. (T01_CodUsuario,T01_Password).
     $aErrores = [
         'usuario' => null,

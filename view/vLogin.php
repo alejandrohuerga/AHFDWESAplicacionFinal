@@ -29,7 +29,7 @@
                     </div>
                     <div id="o">O</div>
                     <p id="sincuenta">¿No tienes cuenta?</p>
-                    <input type="submit" name="registrarse" value="CREAR CUENTA" />
+                    <input type="submit" name="crearCuenta" value="CREAR CUENTA" />
                 </div>
             </form>
         </div>

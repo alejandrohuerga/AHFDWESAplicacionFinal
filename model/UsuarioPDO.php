@@ -110,7 +110,7 @@ class UsuarioPDO{
          * Numero de conexiones a 1 , empieza al hacer el registro.
         */
         $sql = <<<SQL
-            INSERT INTO T01_Usuario 
+            INSERT INTO T_01Usuario 
             (T01_CodUsuario, 
             T01_Password, 
             T01_DescUsuario, 
