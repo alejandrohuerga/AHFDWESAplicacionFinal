@@ -65,7 +65,7 @@
                 $oUsuario = UsuarioPDO::altaUsuario(
                     $_REQUEST['usuario'],
                     $_REQUEST['password'],
-                    $_REQUEST['descUsuario']
+                    $_REQUEST['descripcion']
                 );
 
                 if ($oUsuario === null) {
@@ -76,12 +76,15 @@
                     $_SESSION['paginaEnCurso'] = 'login';
                     header('Location: index.php');
                     exit;
+                    unset($_SESSION['usuarioDAW202LoginLogoff']);
+                    $_SESSION['usuarioDAW202LoginLogoff'] = $oUsuario;
                 } else {
                     // Login correcto
                     $_SESSION['paginaEnCurso'] = 'inicioPrivado';
                     header('Location: index.php');
                     exit;
                 }
+                
             }
         }
     }else{
