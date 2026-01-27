@@ -30,16 +30,23 @@
 
     // Array que almacena los objetos Departamento para pasarlos a la vista.
     $aDepartamentos=[];
-    
+
     // Inicializamos el array con todos los departamentos.
     $aDepartamentos=DepartamentoPDO::buscarTodosDepartamentos();
 
+    if(isset($_SESSION['depBuscados']) && !! !empty($_SESSION['depBuscados'])){
+        $aDepartamentos = $_SESSION['depBuscados'];
+    }
     define('OBLIGATORIO', 0);
 
     $entradaOK=true;
     $oDepartamento=null;
     $descDepartamento="";
-    $_SESSION['descBuscada'] = "";
+
+    // Si esta vacia la inicializamos.
+    if (!isset($_SESSION['descBuscada'])) {
+        $_SESSION['descBuscada'] = '';
+    }
 
     if(isset($_REQUEST['descBuscado'])){
         $aErrores['DescDepartamentoBuscar'] =validacionFormularios::comprobarAlfabetico($_REQUEST['DescDepBuscado'],30,1,OBLIGATORIO);
@@ -59,6 +66,8 @@
     }
     
     $descBuscada = $_SESSION['descBuscada'];
+
+    
     
     // Cargamos el layout principal que cargara cada página a parte de la estructura principal.
     require_once $view['layout'];

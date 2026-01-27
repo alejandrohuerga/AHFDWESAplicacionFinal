@@ -24,6 +24,8 @@
         exit;
     }
 
+    
+
     $aErrores = [
         'fechaNasa' => null
     ];
@@ -35,6 +37,12 @@
     $fechaHoyFormateada=$fechaHoy -> format('Y-m-d');
     $fechaNasa = $fechaHoyFormateada; // Por defecto hoy.
 
+    // Si NO se ha enviado el formulario, cargamos la foto del día
+    if (!isset($_REQUEST['enviarNasa'])) {
+        $oFotoNasa = REST::apiNasa($fechaHoyFormateada);
+        $_SESSION['InfoNasa'] = $oFotoNasa;
+    }
+    
     // Validación al darle al botón enviar de la Nasa
     if(isset($_REQUEST['enviarNasa'])){
         $entradaOK = true;
