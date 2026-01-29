@@ -737,6 +737,58 @@ main.detalle table.tableSG th {
     margin-bottom: 50px;
 }
 
+input[name="enviarNasa"]:hover{
+    background-color: rgb(170, 70, 3);
+}
+
+input[name="enviarNasa"]{
+    height: 32px;
+    font-family: Play,sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: inherit;
+    color: rgb(241,241,241);
+    padding: 8px 24px;
+    background-color: rgb(255, 108, 32);
+    border: none;
+    border-radius: 4px;
+}
+
+input[name="detalleNasa"]:hover{
+    background-color: rgb(170, 70, 3);
+}
+
+input[name="detalleNasa"]{
+    height: 32px;
+    font-family: Play,sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: inherit;
+    color: rgb(241,241,241);
+    padding: 8px 24px;
+    background-color: rgb(255, 108, 32);
+    border: none;
+    border-radius: 4px;
+}
+
+input[name="fechaNasa"]:hover{
+    background-color: rgb(170, 70, 3);
+}
+
+input[name="fechaNasa"]{
+    height: 32px;
+    width: 170px;
+    font-family: Play,sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: inherit;
+    color: black;
+    padding: 8px 24px;
+    background-color: rgb(255, 215, 83);
+    border: none;
+    border-radius: 4px;
+}
+
 /* ESTILOS MENSAJE DE ERROR */
 
 .error-valor{

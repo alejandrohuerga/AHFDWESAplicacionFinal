@@ -4,6 +4,10 @@
  * @since 16/12/2025
 */
     date_default_timezone_set('Europe/Madrid');
+
+    // ApiKey de la Api de la Nasa de foto del dia.
+    define("API_KEY_NASA","6qXdzrHPJ6rIaOMcGJDAePcNlUMFoAtOdcjy8yZg");
+
     // Importamos todo el modelo para no tener que importarlos por los archivos.
     require_once 'model/Usuario.php';
     require_once 'model/UsuarioPDO.php';

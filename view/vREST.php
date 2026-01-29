@@ -12,14 +12,15 @@
             <div class="tituloRest">
                 <form name="formularioNasa" method="post">
                     <label for="fechaNasa">Fecha: </label>
-                    <input class="formulariosApi" type="date" name="fechaNasa" value="<?php echo $avRestNasa['fechaNasa']?>"/>
+                    <input class="formulariosApi" type="date" name="fechaNasa" value="<?php echo $_SESSION['fechaDetalleNasa']?>"/>
                     <span style="color: red;" class="error rojo"><?php echo $avRestNasa['errorNasa'] ?></span>
                     <input type="submit" name="enviarNasa" value="BUSCAR">
+                    <input type="submit" name="detalleNasa" value="DETALLE">
                 </form>
                 <?php echo '<h2 id="tituloFotoNasa">' . $avRestNasa['tituloNasa']. '</h2>' ?>
             </div>
             <div class="infoRest">
-                <img src="<?php echo $avRestNasa['fotoNasa']?>" alt="Foto de la NASA" width="300px" height="200px">
+                <img src="<?php echo $_SESSION['fotoNasa']?>" alt="Foto de la NASA" width="300px" height="200px">
             </div>
             <div id="descripcionFotoNasa">
                 <?php echo '<p id="descripcionNasa">' .  $avRestNasa['explicacionNasa']. '</p>'?>
@@ -28,6 +29,7 @@
                 <p><b>Instrucciones de uso:</b> <a target="blank" href=" https://api.nasa.gov" id="urlNasa"> https://api.nasa.gov</a></p>
                 <p><b>Parámetros:</b> Fecha</p>
                 <p><b>Método:</b> GET</p>
+                <p><b>Devuelve la foto de la Nasa de la fecha seleccionada</b></p>
             </div>
         </div>
         <div class="Rest" id="pokemon">

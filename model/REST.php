@@ -11,9 +11,6 @@
      */
 
     class REST{
-        // ApiKey de la Api de la Nasa de foto del dia.
-        const API_KEY_NASA = '6qXdzrHPJ6rIaOMcGJDAePcNlUMFoAtOdcjy8yZg';
-        
         /**
          * Function __apiNasa(&fecha)
          * Funcion la cual conecta y hace la petición de la foto de la fecha proporcinada.
@@ -29,7 +26,7 @@
         public static function apiNasa($fecha){
             // Accedemos a la URL de la Nasa
             // El @ evita que salga el warning por pantalla
-            $resultado=@file_get_contents("https://api.nasa.gov/planetary/apod?date=$fecha&api_key=" . self::API_KEY_NASA);
+            $resultado=@file_get_contents("https://api.nasa.gov/planetary/apod?date=$fecha&api_key=" . API_KEY_NASA);
 
             if($resultado === false){
                 return null;

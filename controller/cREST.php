@@ -24,8 +24,6 @@
         exit;
     }
 
-    
-
     $aErrores = [
         'fechaNasa' => null
     ];
@@ -56,6 +54,7 @@
             $fechaNasa = $_REQUEST['fechaNasa'];
             $_SESSION['fechaDetalleNasa'] = $fechaNasa;
             $oFotoNasa = REST::apiNasa($fechaNasa);
+            $_SESSION['fotoNasa']=$oFotoNasa->getFoto();
             $_SESSION['InfoNasa'] = $oFotoNasa;
         } else{
             $oFotoNasa = $_SESSION['InfoNasa'] ?? null;
