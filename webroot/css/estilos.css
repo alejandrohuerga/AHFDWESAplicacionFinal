@@ -772,7 +772,7 @@ input[name="detalleNasa"]{
 }
 
 input[name="fechaNasa"]:hover{
-    background-color: rgb(170, 70, 3);
+    background-color: rgb(255, 222, 74);
 }
 
 input[name="fechaNasa"]{
