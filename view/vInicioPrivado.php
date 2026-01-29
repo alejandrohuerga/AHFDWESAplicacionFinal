@@ -17,5 +17,7 @@
         <input type="submit" name="mantenimientoDep" value="Mantenimiento Departamentos"/>
         <input type="submit" name="error" value="Error">
         <input type="submit" name="rest" value="Rest">
+        <input type="submit" name="mtoUsuarios" value="Mantenimiento Usuarios">
+        
     </form>
 </main>

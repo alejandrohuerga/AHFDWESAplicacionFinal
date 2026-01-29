@@ -66,6 +66,7 @@
     if ($entradaOK) {
         // Login correcto
         $_SESSION['usuarioDAW202LoginLogoff'] = $oUsuario;
+        $_SESSION['perfilUsuario'] = $oUsuario -> getPerfil();
         UsuarioPDO::registrarUltimaConexion($_SESSION['usuarioDAW202LoginLogoff']);
         $_SESSION['paginaEnCurso'] = 'inicioPrivado';
         header('Location: index.php');

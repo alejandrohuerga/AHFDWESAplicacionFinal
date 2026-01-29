@@ -26,6 +26,9 @@
                     <label for="password">Descripción</label>
                     <input type="text" name="descripcion" value="<?php echo $_REQUEST['descripcion'] ?? '' ?>" class="entradaDatos" placeholder="Descripcion" />
                     <span class="error" id="erroresFormulario"><?php echo $aErrores['descripcion'] ?? '' ?></span>
+                    <label for="preguntaSeguridad">Pregunta Seguridad:</label>
+                    <input type="text" name="preguntaSeguridad" value="<?php echo $_REQUEST['preguntaSeguridad'] ?? '' ?>" class="entradaDatos" placeholder="Pregunta" />
+                    <span class="error" id="erroresFormulario"><?php echo $aErrores['preguntaSeguridad'] ?? '' ?></span>
                 </div>
                 <div id="botonesRegistro">
                     <div id="entrarCancelar">

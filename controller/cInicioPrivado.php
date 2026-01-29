@@ -9,6 +9,7 @@
         exit;
     }
     
+    
     // Variable que guarda el valor de la cookie idioma.
     $idioma= $_COOKIE['idioma'] ?? 'es'; // Español por defecto.
 
@@ -59,7 +60,8 @@
     $avInicioPrivado=[ // Array que almacena los datos que obtenemos del objeto usuario.
         "descUsuario" => $_SESSION['usuarioDAW202LoginLogoff'] -> getDescUsuario(),
         "numAccesos" => $_SESSION['usuarioDAW202LoginLogoff'] -> getNumAccesos(),
-        "fechaHoraUltimaConexionAnterior" => $_SESSION['usuarioDAW202LoginLogoff'] -> getFechaHoraUltimaConexionAnterior()
+        "fechaHoraUltimaConexionAnterior" => $_SESSION['usuarioDAW202LoginLogoff'] -> getFechaHoraUltimaConexionAnterior(),
+        "perfil" => $_SESSION['usuarioDAW202LoginLogoff'] -> getPerfil()
     ];
 
     // Array que almacena los datos para formar el mensaje de bienvenida.

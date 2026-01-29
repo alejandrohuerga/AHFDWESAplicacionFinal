@@ -15,14 +15,16 @@
         'usuario' => '',
         'password' => '',
         'confirmarPassword' => '',
-        'descripcion' => ''
+        'descripcion' => '',
+        'preguntaSeguridad' =>''
     ];
 
     $aRespuestas=[
         'usuario' => '',
         'password' => '',
         'confirmarPassword' => '',
-        'descripcion' => ''
+        'descripcion' => '',
+        'preguntaSeguridad' =>''
     ];
 
     $entradaOK = true;
@@ -35,9 +37,15 @@
         $aErrores['password'] = validacionFormularios::validarPassword($_REQUEST['password'], 8, 4, 1, 1);
         $aErrores['confirmarPassword'] = validacionFormularios::validarPassword($_REQUEST['confirmarPassword'], 8, 4, 1, 1);
         $aErrores['descripcion'] = validacionFormularios::comprobarAlfaNumerico($_REQUEST['descripcion'], 255, 4, 1);
+        $aErrores['preguntaSeguridad'] =validacionFormularios::comprobarAlfabetico($_REQUEST['preguntaSeguridad'],200,1,1);
         
         if($_REQUEST['password'] !== $_REQUEST['confirmarPassword']){
             $aErrores['confirmarPassword'] = "Las contraseñas deben coincidir";
+            $entradaOK=false;
+        }
+
+        if($_REQUEST['preguntaSeguridad'] !== PREGUNTASEG){
+            $aErrores['preguntaSeguridad'] = "Pregunta de seguridad incorrecta";
             $entradaOK=false;
         }
 
@@ -46,6 +54,7 @@
         $aRespuestas['password'] = $_REQUEST['password'];
         $aRespuestas['confirmarPassword'] = $_REQUEST['confirmarPassword'];
         $aRespuestas['descripcion'] = $_REQUEST['descripcion'];
+        $aRespuestas['preguntaSeguridad'] = $_REQUEST['preguntaSeguridad'];
 
         // Verificar si hay errores de validación
         foreach ($aErrores as $valorCampo => $msjError) {

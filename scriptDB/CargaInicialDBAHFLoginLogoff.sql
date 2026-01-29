@@ -30,7 +30,9 @@ INSERT INTO T_01Usuario (T01_CodUsuario,T01_Password,T01_DescUsuario,T01_ImagenU
             ('claudio',SHA2('claudiopaso',256),'Claudio Lozano',null),
             ('gisela',SHA2('giselapaso',256),'Gisela Folgueral',null)
 ;
-            
+
+INSERT INTO `T_01Usuario` (T01_CodUsuario,T01_Password,T01_DescUsuario,T01_Perfil,T01_ImagenUsuario) VALUES
+('admin',SHA2('adminpaso',256), 'Administrador','administrador',null);
 
 INSERT INTO T_02Departamento (T02_CodDepartamento,T02_DescDepartamento,T02_FechaCreacionDepartamento,T02_VolumenDeNegocio,T02_FechaBajaDepartamento) VALUES 
     ('AUT','Automoción',now(),1285.50,NULL),
