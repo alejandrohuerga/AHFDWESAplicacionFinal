@@ -34,7 +34,8 @@
     $fechaHoy=new DateTime();
     $fechaHoyFormateada=$fechaHoy -> format('Y-m-d');
     $fechaNasa = $fechaHoyFormateada; // Por defecto hoy.
-
+    
+    
     // Si NO se ha enviado el formulario, cargamos la foto del día
     if (!isset($_REQUEST['enviarNasa'])) {
         $oFotoNasa = REST::apiNasa($fechaHoyFormateada);

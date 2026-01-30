@@ -799,13 +799,24 @@ input[name="fechaNasa"]{
 }
 
 /* ESTILOS TABLA MTO DEPARTAMENTOS */
+#flechaArriba{
+        width: 10px;
+        height: 10px;
+}
 
 #tablaBuscarDep{
     border: 2px solid black;
     margin-top: 1%;
     background: #f0972b;
     color: black;
+
+    & th{
+        border: 2px solid black;
+        padding: 15px;
+    }
+
     & td{
         border: 2px solid black;
+        padding: 15px;
     }
 }

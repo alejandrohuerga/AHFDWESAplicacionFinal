@@ -77,5 +77,27 @@
             
             return $aTodosDepartamentos;
         }
+
+        /**
+         * Función para modificar un Departamento en la base de datos.
+         * Parámetros: $codDepartamento, $descDepartamento, $volumenDepartamento.
+         * 
+         * @param String $codDepartamento Codigo del departamento.
+         * @param String $descDepartamento , descripción del departamento a buscar.
+         * @param Float $volumenDepartamento , volumen del departamento.
+         * @return True | False si se ha editado o no el departamento
+         * 
+         * @author Alejandro De la Huerga.
+         * @version 1.0.0 Fecha Última modificación: 30/01/2026.
+         * @since 30/01/2025
+         */
+
+        public static function modificarDepartamento ($codDepartamento,$descDepartamento,$volumenDepartamento)
+        {
+            // Variable que indica si el departamento ha sido modificado.
+            $departamentoModificado = false; 
+
+
+        }
     }
 ?>
