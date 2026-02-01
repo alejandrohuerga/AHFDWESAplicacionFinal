@@ -31,21 +31,47 @@
     $oFotoNasa = null;
 
     // Obtenemos la fecha de hoy para valores por defecto.
-    $fechaHoy=new DateTime();
-    $fechaHoyFormateada=$fechaHoy -> format('Y-m-d');
-    $fechaNasa = $fechaHoyFormateada; // Por defecto hoy.
-    
-    
-    // Si NO se ha enviado el formulario, cargamos la foto del día
+    $fechaHoy = new DateTime();
+    $fechaHoyFormateada = $fechaHoy->format('Y-m-d');
+    $fechaNasa = $fechaHoyFormateada; // Por defecto hoy
+    $tituloNasa = "No hay datos";
+    $explicacionNasa = "";
+    $urlFotoNasa = null;
+
+    // Si NO se ha enviado el formulario
     if (!isset($_REQUEST['enviarNasa'])) {
-        $oFotoNasa = REST::apiNasa($fechaHoyFormateada);
-        $_SESSION['InfoNasa'] = $oFotoNasa;
+        if (isset($_SESSION['urlFotoNasa']) && isset($_SESSION['fechaNasaEnCurso'])) {
+            // Recuperamos la última búsqueda de la sesión
+            $urlFotoNasa = $_SESSION['urlFotoNasa'];
+            $fechaNasa = $_SESSION['fechaNasaEnCurso'];
+            $tituloNasa = $_SESSION['tituloNasa'] ?? $tituloNasa;
+            $explicacionNasa = $_SESSION['explicacionNasa'] ?? $explicacionNasa;
+        } else {
+            // Primera carga: foto del día
+            $oFotoNasa = REST::apiNasa($fechaHoyFormateada);
+            if ($oFotoNasa) {
+                $tituloNasa = $oFotoNasa->getTitulo();
+                $explicacionNasa = $oFotoNasa->getExplicacion();
+                $urlFotoNasa = $oFotoNasa->getFoto();
+            }
+
+            // Guardamos en sesión
+            $_SESSION['urlFotoNasa'] = $urlFotoNasa;
+            $_SESSION['fechaNasaEnCurso'] = $fechaHoyFormateada;
+            $_SESSION['tituloNasa'] = $tituloNasa;
+            $_SESSION['explicacionNasa'] = $explicacionNasa;
+        }
     }
-    
-    // Validación al darle al botón enviar de la Nasa
-    if(isset($_REQUEST['enviarNasa'])){
+
+    // Si se envía el formulario de búsqueda
+    if (isset($_REQUEST['enviarNasa'])) {
         $entradaOK = true;
-        $aErrores['fechaNasa'] = validacionFormularios::validarFecha($_REQUEST['fechaNasa'], $fechaHoyFormateada, '1995-06-16', 1);
+        $aErrores['fechaNasa'] = validacionFormularios::validarFecha(
+            $_REQUEST['fechaNasa'],
+            $fechaHoyFormateada,
+            '1995-06-16',
+            1
+        );
 
         if ($aErrores['fechaNasa'] != null) {
             $entradaOK = false;
@@ -53,22 +79,32 @@
 
         if ($entradaOK) {
             $fechaNasa = $_REQUEST['fechaNasa'];
-            $_SESSION['fechaDetalleNasa'] = $fechaNasa;
             $oFotoNasa = REST::apiNasa($fechaNasa);
-            $_SESSION['fotoNasa']=$oFotoNasa->getFoto();
-            $_SESSION['InfoNasa'] = $oFotoNasa;
-        } else{
-            $oFotoNasa = $_SESSION['InfoNasa'] ?? null;
+            if ($oFotoNasa) {
+                $tituloNasa = $oFotoNasa->getTitulo();
+                $explicacionNasa = $oFotoNasa->getExplicacion();
+                $urlFotoNasa = $oFotoNasa->getFoto();
+            }
+            // Guardamos en sesión
+            $_SESSION['urlFotoNasa'] = $urlFotoNasa;
+            $_SESSION['fechaNasaEnCurso'] = $fechaNasa;
+            $_SESSION['tituloNasa'] = $tituloNasa;
+            $_SESSION['explicacionNasa'] = $explicacionNasa;
+        } else {
+            // Si hay error, usamos último valor guardado
+            $urlFotoNasa = $_SESSION['urlFotoNasa'] ?? null;
+            $fechaNasa = $_SESSION['fechaNasaEnCurso'] ?? $fechaHoyFormateada;
+            $tituloNasa = $_SESSION['tituloNasa'] ?? $tituloNasa;
+            $explicacionNasa = $_SESSION['explicacionNasa'] ?? $explicacionNasa;
         }
     }
-
-    $avRestNasa =[
-        'fechaHoy' => $fechaHoyFormateada,
-        'tituloNasa' => ($oFotoNasa) ? $oFotoNasa->getTitulo() : "No hay datos",
-        'fotoNasa' => ($oFotoNasa) ? $oFotoNasa->getFoto() : "",
+    // Pasamos a la vista
+    $avRestNasa = [
         'fechaNasa' => $fechaNasa,
-        'explicacionNasa' => ($oFotoNasa) ? $oFotoNasa->getExplicacion() : "",
-        'errorNasa' => $aErrores['fechaNasa'],
+        'fotoNasa' => $urlFotoNasa,
+        'tituloNasa' => $tituloNasa,
+        'explicacionNasa' => $explicacionNasa,
+        'errorNasa' => $aErrores['fechaNasa'] ?? null
     ];
 
     require_once $view['layout'];

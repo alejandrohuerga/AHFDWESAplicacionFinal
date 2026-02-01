@@ -47,30 +47,5 @@
         'registro' => 'view/vRegistro.php'
     ];
 
-    $controllerAdmin =[
-        'inicioPublico' => 'controller/cInicioPublico.php',
-        'login' => 'controller/cLogin.php',
-        'inicioPrivado' => 'controller/cInicioPrivado.php',
-        'detalle' => 'controller/cDetalle.php',
-        'departamento' => 'controller/cMtoDepartamentos.php',
-        'wip' => 'controller/cWip.php',
-        'error' => 'controller/cError.php',
-        'api'=>'controller/cREST.php',
-        'registro' => 'controller/cRegistro.php',
-        'mtoUsuarios' => 'controller/cMtoUsuarios.php'
-    ];
-
-    $viewAdmin =[
-        'inicioPublico' => 'view/vInicioPublico.php',
-        'layout' => 'view/layout.php',
-        'login' => 'view/vLogin.php',
-        'inicioPrivado' => 'view/vInicioPrivado.php',
-        'detalle' => 'view/vDetalle.php',
-        'departamento' => 'view/vMtoDepartamentos.php',
-        'wip' => 'view/vWip.php',
-        'error' => 'view/vError.php',
-        'api' => 'view/vREST.php',
-        'registro' => 'view/vRegistro.php',
-        'mtoUsuarios' => 'view/vMtoUsuarios.php'
-    ];
+    
 ?>
