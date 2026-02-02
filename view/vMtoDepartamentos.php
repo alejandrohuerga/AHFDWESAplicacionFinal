@@ -20,6 +20,10 @@
             <th>Fecha Alta</th>
             <th>Volumen del Negocio</th>
             <th>Fecha Baja</th>
+            <th>Ver</th>
+            <th>Estado</th>
+            <th>Editar</th>
+            <th>Borrar</th>
         </tr>
         <?php foreach ($aDepartamentos as $oDepartamento): ?>
             <tr>
@@ -28,6 +32,10 @@
                 <td><?= $oDepartamento->getFechaCreacionDepartamento() ?></td>
                 <td><?= $oDepartamento->getVolumenNegocio() ?></td>
                 <td><?= $oDepartamento->getFechaBajaDepartamento() ?? '—' ?></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
             </tr>
         <?php endforeach; ?>
     </table>

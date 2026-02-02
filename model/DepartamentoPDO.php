@@ -97,7 +97,14 @@
             // Variable que indica si el departamento ha sido modificado.
             $departamentoModificado = false; 
 
+            $consulta="UPDATE T_02Departamento SET T02_DescDepartamento = ?, T02_VolumenNegocio = ? WHERE T02_CodDepartamento = ?";
+            $resultadoConsulta=DBPDO::ejecutarConsulta($consulta);
 
+            if($resultadoConsulta!=null){
+                $departamentoModificado = true;
+            }
+
+            return $departamentoModificado;
         }
     }
 ?>

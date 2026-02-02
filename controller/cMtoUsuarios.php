@@ -28,9 +28,6 @@
         exit;
     }
 
-    
-
-
     // Cargamos el layout principal que cargara cada página a parte de la estructura principal.
     require_once $view['layout'];
 ?>
