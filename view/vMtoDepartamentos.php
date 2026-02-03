@@ -32,10 +32,22 @@
                 <td><?= $oDepartamento->getFechaCreacionDepartamento() ?></td>
                 <td><?= $oDepartamento->getVolumenNegocio() ?></td>
                 <td><?= $oDepartamento->getFechaBajaDepartamento() ?? '—' ?></td>
+                <td>
+                    <button type="button" class="botonCrudDep" style="background: #f0972b; border:none;">
+                        <img src="webroot/images/icon-ojo.png" alt="Descripción del botón" style="height: 40px; width: 40px;">
+                    </button>
+                </td>
                 <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>
+                    <button type="button" class="botonCrudDep" style="background: #f0972b; border:none;">
+                        <img src="webroot/images/icon-editar.png" alt="Descripción del botón" style="height: 40px; width: 40px;">
+                    </button>
+                </td>
+                <td>
+                    <button type="button" class="botonCrudDep" style="background: #f0972b; border:none;">
+                        <img src="webroot/images/icon-eliminar.png" alt="Descripción del botón" style="height: 40px; width: 40px;">
+                    </button>
+                </td>
             </tr>
         <?php endforeach; ?>
     </table>
