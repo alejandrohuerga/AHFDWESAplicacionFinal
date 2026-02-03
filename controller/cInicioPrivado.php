@@ -57,6 +57,14 @@
         exit;
     }
 
+    // Código que se ejecuta cuando pulsamos el boton MtoUsuarios
+    if(isset($_REQUEST['mtoUsuarios'])){
+        $_SESSION['paginaAnterior']= $_SESSION['paginaEnCurso'];
+        $_SESSION['paginaEnCurso'] = 'wip';
+        header('Location: index.php');
+        exit;
+    }
+
     $avInicioPrivado=[ // Array que almacena los datos que obtenemos del objeto usuario.
         "descUsuario" => $_SESSION['usuarioDAW202LoginLogoff'] -> getDescUsuario(),
         "numAccesos" => $_SESSION['usuarioDAW202LoginLogoff'] -> getNumAccesos(),

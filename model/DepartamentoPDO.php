@@ -11,9 +11,9 @@
 
     class DepartamentoPDO{
         /**
-         * Función para buscar un departamento por código.
-         * Función que busca un departamento por el codigo.
-         * Parámetros: Código.
+         * Función para buscar un departamento por descripción.
+         * Función que busca un departamento por el cdescripción.
+         * Parámetros: Descripción.
          * 
          * @param String $descDepartamento , descripción del departamento a buscar.
          * @return Array $aDepartamento , array con los objetos departamento encontrados
@@ -28,7 +28,7 @@
         public static function buscaDepartamentoPorDesc($descDepartamento){
             $aDepartamentos=[]; //Array que almacena los objetos Departamento que se encuentren.
             
-            // Consulta para buscar departamentos por el código.
+            // Consulta para buscar departamentos por el descripcion.
             $consulta = "SELECT * FROM T_02Departamento WHERE T02_DescDepartamento LIKE ?";
             $resultadoConsulta = DBPDO::ejecutarConsulta($consulta,["%$descDepartamento%"]);
 
@@ -43,6 +43,39 @@
             }
             
             return $aDepartamentos;
+        }
+
+        /**
+         *  Función para buscar un departamento por código.
+         *  Parámetros: Código de departamento.
+         *  
+         *  @param String $codDepartamento , código del departamento a buscar.
+         *  @return null | $oDepartamento , devuelve null si no encuentra un departamento o el objeto departamento.
+         *  
+         *  @version 1.0.0 Fecha última modificación 03/02/2026
+         *  @since 03/02/2026
+        */
+
+        public static function buscarDepartamentoPorCod($codDepartamento){
+            // Objeto departamento inicializado a null.
+            $oDepartamento = null; 
+
+            $consultaSQL = "SELECT * FROM T_02Departamento WHERE T02_CodDepartamento =?";
+            $resultadoConsulta = DBPDO::ejecutarConsulta($consultaSQL,[$codDepartamento]);
+
+            if($resultadoConsulta -> rowCount() >0){
+                $departamento = $resultadoConsulta ->fetchObject();
+
+                $oDepartamento=new Departamento(
+                    $departamento->T02_CodDepartamento,
+                    $departamento->T02_DescDepartamento,
+                    $departamento->T02_FechaCreacionDepartamento,
+                    $departamento->T02_VolumenDeNegocio,
+                    $departamento ->T02_FechaBajaDepartamento
+                );    
+            }
+
+            return $oDepartamento;
         }
 
         /**

@@ -1,8 +1,12 @@
 <?php 
-    // Si se intenta acceder a la página sin iniciar sesión resirige a la Inicio publico.
+    /**
+     * @author: Alejandro De la Huerga Fernández (Adaptado)
+     * @since: 03/02/2026
+     */
+
+    // Si se intenta acceder a la página sin iniciar sesión redirige al Inicio público.
     if(empty($_SESSION['usuarioDAW202LoginLogoff'])) {
         $_SESSION['paginaAnterior'] = $_SESSION['paginaEnCurso'];
-        // Redirige a la página de inicio.
         $_SESSION['paginaEnCurso'] = 'inicioPublico';
         header("location: index.php");  
         exit;
@@ -11,7 +15,6 @@
     // Código que se ejecuta al pulsar cerrar sesión
     if(isset($_REQUEST['cerrarSesion'])){
         $_SESSION['paginaAnterior'] = $_SESSION['paginaEnCurso'];
-        // Si se pulsa le damos el valor a la página solicitada a la variable $_SESSION
         $_SESSION['paginaEnCurso']='inicioPublico';
         header("location: index.php");  
         exit;
@@ -24,48 +27,72 @@
         exit;
     }
 
+    // --- LÓGICA PARA REDIRIGIR A "VER DEPARTAMENTO" ---
+    if (isset($_REQUEST['mostrar'])) {
+        // Guardamos el código capturado del input hidden en la sesión
+        $_SESSION['codDepartamentoEnCurso'] = $_REQUEST['codDepartamentoVer'];
+        $_SESSION['paginaAnterior'] = $_SESSION['paginaEnCurso'];
+        // Cambiamos a la página de consulta (asegúrate que esta clave esté en confApp.php)
+        $_SESSION['paginaEnCurso'] = 'consultarModificarDepartamento'; 
+        header("location: index.php");
+        exit;
+    }
+
     $aErrores =[
         'DescDepartamentoBuscar' => ''
     ];
 
-    // Array que almacena los objetos Departamento para pasarlos a la vista.
-    $aDepartamentos=[];
+    // Array temporal para los objetos que devuelve el PDO
+    $aDepartamentosObjetos = [];
 
-    // Inicializamos el array con todos los departamentos.
-    $aDepartamentos=DepartamentoPDO::buscarTodosDepartamentos();
-
-    if(isset($_SESSION['depBuscados']) && !! !empty($_SESSION['depBuscados'])){
-        $aDepartamentos = $_SESSION['depBuscados'];
-    }
+    // Lógica de búsqueda y persistencia
     define('OBLIGATORIO', 0);
+    $entradaOK = true;
 
-    $entradaOK=true;
-    $oDepartamento=null;
-    $descDepartamento="";
-
-    // Si esta vacia la inicializamos.
     if (!isset($_SESSION['descBuscada'])) {
         $_SESSION['descBuscada'] = '';
     }
 
+    // Si se ha pulsado buscar
     if(isset($_REQUEST['descBuscado'])){
-        $aErrores['DescDepartamentoBuscar'] =validacionFormularios::comprobarAlfabetico($_REQUEST['DescDepBuscado'],30,1,OBLIGATORIO);
+        $aErrores['DescDepartamentoBuscar'] = validacionFormularios::comprobarAlfabetico($_REQUEST['DescDepBuscado'], 30, 1, OBLIGATORIO);
         
         if($aErrores['DescDepartamentoBuscar'] != null){
             $entradaOK = false;
         }
 
         if($entradaOK){  
-            $aDepartamentos=DepartamentoPDO::buscaDepartamentoPorDesc($_REQUEST['DescDepBuscado']);
-            $_SESSION['depBuscados'] = $aDepartamentos; // Metemos en la sesión los departamentos encontrados.
-            $_SESSION['descBuscada'] = $_REQUEST['DescDepBuscado']; // Metemos en la SESSION la descBuscada para mantenerla en el input text.
-            if(empty($aDepartamentos)){
-                $aDepartamentos=DepartamentoPDO::buscarTodosDepartamentos();
-            }
+            $aDepartamentosObjetos = DepartamentoPDO::buscaDepartamentoPorDesc($_REQUEST['DescDepBuscado']);
+            $_SESSION['depBuscados'] = $aDepartamentosObjetos; 
+            $_SESSION['descBuscada'] = $_REQUEST['DescDepBuscado'];
         } 
+    } else {
+        // Si no hay búsqueda activa, cargamos lo que había en sesión o todos por defecto
+        if(isset($_SESSION['depBuscados']) && !empty($_SESSION['depBuscados'])){
+            $aDepartamentosObjetos = $_SESSION['depBuscados'];
+        } else {
+            $aDepartamentosObjetos = DepartamentoPDO::buscarTodosDepartamentos();
+        }
+    }
+
+    // --- CONVERSIÓN DE OBJETOS A ARRAY PARA LA VISTA ---
+    // Este es el array que usará la vista para no tocar objetos directamente
+    $aVDepartamentos = []; 
+
+    if (!empty($aDepartamentosObjetos)) {
+        foreach ($aDepartamentosObjetos as $oDepartamento) {
+            $aVDepartamentos[] = [
+                'codDepartamento' => $oDepartamento->getCodDepartamento(),
+                'descDepartamento' => $oDepartamento->getDescDepartamento(),
+                'fechaAlta' => $oDepartamento->getFechaCreacionDepartamento(),
+                'volumenNegocio' => $oDepartamento->getVolumenNegocio(),
+                'fechaBaja' => $oDepartamento->getFechaBajaDepartamento() ?? '—'
+            ];
+        }
     }
     
     $descBuscada = $_SESSION['descBuscada'];
-    // Cargamos el layout principal que cargara cada página a parte de la estructura principal.
+
+    // Cargamos el layout principal
     require_once $view['layout'];
 ?>

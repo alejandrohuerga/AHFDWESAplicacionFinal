@@ -31,7 +31,8 @@
         'wip' => 'controller/cWip.php',
         'error' => 'controller/cError.php',
         'api'=>'controller/cREST.php',
-        'registro' => 'controller/cRegistro.php'
+        'registro' => 'controller/cRegistro.php',
+        'consultarModificarDepartamento' => 'controller/cConsultarModificarDepartamento.php'
     ];
 
     $view = [
@@ -44,8 +45,16 @@
         'wip' => 'view/vWip.php',
         'error' => 'view/vError.php',
         'api' => 'view/vREST.php',
-        'registro' => 'view/vRegistro.php'
+        'registro' => 'view/vRegistro.php',
+        'consultarModificarDepartamento' => 'view/vConsultarModificarDepartamento.php'
     ];
 
-    
+    // Array que controla los diferentes perfiles de los usuarios para funcionalidad.
+    $aPermisos=[
+        'pagDetalle' => ['administrador','usuario'],
+        'pagError' => ['administrador','usuario'],
+        'pagRest' => ['administrador','usuario'],
+        'mtoDepartamentos' => ['administrador','usuario'],
+        'mtoUsuarios' => ['administrador'],
+    ];
 ?>

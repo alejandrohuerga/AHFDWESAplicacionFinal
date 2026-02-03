@@ -16,18 +16,15 @@
         header("location: index.php");  
         exit;
     }
-
     // Código que se ejecuta al pulsar el botón volver.
     if(isset($_REQUEST['volver'])){
         $_SESSION['paginaEnCurso']='inicioPrivado';
         header("location: index.php");  
         exit;
     }
-
     $aErrores = [
         'fechaNasa' => null
     ];
-
     $oFotoNasa = null;
 
     // Obtenemos la fecha de hoy para valores por defecto.
@@ -37,7 +34,6 @@
     $tituloNasa = "No hay datos";
     $explicacionNasa = "";
     $urlFotoNasa = null;
-
     // Si NO se ha enviado el formulario
     if (!isset($_REQUEST['enviarNasa'])) {
         if (isset($_SESSION['urlFotoNasa']) && isset($_SESSION['fechaNasaEnCurso'])) {
@@ -54,7 +50,6 @@
                 $explicacionNasa = $oFotoNasa->getExplicacion();
                 $urlFotoNasa = $oFotoNasa->getFoto();
             }
-
             // Guardamos en sesión
             $_SESSION['urlFotoNasa'] = $urlFotoNasa;
             $_SESSION['fechaNasaEnCurso'] = $fechaHoyFormateada;
@@ -72,11 +67,9 @@
             '1995-06-16',
             1
         );
-
         if ($aErrores['fechaNasa'] != null) {
             $entradaOK = false;
         }
-
         if ($entradaOK) {
             $fechaNasa = $_REQUEST['fechaNasa'];
             $oFotoNasa = REST::apiNasa($fechaNasa);

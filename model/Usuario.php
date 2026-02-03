@@ -1,4 +1,5 @@
-<?php 
+<?php
+
 /**
  * Clase que representa un Usuario.
  * 
@@ -8,8 +9,8 @@
  * @version 1.0.0 Fecha última modificación: 18/12/2025
  * @since 14/01/2026
 */
-
-class Usuario{
+class Usuario
+{
     private $codUsuario;
     private $password;
     private $descUsuario;
@@ -17,7 +18,8 @@ class Usuario{
     private $fechaHoraUltimaConexion;
     private $fechaHoraUltimaConexionAnterior;
     private $perfil;
-    
+    private $imagenUsuario;
+
     /**
      * Function __construct
      * Función constructor para crear un objeto usuario.
@@ -29,17 +31,21 @@ class Usuario{
      * @param String $fechaHoraUltimaConexión fecha y hora de la última conexión.
      * @param String $fechaHoraUltimaConexiónAnterior fecha y hora de la conexión anterior.
      * @param String $perfil Opcional. Cadena con el valor 'administrador o 'usuario' por defecto 'usuario'.
+     * @param String | null Imagen del perfil del usuario.
      */
+    public function __construct($codUsuario, $password, $descUsuario, $numAccesos, $fechaHoraUltimaConexionAnterior, $perfil, $imagenUsuario)
+    {
+        $this->codUsuario = $codUsuario;
+        $this->password = $password;
+        $this->descUsuario = $descUsuario;
+        $this->numAccesos = $numAccesos;
 
-    public function __construct($codUsuario,$password,$descUsuario,$numAccesos,$fechaHoraUltimaConexionAnterior) {
-        $this->codUsuario= $codUsuario;
-        $this->password=$password;
-        $this->descUsuario=$descUsuario;
-        $this->numAccesos=$numAccesos;
-        $this->fechaHoraUltimaConexion= new DateTime("now");
-        $this->fechaHoraUltimaConexionAnterior=$fechaHoraUltimaConexionAnterior;
+        // La conexión actual siempre es "ahora" al loguearse
+        $this->fechaHoraUltimaConexion = new DateTime( "now");
+        $this->fechaHoraUltimaConexionAnterior = $fechaHoraUltimaConexionAnterior;
+        $this->perfil = $perfil;
+        $this->imagenUsuario = $imagenUsuario;
     }
-
 
     /**
      * Get the value of codUsuario
@@ -55,7 +61,6 @@ class Usuario{
     public function setCodUsuario($codUsuario): self
     {
         $this->codUsuario = $codUsuario;
-
         return $this;
     }
 
@@ -73,7 +78,6 @@ class Usuario{
     public function setPassword($password): self
     {
         $this->password = $password;
-
         return $this;
     }
 
@@ -91,7 +95,6 @@ class Usuario{
     public function setDescUsuario($descUsuario): self
     {
         $this->descUsuario = $descUsuario;
-
         return $this;
     }
 
@@ -109,7 +112,6 @@ class Usuario{
     public function setNumAccesos($numAccesos): self
     {
         $this->numAccesos = $numAccesos;
-
         return $this;
     }
 
@@ -127,7 +129,6 @@ class Usuario{
     public function setFechaHoraUltimaConexion($fechaHoraUltimaConexion): self
     {
         $this->fechaHoraUltimaConexion = $fechaHoraUltimaConexion;
-
         return $this;
     }
 
@@ -145,7 +146,6 @@ class Usuario{
     public function setFechaHoraUltimaConexionAnterior($fechaHoraUltimaConexionAnterior): self
     {
         $this->fechaHoraUltimaConexionAnterior = $fechaHoraUltimaConexionAnterior;
-
         return $this;
     }
 
@@ -163,8 +163,17 @@ class Usuario{
     public function setPerfil($perfil): self
     {
         $this->perfil = $perfil;
+        return $this;
+    }
 
+    public function getImagenUsuario()
+    {
+        return $this->imagenUsuario;
+    }
+
+    public function setImagenUsuario($imagenUsuario)
+    {
+        $this->imagenUsuario = $imagenUsuario;
         return $this;
     }
 }
-?>

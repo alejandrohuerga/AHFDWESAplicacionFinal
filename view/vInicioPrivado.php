@@ -13,6 +13,9 @@
         echo "<h2>". $avMensajeBienvenida['ultimaConexion']."</h2>";
     ?> 
     <form>
+        <?php if(in_array($avInicioPrivado['perfil'],$aPermisos['mtoUsuarios'])):?>
+            <input type="submit" name="mtoUsuarios" value="Mantenimiento Usuarios"/>
+        <?php endif;?>
         <input type="submit" name="detalle" value="Detalle" />
         <input type="submit" name="mantenimientoDep" value="Mantenimiento Departamentos"/>
         <input type="submit" name="error" value="Error">

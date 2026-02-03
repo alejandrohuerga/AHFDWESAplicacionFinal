@@ -43,15 +43,15 @@ class UsuarioPDO{
             $oFechaValida = ($fechaBD) ? new DateTime($fechaBD) : null;
 
             $oUsuario = new Usuario(
-                $oRegistroUsuario->T01_CodUsuario, 
-                $oRegistroUsuario->T01_Password, 
-                $oRegistroUsuario->T01_DescUsuario, 
-                $oRegistroUsuario->T01_NumConexiones, 
+                $oRegistroUsuario->T01_CodUsuario,
+                $oRegistroUsuario->T01_Password,
+                $oRegistroUsuario->T01_DescUsuario,
+                $oRegistroUsuario->T01_NumConexiones,
                 $oFechaValida,
-                null,
-                $oRegistroUsuario->T01_Perfil, 
+                // He quitado el null que estaba aquí
+                $oRegistroUsuario->T01_Perfil,
                 $oRegistroUsuario->T01_ImagenUsuario
-            ); 
+            );
             
         }
         return $oUsuario;    
