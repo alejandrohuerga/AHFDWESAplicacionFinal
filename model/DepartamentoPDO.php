@@ -19,8 +19,7 @@
          * @return Array $aDepartamento , array con los objetos departamento encontrados
          * Devuelve un array con los objetos departamento.
          * Devuelve PDOException si ha habido algún error.
-         * 
-         * @author Alejandro De la Huerga.
+         *  
          * @version 1.0.0 Fecha Última modificación: 26/01/2026.
          * @since 23/01/2025
          */
@@ -86,8 +85,7 @@
          * departamentos de la base de datos.
          * Devuelve un array con los objetos departamento que hay en la base de datos.
          * Devuelve PDOException si ha habido algún error.
-         * 
-         * @author Alejandro De la Huerga.
+         *  
          * @version 1.0.0 Fecha Última modificación: 25/01/2026.
          * @since 23/01/2025
          */
@@ -120,7 +118,6 @@
          * @param Float $volumenDepartamento , volumen del departamento.
          * @return True | False si se ha editado o no el departamento
          * 
-         * @author Alejandro De la Huerga.
          * @version 1.0.0 Fecha Última modificación: 30/01/2026.
          * @since 30/01/2025
          */
@@ -142,6 +139,31 @@
             }
 
             return $departamentoModificado;
+        }
+
+        /**
+         *  Función para eliminar un departamento de forma física.
+         *  Función que elimina un departamento de la base de datos cuyo codigo es el pasado como parámetro.
+         *  
+         *  @param $codDepartamento Codigo del departamento.
+         *  @return True | False si se ha eliminado o no el departamento.
+         *  
+         *  @version 1.0.0 última actualización 04/02/2026.
+         *  @since 04/02/2026
+         */
+
+        public static function bajaFisicaDepartamento ($codDepartamento){
+            // Variable booleana que indica si se ha eliminado o no el departamento.
+            $departamentoEliminado=false;
+
+            $consultaSQL="DELETE * FROM T_02Departamento WHERE T_02CodDepartamento =?";
+            $resultadoConsulta=DBPDO::ejecutarConsulta($consultaSQL,[$codDepartamento]);
+
+            if($resultadoConsulta!=null){
+                $departamentoEliminado=true;
+            }
+
+            return $departamentoEliminado;
         }
     }
 ?>

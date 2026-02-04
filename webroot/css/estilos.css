@@ -390,6 +390,25 @@ input[name="rest"]{
     border-radius: 4px;
 }
 
+/* ESTILOS DEL BOTON ELIMINAR DEPARTAMENTO */
+
+input[name="eliminarDep"]:hover{
+    background-color: rgb(80,80,80);
+}
+
+input[name="eliminarDep"]{
+    height: 32px;
+    font-family: Play,sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: inherit;
+    color: rgb(241,241,241);
+    padding: 8px 24px;
+    background-color: rgb(56,56,56);
+    border: none;
+    border-radius: 4px;
+}
+
 input[name="volver"]{
     height: 32px;
     font-family: Play,sans-serif;

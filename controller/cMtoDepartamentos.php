@@ -47,6 +47,15 @@
         exit;
     }
 
+    // Código que se ejecuta al borrar un departamento.
+    if(isset($_REQUEST['borrar'])){
+        $_SESSION['codDepartamentoEnCurso']=$_REQUEST['codDepartamentoBorrar'];
+        $_SESSION['paginaAnterior']=$_SESSION['paginaEnCurso'];
+        $_SESSION['paginaEnCurso'] = 'wip';
+        header("location: index.php");
+        exit;
+    }
+
     $aErrores =[
         'DescDepartamentoBuscar' => ''
     ];
@@ -57,7 +66,7 @@
     // Lógica de búsqueda y persistencia
     define('OBLIGATORIO', 0);
     $entradaOK = true;
-
+    
     if (!isset($_SESSION['descBuscada'])) {
         $_SESSION['descBuscada'] = '';
     }

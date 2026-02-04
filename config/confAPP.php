@@ -33,7 +33,8 @@
         'api'=>'controller/cREST.php',
         'registro' => 'controller/cRegistro.php',
         'consultarModificarDepartamento' => 'controller/cConsultarModificarDepartamento.php',
-        'micuenta' => 'controller/cMiCuenta.php'
+        'micuenta' => 'controller/cMiCuenta.php',
+        'borrarDepartamento'=>'controller/cEliminarDepartamento.php'
     ];
 
     $view = [
@@ -48,7 +49,8 @@
         'api' => 'view/vREST.php',
         'registro' => 'view/vRegistro.php',
         'consultarModificarDepartamento' => 'view/vConsultarModificarDepartamento.php',
-        'micuenta' => 'view/vMiCuenta.php'
+        'micuenta' => 'view/vMiCuenta.php',
+        'borrarDepartamento'=>'view/vEliminarDepartamento.php'
     ];
 
     // Array que controla los diferentes perfiles de los usuarios para funcionalidad.
