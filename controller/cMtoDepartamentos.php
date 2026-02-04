@@ -27,12 +27,21 @@
         exit;
     }
 
-    // --- LÓGICA PARA REDIRIGIR A "VER DEPARTAMENTO" ---
+    
     if (isset($_REQUEST['mostrar'])) {
         // Guardamos el código capturado del input hidden en la sesión
         $_SESSION['codDepartamentoEnCurso'] = $_REQUEST['codDepartamentoVer'];
         $_SESSION['paginaAnterior'] = $_SESSION['paginaEnCurso'];
-        // Cambiamos a la página de consulta (asegúrate que esta clave esté en confApp.php)
+        
+        $_SESSION['paginaEnCurso'] = 'consultarModificarDepartamento'; 
+        header("location: index.php");
+        exit;
+    }
+
+    // Código que se ejecuta el pulsar editar.
+    if(isset($_REQUEST['editar'])){
+        $_SESSION['codDepartamentoEnCurso'] = $_REQUEST['codDepartamentoEditar'];
+        $_SESSION['paginaAnterior'] = $_SESSION['paginaEnCurso'];
         $_SESSION['paginaEnCurso'] = 'consultarModificarDepartamento'; 
         header("location: index.php");
         exit;

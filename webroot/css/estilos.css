@@ -231,7 +231,6 @@ input[name="cerrarSesion"]{
     padding-left: 8px;
     width:45%;
     margin-right: 10px;
-    
 }
 
 #formularioLogin input[name="cancelar"]{
@@ -392,6 +391,24 @@ input[name="rest"]{
 }
 
 input[name="volver"]{
+    height: 32px;
+    font-family: Play,sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: inherit;
+    color: rgb(241,241,241);
+    padding: 8px 24px;
+    background-color: rgb(56,56,56);
+    border: none;
+    border-radius: 4px;
+    margin: 7px;
+}
+
+input[name="micuenta"]:hover{
+    background-color: rgb(80,80,80);
+}
+
+input[name="micuenta"]{
     height: 32px;
     font-family: Play,sans-serif;
     font-size: 14px;
@@ -822,6 +839,45 @@ input[name="fechaNasa"]{
 }
 
 
+/* FORMULARIO VER EDITAR DEPARTAMENTO */
+
+#formularioMostrarEditar{
+    display: flex;
+    flex-direction: column;
+    border-radius: 3px;
+    background: black;
+    padding: 30px;
+}
+
+#formularioMostrarEditar h2{
+    margin:4%;
+    
+}
 
 
+#formularioMostrarEditar input{
+    height: 32px;
+    width: 90%;
+    font-family: Play,sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: inherit;
+    color: rgb(241,241,241);
+    padding: 8px 24px;
+    background-color: rgb(56,56,56);
+    border: none;
+    border-radius: 4px;
+    margin-top: 2%;
+    margin-bottom: 3%;
+}
 
+#formularioMostrarEditar input[name="editar"]{
+    background-color: rgb(255, 108, 32);
+    padding-left: 8px;
+    width:45%;
+    margin-right: 10px;
+}
+
+#formularioMostrarEditar input[name="volver"]{
+    width: 45%;
+}

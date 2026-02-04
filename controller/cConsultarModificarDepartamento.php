@@ -15,13 +15,23 @@
         header("location: index.php");
         exit;
     }
-    //Guardamos el objeto buscado por el codigo de departamento.
-    $oDepartamento =DepartamentoPDO::buscarDepartamentoPorCod($_SESSION['codDepartamentoEnCurso']);
-    
-    // Array que almacena los datos del objeto departamento para pasarlos a la vista.
+
+    // Código que se ejecuta al pulsar el botón cerrar sesión
+    if(isset($_REQUEST['cerrarSesion'])){
+        $_SESSION['paginaAnterior'] = $_SESSION['paginaEnCurso'];
+        // Si se pulsa le damos el valor a la página solicitada a la variable $_SESSION
+        $_SESSION['paginaEnCurso']='inicioPublico';
+        header("location: index.php");  
+        exit;
+    }
+
+
+    // 1. Buscamos el departamento
+    $oDepartamento = DepartamentoPDO::buscarDepartamentoPorCod($_SESSION['codDepartamentoEnCurso']);
     $aVDepartamento = [];
 
-    if ($oDepartamento) {
+    // 2. Solo si existe el objeto, accedemos a sus métodos
+    if ($oDepartamento instanceof Departamento) { // 'instanceof' ayuda mucho al editor
         $aVDepartamento = [
             'codDepartamento' => $oDepartamento->getCodDepartamento(),
             'descDepartamento' => $oDepartamento->getDescDepartamento(),
@@ -29,6 +39,40 @@
             'volumenDepartamento' => $oDepartamento->getVolumenNegocio(),
             'fechaBajaDepartamento' => $oDepartamento->getFechaBajaDepartamento() ?? 'N/A'
         ];
+    }
+
+    define('OBLIGATORIO',1);
+    $entradaOK=true;
+
+    $aErrores=[
+        'descDepartamento' =>null,
+        'volumenNegocio' => null
+    ];
+
+    $aRespuestas=[
+        'descDepartamento' =>null,
+        'volumenNegocio' => null
+    ];
+
+    if(isset($_REQUEST['editar'])){
+        $aErrores['descDepartamento']=validacionFormularios::comprobarAlfaNumerico($_REQUEST['DescDepartamento'],255,1,OBLIGATORIO);
+        $aErrores['volumenNegocio']=validacionFormularios::comprobarFloat($_REQUEST['VolumenNegocio'],PHP_FLOAT_MAX,0,OBLIGATORIO);
+
+        foreach($aErrores as $valor){
+            if($valor != null){
+                $entradaOK = false;
+            }
+        }
+    }else{
+        $entradaOK=false;
+    }
+
+    if($entradaOK){
+        DepartamentoPDO::modificarDepartamento($_SESSION['codDepartamentoEnCurso'],$_REQUEST['DescDepartamento'],$_REQUEST['VolumenNegocio']);
+        
+        $_SESSION['paginaEnCurso']='departamento';
+        header('Location: index.php');//Redirigimos al usuario a la ventana de editar departamento
+        exit;
     }
 
     // Cargamos el layout principal

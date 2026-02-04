@@ -1,10 +1,3 @@
-Aquí tienes la vista vMtoDepartamentos.php adaptada. He realizado dos cambios fundamentales para que funcione con tu nuevo controlador:
-
-    Uso de Array: Ahora accede a los datos como $departamento['clave'] en lugar de llamar a métodos del objeto.
-
-    Formulario por fila: Cada icono del "ojo" ahora está envuelto en un pequeño formulario independiente que envía el código específico de ese departamento mediante un input type="hidden".
-
-PHP
 
 <header>
     <p>APLICACIÓN FINAL</p>
@@ -50,9 +43,7 @@ PHP
                             </button>
                         </form>
                     </td>
-
                     <td></td>
-
                     <td>
                         <form method="post">
                             <input type="hidden" name="codDepartamentoEditar" value="<?= $departamento['codDepartamento'] ?>">
