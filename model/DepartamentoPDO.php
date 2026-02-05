@@ -156,7 +156,7 @@
             // Variable booleana que indica si se ha eliminado o no el departamento.
             $departamentoEliminado=false;
 
-            $consultaSQL="DELETE * FROM T_02Departamento WHERE T_02CodDepartamento =?";
+            $consultaSQL="DELETE FROM T_02Departamento WHERE T02_CodDepartamento =?";
             $resultadoConsulta=DBPDO::ejecutarConsulta($consultaSQL,[$codDepartamento]);
 
             if($resultadoConsulta!=null){

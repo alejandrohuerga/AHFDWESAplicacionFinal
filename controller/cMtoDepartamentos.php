@@ -33,7 +33,7 @@
         $_SESSION['codDepartamentoEnCurso'] = $_REQUEST['codDepartamentoVer'];
         $_SESSION['paginaAnterior'] = $_SESSION['paginaEnCurso'];
         
-        $_SESSION['paginaEnCurso'] = 'consultarModificarDepartamento'; 
+        $_SESSION['paginaEnCurso'] = 'consultarDepartamento'; 
         header("location: index.php");
         exit;
     }
@@ -42,7 +42,7 @@
     if(isset($_REQUEST['editar'])){
         $_SESSION['codDepartamentoEnCurso'] = $_REQUEST['codDepartamentoEditar'];
         $_SESSION['paginaAnterior'] = $_SESSION['paginaEnCurso'];
-        $_SESSION['paginaEnCurso'] = 'consultarModificarDepartamento'; 
+        $_SESSION['paginaEnCurso'] = 'modificarDepartamento'; 
         header("location: index.php");
         exit;
     }
@@ -51,7 +51,7 @@
     if(isset($_REQUEST['borrar'])){
         $_SESSION['codDepartamentoEnCurso']=$_REQUEST['codDepartamentoBorrar'];
         $_SESSION['paginaAnterior']=$_SESSION['paginaEnCurso'];
-        $_SESSION['paginaEnCurso'] = 'wip';
+        $_SESSION['paginaEnCurso'] = 'borrarDepartamento';
         header("location: index.php");
         exit;
     }

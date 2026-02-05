@@ -15,9 +15,28 @@
         exit;
     }
 
-    if(isset($_REQUEST['codDepartamentoBorrar'])){
-        DepartamentoPDO::bajaFisicaDepartamento($_SESSION['']);
+    $oDepartamento = DepartamentoPDO::buscarDepartamentoPorCod($_SESSION['codDepartamentoEnCurso']);
+    $avDepartamentoBorrar =[];
+
+    // 2. Solo si existe el objeto, accedemos a sus métodos
+    if ($oDepartamento instanceof Departamento) { 
+        $aVDepartamento = [
+            'codDepartamento' => $oDepartamento->getCodDepartamento(),
+            'descDepartamento' => $oDepartamento->getDescDepartamento(),
+            'fechaAltaDepartamento' => $oDepartamento->getFechaCreacionDepartamento(),
+            'volumenDepartamento' => $oDepartamento->getVolumenNegocio(),
+            'fechaBajaDepartamento' => $oDepartamento->getFechaBajaDepartamento() ?? 'N/A'
+        ];
     }
+
+    if(isset($_REQUEST['eliminarDep'])){
+        DepartamentoPDO::bajaFisicaDepartamento($_SESSION['codDepartamentoEnCurso']);
+        $_SESSION['paginaAnterior'] = $_SESSION['paginaEnCurso'];
+        $_SESSION['paginaEnCurso'] = 'departamento';
+        header('Location: index.php');
+        exit;
+    }
+
     // Cargamos el layout principal
     require_once $view['layout'];
 ?>

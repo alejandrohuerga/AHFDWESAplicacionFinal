@@ -32,7 +32,8 @@
         'error' => 'controller/cError.php',
         'api'=>'controller/cREST.php',
         'registro' => 'controller/cRegistro.php',
-        'consultarModificarDepartamento' => 'controller/cConsultarModificarDepartamento.php',
+        'modificarDepartamento' => 'controller/cModificarDepartamento.php',
+        'consultarDepartamento' => 'controller/cConsultarDepartamento.php',
         'micuenta' => 'controller/cMiCuenta.php',
         'borrarDepartamento'=>'controller/cEliminarDepartamento.php'
     ];
@@ -48,7 +49,8 @@
         'error' => 'view/vError.php',
         'api' => 'view/vREST.php',
         'registro' => 'view/vRegistro.php',
-        'consultarModificarDepartamento' => 'view/vConsultarModificarDepartamento.php',
+        'modificarDepartamento' => 'view/vModificarDepartamento.php',
+        'consultarDepartamento' => 'view/vConsultarDepartamento.php',
         'micuenta' => 'view/vMiCuenta.php',
         'borrarDepartamento'=>'view/vEliminarDepartamento.php'
     ];

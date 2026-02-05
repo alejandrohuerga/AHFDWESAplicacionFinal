@@ -870,7 +870,7 @@ input[name="fechaNasa"]{
 
 #formularioMostrarEditar h2{
     margin:4%;
-    
+    text-align: center;
 }
 
 
@@ -898,5 +898,54 @@ input[name="fechaNasa"]{
 }
 
 #formularioMostrarEditar input[name="volver"]{
+    width: 45%;
+}
+
+#formularioMostrarEditar input[name="volverMostrar"]{
+    width: 90%;
+    background-color: rgb(255, 108, 32);
+}
+
+
+/* FORMULARIO ELIMINAR DEPARTAMENTO */
+
+#formularioEliminar{
+    display: flex;
+    flex-direction: column;
+    border-radius: 3px;
+    background: black;
+    padding: 30px;
+}
+
+#formularioEliminar h2{
+    margin:4%;
+    
+}
+
+
+#formularioEliminar input{
+    height: 32px;
+    width: 90%;
+    font-family: Play,sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: inherit;
+    color: rgb(241,241,241);
+    padding: 8px 24px;
+    background-color: rgb(56,56,56);
+    border: none;
+    border-radius: 4px;
+    margin-top: 2%;
+    margin-bottom: 3%;
+}
+
+#formularioEliminar input[name="eliminarDep"]{
+    background-color: rgb(255, 108, 32);
+    padding-left: 8px;
+    width:45%;
+    margin-right: 10px;
+}
+
+#formularioEliminar input[name="volver"]{
     width: 45%;
 }

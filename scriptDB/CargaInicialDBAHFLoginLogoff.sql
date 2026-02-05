@@ -38,3 +38,6 @@ INSERT INTO T_02Departamento (T02_CodDepartamento,T02_DescDepartamento,T02_Fecha
     ('AUT','Automoción',now(),1285.50,NULL),
     ('AER','Aeronautica',now(),2285.50,NULL),
     ('DEF','Defensa',now(),3285.50,'2025-05-25');
+
+    
+    
