@@ -28,6 +28,13 @@
         exit;
     }
 
+    // Código que se ejecuta al pulsar el botón volver.
+    if(isset($_REQUEST['volver'])){
+        $_SESSION['paginaEnCurso']='inicioPrivado';
+        header("location: index.php");  
+        exit;
+    }
+
     
 
     // Cargamos el layout principal que cargara cada página a parte de la estructura principal.

@@ -177,5 +177,41 @@ class UsuarioPDO{
 
         return $codExiste;
     }
+
+    /**
+         * Función para buscar un usuario por descripción.
+         * Función que busca un usuario por el cdescripción.
+         * Parámetros: Descripción de usuarios.
+         * 
+         * @param String $descUsuario , descripción del usuario a buscar.
+         * @return Array $aUsuarios , array con los objetos usuarios encontrados
+         * Devuelve un array con los objetos usuarios.
+         * Devuelve PDOException si ha habido algún error.
+         *  
+         * @version 1.0.0 Fecha Última modificación: 05/02/2026.
+         * @since 05/02/2026
+         */
+
+        public static function buscaUsuariosPorDesc($descUsuario){
+            $aUsuarios=[]; //Array que almacena los objetos Departamento que se encuentren.
+            
+            // Consulta para buscar departamentos por el descripcion.
+            $consulta = "SELECT * FROM T_01Usuario WHERE T01_DescUsuario LIKE ?";
+            $resultadoConsulta = DBPDO::ejecutarConsulta($consulta,["%$descUsuario%"]);
+
+            while($oRegistro = $resultadoConsulta -> fetchObject()){
+                $aUsuarios[] = new Usuario(
+                    $oRegistro  -> T01_CodUsuario,
+                    $oRegistro -> T01_Password,
+                    $oRegistro -> T01_DescUsuario,
+                    $oRegistro -> T01_FechaHoraUltimaConexion,
+                    $oRegistro -> T01_NumConexiones,
+                    $oRegistro -> T01_Perfil,
+                    $oRegistro -> T01_ImagenUsuario
+                );
+            }
+            
+            return $aUsuarios;
+        }
 }
 ?>

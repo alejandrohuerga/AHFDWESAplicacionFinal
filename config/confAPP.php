@@ -35,7 +35,8 @@
         'modificarDepartamento' => 'controller/cModificarDepartamento.php',
         'consultarDepartamento' => 'controller/cConsultarDepartamento.php',
         'micuenta' => 'controller/cMiCuenta.php',
-        'borrarDepartamento'=>'controller/cEliminarDepartamento.php'
+        'borrarDepartamento'=>'controller/cEliminarDepartamento.php',
+        'mtoUsuarios' => 'controller/cMtoUsuarios.php'
     ];
 
     $view = [
@@ -52,7 +53,8 @@
         'modificarDepartamento' => 'view/vModificarDepartamento.php',
         'consultarDepartamento' => 'view/vConsultarDepartamento.php',
         'micuenta' => 'view/vMiCuenta.php',
-        'borrarDepartamento'=>'view/vEliminarDepartamento.php'
+        'borrarDepartamento'=>'view/vEliminarDepartamento.php',
+        'mtoUsuarios' => 'view/vMtoUsuarios.php'
     ];
 
     // Array que controla los diferentes perfiles de los usuarios para funcionalidad.
