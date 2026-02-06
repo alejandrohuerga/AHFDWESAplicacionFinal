@@ -6,37 +6,60 @@
     </form>
 </header>
 <main>
-    <input type="text" name="DescUsuarioBuscado" class="buscar" value="" id="campoBusquedaUsuario"/>
+    <div class="controlMtoUsuarios">
+        <form method="post">
+        <input type="submit" name="volver" value="Volver" id="volverMtoUsuarios"/>
+    </form>
+        <input type="text" name="DescUsuarioBuscado" class="buscar"  id="campoBusquedaUsuario"/>
+    </div>
     <table id="tablaUsuarios">
         <thead> 
-                <td>Codigo</td>
-                <td>Descripción</td>
-                <td>Numero Conexiones</td>
-                <td>Fecha Ultima Conexion</td>
-                <td>Perfil</td>
-                <td>Acciones</td>
-                <td>Acciones</td>
+                <th>Codigo</th>
+                <th>Descripción</th>
+                <th>Numero Conexiones</th>
+                <th>Fecha Ultima Conexion</th>
+                <th>Perfil</th>
+                <th>Acciones</th>
         </thead>
     </table>
-    <form method="post">
-        <input type="submit" name="volver" value="Volver" />
-    </form>
+    
     <script>
         var tablaUsuarios=document.getElementById("tablaUsuarios");
         function mostrarUsuarios(usuarios){
-            
+            tablaUsuarios.innerHTML=`<thead>
+                    <th>Codigo</th>
+                    <th>Descripción</th>
+                    <th>Numero Conexiones</th>
+                    <th>Fecha Ultima Conexion</th>
+                    <th>Perfil</th>
+                    <th>Acciones</th>
+                    <th>Acciones</th>
+                </thead>`;
             for(i=0;i<usuarios.length;i++){
                 var fila=document.createElement("tr");
-                var celda=document.createElement("td");
-                celda.textContent=usuarios[i].codUsuario;
-                fila.appendChild(celda);
-                celda=document.createElement("td");
-                celda.textContent=usuarios[i].descUsuario;
-                fila.appendChild(celda);
-                celda=document.createElement("td");
-                celda.textContent=usuarios[i].numConexiones;
-                fila.appendChild(celda);
+
+                var celda1=document.createElement("td");
+                celda1.textContent=usuarios[i].codUsuario;
+                fila.appendChild(celda1);
+
+                celda2=document.createElement("td");
+                celda2.textContent=usuarios[i].descUsuario;
+                fila.appendChild(celda2);
+
+                celda3=document.createElement("td");
+                celda3.textContent=usuarios[i].numConexiones;
+                fila.appendChild(celda3);
+
+                celda4=document.createElement("td");
+                celda4.textContent=usuarios[i].fechaHoraUltimaConexion.date;
+                fila.appendChild(celda4);
+
+                celda5=document.createElement("td");
+                celda5.textContent=usuarios[i].perfilUsuario;
+                fila.appendChild(celda5);
+
                 tablaUsuarios.appendChild(fila);
+
             }
         }
 
@@ -53,7 +76,7 @@
 
         var inputBusqueda=document.getElementById("campoBusquedaUsuario");
         
-        inputBusqueda.addEventListener("keyup",(event)=>{
+        inputBusqueda.addEventListener("input",()=>{
 
             fetch(urlApi+"?descUsuario="+inputBusqueda.value)
                 .then((response)=>{
@@ -61,17 +84,7 @@
                 })
 
                 .then((datos)=>{
-                    tablaUsuarios.innerHTML=`<thead>
-                        <td>Codigo</td>
-                        <td>Descripción</td>
-                        <td>Numero Conexiones</td>
-                        <td>Fecha Ultima Conexion</td>
-                        <td>Perfil</td>
-                        <td>Acciones</td>
-                        <td>Acciones</td>
-                    </thead>`;
                     mostrarUsuarios(datos);
-
                 })
             })
 

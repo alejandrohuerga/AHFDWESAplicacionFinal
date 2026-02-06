@@ -204,8 +204,8 @@ class UsuarioPDO{
                     $oRegistro  -> T01_CodUsuario,
                     $oRegistro -> T01_Password,
                     $oRegistro -> T01_DescUsuario,
-                    $oRegistro -> T01_FechaHoraUltimaConexion,
                     $oRegistro -> T01_NumConexiones,
+                    $oRegistro -> T01_FechaHoraUltimaConexion,
                     $oRegistro -> T01_Perfil,
                     $oRegistro -> T01_ImagenUsuario
                 );

@@ -858,6 +858,44 @@ input[name="fechaNasa"]{
 }
 
 
+
+/* MTO USUARIOS*/
+
+.controlMtoUsuarios{
+    position: fixed;
+    margin-bottom: 35%;
+}
+
+#tablaUsuarios{
+    margin-top: 1%;
+    width: 70%;
+    background: white;
+    color: black;
+
+    & th{
+        padding: 0px;
+        background: #f0972b;
+    }
+
+    
+
+    & td{
+        border-bottom: 1px solid black;
+        border-top: 1px solid black;
+        font-size: 0.9rem;
+        padding: 1px;
+        background: white;
+    }
+}
+
+input[id="campoBusquedaUsuario"]{
+    height: 32px;
+    width: 400px;
+    font-family: Play,sans-serif;
+    font-size: 14px;
+}
+
+
 /* FORMULARIO VER EDITAR DEPARTAMENTO */
 
 #formularioMostrarEditar{

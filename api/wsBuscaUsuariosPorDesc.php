@@ -18,18 +18,16 @@
         'descUsuario' => null
     ];
 
-
     if(isset($_REQUEST['descUsuario'])){
-        $aErrores['descUsuario']=validacionFormularios::comprobarAlfabetico($_REQUEST['descUsuario'],255,0,OBLIGATORIO);
+        $aErrores['descUsuario']=validacionFormularios::comprobarAlfabetico($_REQUEST['descUsuario'],255,0,0);
 
         if($aErrores['descUsuario']!=null){
             $entradaOK=false;
         }
     }
-
     
     if($entradaOK){
-        $aRespuestas=UsuarioPDO::buscaUsuariosPorDesc($_REQUEST['descUsuario']??'');
+        $aRespuestas=UsuarioPDO::buscaUsuariosPorDesc($_REQUEST['descUsuario'] ?? "");
         $aUsuarios=[];
 
         foreach($aRespuestas as $oUsuario){
@@ -39,11 +37,12 @@
                 'descUsuario' => $oUsuario-> getDescUsuario(),
                 'fechaHoraUltimaConexion' => $oUsuario -> getFechaHoraUltimaConexion(),
                 'numConexiones' => $oUsuario -> getNumAccesos(),
-                'perfilUsuario' => $oUsuario -> getPerfil()
+                'perfilUsuario' => $oUsuario -> getPerfil(),
+                'imagenUsuario' =>$oUsuario ->getImagenUsuario()
             ]);
         }
     }
 
     header('Content-Type: application/json'); // el contenido devuelto va a tener formato JSON
-    print_r(json_encode($aUsuarios, JSON_PRETTY_PRINT));
+    echo(json_encode($aUsuarios, JSON_PRETTY_PRINT));
 ?>
