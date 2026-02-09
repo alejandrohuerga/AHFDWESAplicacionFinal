@@ -20,12 +20,24 @@
 
     // 2. Solo si existe el objeto, accedemos a sus métodos
     if ($oDepartamento instanceof Departamento) { 
+
+        // Formateamos las fechas a datetime para sacarlo por pantalla.
+        $fechaAltaDepartamento = new DateTime(($oDepartamento->getFechaCreacionDepartamento()));
+        $fechaAltaFormateada =$fechaAltaDepartamento->format('d-m-Y');
+
+        if(!is_null($oDepartamento->getFechaBajaDepartamento())){
+            $fechaBajaDepartamento = new DateTime($oDepartamento->getFechaBajaDepartamento());
+            $fechaBajaFormateada = $fechaAltaDepartamento->format('d-m-Y');
+        }
+
+        $volumenFormateado=(number_format($oDepartamento->getVolumenNegocio(), 2, ',', '.').'€');
+
         $aVDepartamento = [
             'codDepartamento' => $oDepartamento->getCodDepartamento(),
             'descDepartamento' => $oDepartamento->getDescDepartamento(),
-            'fechaAltaDepartamento' => $oDepartamento->getFechaCreacionDepartamento(),
-            'volumenDepartamento' => $oDepartamento->getVolumenNegocio(),
-            'fechaBajaDepartamento' => $oDepartamento->getFechaBajaDepartamento() ?? 'N/A'
+            'fechaAltaDepartamento' => $fechaAltaFormateada,
+            'volumenDepartamento' => $volumenFormateado,
+            'fechaBajaDepartamento' => $fechaBajaFormateada ?? 'N/A'
         ];
     }
 

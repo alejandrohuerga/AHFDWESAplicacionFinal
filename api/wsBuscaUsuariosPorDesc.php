@@ -43,6 +43,6 @@
         }
     }
 
-    header('Content-Type: application/json'); // el contenido devuelto va a tener formato JSON
+    header('Content-Type: application/json'); // El contenido devuelto va a tener formato JSON
     echo(json_encode($aUsuarios, JSON_PRETTY_PRINT));
 ?>

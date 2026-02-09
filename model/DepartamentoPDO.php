@@ -89,6 +89,7 @@
          * @version 1.0.0 Fecha Última modificación: 25/01/2026.
          * @since 23/01/2025
          */
+        
         public static function buscarTodosDepartamentos (){
             // Array para almacenar todos los objetos Departamento que hay en la base de datos.
             $aTodosDepartamentos=[];
@@ -164,6 +165,54 @@
             }
 
             return $departamentoEliminado;
+        }
+
+        /**
+         * Función para dar de baja logica un departamento.
+         * Mediante el código , se da de baja en la base de datos indicandole su fecha de baja.
+         * 
+         * @param String $codDepartamento Codigo del departamento.
+         * @return boolean true | false dependiendo si se ha dado de baja o no.
+         * 
+         * @version 1.0.0
+         * @since 09/02/2026
+         */
+
+        public static function bajaLogicaDepartamento ($codDepartamento){
+            $bajaDepartamento = false;
+            
+            $consultaSQL="UPDATE T_02Departamento SET T02_FechaBajaDepartamento = UNIX_TIMESTAMP() WHERE T02_CodDepartamento=?";
+            $resultadoConsulta=DBPDO::ejecutarConsulta($consultaSQL,[$codDepartamento]);
+
+            if($resultadoConsulta!=null){
+                $bajaDepartamento=true;
+            }
+
+            return $bajaDepartamento;
+        }
+
+        /**
+         * Función para rehabilitar un departamento.
+         * Mediante el código , se rehabilita un departamento quitandole la fecha de baja en la base de datos.
+         * 
+         * @param String $codDepartamento Codigo del departamento.
+         * @return boolean true | false dependiendo si se ha rehabilitado o no.
+         * 
+         * @version 1.0.0
+         * @since 09/02/2026
+         */
+
+        public static function rehabilitaDepartamento($codDepartamento){
+            $departamentoRehabilitado = false;
+
+            $consultaSQL="UPDATE T_02Departamento SET T02_FechaBajaDepartamento = NULL WHERE T02_CodDepartamento=?";
+            $resultadoConsulta=DBPDO::ejecutarConsulta($consultaSQL,[$codDepartamento]);
+
+            if($resultadoConsulta!=null){
+                $bajaDepartamento=true;
+            }
+
+            return $codDepartamento;
         }
     }
 ?>

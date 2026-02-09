@@ -8,25 +8,26 @@
 <main>
     <div class="controlMtoUsuarios">
         <form method="post">
-        <input type="submit" name="volver" value="Volver" id="volverMtoUsuarios"/>
-    </form>
-        <input type="text" name="DescUsuarioBuscado" class="buscar"  id="campoBusquedaUsuario"/>
+            <input type="submit" name="volver" value="Volver" id="volverMtoUsuarios" />
+        </form>
+        <input type="text" name="DescUsuarioBuscado" class="buscar" id="campoBusquedaUsuario" />
     </div>
     <table id="tablaUsuarios">
-        <thead> 
-                <th>Codigo</th>
-                <th>Descripción</th>
-                <th>Numero Conexiones</th>
-                <th>Fecha Ultima Conexion</th>
-                <th>Perfil</th>
-                <th>Acciones</th>
+        <thead>
+            <th>Codigo</th>
+            <th>Descripción</th>
+            <th>Numero Conexiones</th>
+            <th>Fecha Ultima Conexion</th>
+            <th>Perfil</th>
+            <th>Acciones</th>
         </thead>
     </table>
-    
+
     <script>
-        var tablaUsuarios=document.getElementById("tablaUsuarios");
-        function mostrarUsuarios(usuarios){
-            tablaUsuarios.innerHTML=`<thead>
+        var tablaUsuarios = document.getElementById("tablaUsuarios");
+
+        function mostrarUsuarios(usuarios) {
+            tablaUsuarios.innerHTML = `<thead>
                     <th>Codigo</th>
                     <th>Descripción</th>
                     <th>Numero Conexiones</th>
@@ -35,38 +36,27 @@
                     <th>Acciones</th>
                     <th>Acciones</th>
                 </thead>`;
-            for(i=0;i<usuarios.length;i++){
-                var fila=document.createElement("tr");
+            for (i = 0; i < usuarios.length; i++) {
+                var fila = document.createElement("tr");
 
-                var celda1=document.createElement("td");
-                celda1.textContent=usuarios[i].codUsuario;
+                var celda1 = document.createElement("td");
+                celda1.textContent = usuarios[i].codUsuario;
                 fila.appendChild(celda1);
 
-                celda2=document.createElement("td");
-                celda2.textContent=usuarios[i].descUsuario;
+                celda2 = document.createElement("td");
+                celda2.textContent = usuarios[i].descUsuario;
                 fila.appendChild(celda2);
 
-                celda3=document.createElement("td");
-                celda3.textContent=usuarios[i].numConexiones;
+                celda3 = document.createElement("td");
+                celda3.textContent = usuarios[i].numConexiones;
                 fila.appendChild(celda3);
 
-                celda4=document.createElement("td");
-                // Formateamos la fecha para sacarla por pantalla
-                if(usuarios[i].fechaHoraUltimaConexion!==null){
-                    var fecha=new Date(usuarios[i].fechaHoraUltimaConexion);
-                    var dia = String(fecha.getDate()).padStart(2,'0');
-                    var mes = String(fecha.getMonth()+1).padStart(2, '0');
-                    var anio = String(fecha.getFullYear());
-                    var fechaFormateada = `${dia}-${mes}-${anio}`;
-                }else{
-                    var fechaFormateada="";
-                }
-
-                celda4.textContent=fechaFormateada;
+                celda4 = document.createElement("td");
+                celda4.textContent = usuarios[i].fechaHoraUltimaConexion.date;
                 fila.appendChild(celda4);
 
-                celda5=document.createElement("td");
-                celda5.textContent=usuarios[i].perfilUsuario;
+                celda5 = document.createElement("td");
+                celda5.textContent = usuarios[i].perfilUsuario;
                 fila.appendChild(celda5);
 
                 tablaUsuarios.appendChild(fila);
@@ -74,30 +64,29 @@
             }
         }
 
-        var urlApi="http://daw202.local.ieslossauces.es/AHFDWESAplicacionFinal/api/wsBuscaUsuariosPorDesc.php";
-    
+        var urlApi = "http://daw202.local.ieslossauces.es/AHFDWESAplicacionFinal/api/wsBuscaUsuariosPorDesc.php";
+
         fetch(urlApi)
-            .then((response)=>{
+            .then((response) => {
                 return response.json()
             })
 
-            .then((datos)=>{
+            .then((datos) => {
                 mostrarUsuarios(datos);
             })
 
-        var inputBusqueda=document.getElementById("campoBusquedaUsuario");
-        
-        inputBusqueda.addEventListener("input",()=>{
+        var inputBusqueda = document.getElementById("campoBusquedaUsuario");
 
-            fetch(urlApi+"?descUsuario="+inputBusqueda.value)
-                .then((response)=>{
+        inputBusqueda.addEventListener("input", () => {
+
+            fetch(urlApi + "?descUsuario=" + inputBusqueda.value)
+                .then((response) => {
                     return response.json()
                 })
 
-                .then((datos)=>{
+                .then((datos) => {
                     mostrarUsuarios(datos);
                 })
-            })
-
+        })
     </script>
 </main>

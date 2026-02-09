@@ -56,7 +56,6 @@
         exit;
     }
 
-    
 
     $aErrores =[
         'DescDepartamentoBuscar' => ''
@@ -99,7 +98,6 @@
     // Este es el array que usará la vista para no tocar objetos directamente
     $aVDepartamentos = [];
 
-    
 
     if (!empty($aDepartamentosObjetos)) {
         foreach ($aDepartamentosObjetos as $oDepartamento) {
