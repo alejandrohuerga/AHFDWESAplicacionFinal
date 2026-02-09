@@ -63,7 +63,7 @@ main{
 #divRegistro h1{
     color: rgb(241, 241, 241);
     font-size: 25px;
-    margin-top: 30px;
+    margin-top: 20px;
     margin-bottom: 10px;
 }
 
@@ -73,7 +73,7 @@ main{
     font-size: 0.8rem;
 }
 #formularioRegistro input{
-    height: 32px;
+    height: 25px;
     font-family: Play,sans-serif;
     font-size: 14px;
     font-weight: bold;
@@ -101,7 +101,7 @@ main{
     padding: 20px;
     justify-content: center;
     align-items: center;
-    height: 150px;
+    height: 80px;
 }
 
 #o{

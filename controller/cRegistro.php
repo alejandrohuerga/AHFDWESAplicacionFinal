@@ -33,7 +33,7 @@
         $_SESSION['paginaAnterior'] = $_SESSION['paginaEnCurso'];
 
         // Validamos todos los campos del formulario.
-        $aErrores['usuario'] = validacionFormularios::comprobarAlfaNumerico($_REQUEST['usuario'], 8, 4, 1);
+        $aErrores['usuario'] = validacionFormularios::comprobarAlfaNumerico($_REQUEST['usuario'], 100, 4, 1);
         $aErrores['password'] = validacionFormularios::validarPassword($_REQUEST['password'], 8, 4, 1, 1);
         $aErrores['confirmarPassword'] = validacionFormularios::validarPassword($_REQUEST['confirmarPassword'], 8, 4, 1, 1);
         $aErrores['descripcion'] = validacionFormularios::comprobarAlfaNumerico($_REQUEST['descripcion'], 255, 4, 1);
