@@ -56,6 +56,8 @@
         exit;
     }
 
+    
+
     $aErrores =[
         'DescDepartamentoBuscar' => ''
     ];
@@ -95,16 +97,26 @@
 
     // --- CONVERSIÓN DE OBJETOS A ARRAY PARA LA VISTA ---
     // Este es el array que usará la vista para no tocar objetos directamente
-    $aVDepartamentos = []; 
+    $aVDepartamentos = [];
+
+    
 
     if (!empty($aDepartamentosObjetos)) {
         foreach ($aDepartamentosObjetos as $oDepartamento) {
+            // Formateamos las fechas a datetime para sacarlo por pantalla.
+            $fechaAltaDepartamento = new DateTime(($oDepartamento->getFechaCreacionDepartamento()));
+
+            if(!is_null($oDepartamento->getFechaBajaDepartamento())){
+                $fechaBajaDepartamento = new DateTime($oDepartamento->getFechaBajaDepartamento());
+                $fechaBajaFormateada = $fechaAltaDepartamento->format('d-m-Y');
+            }
+
             $aVDepartamentos[] = [
                 'codDepartamento' => $oDepartamento->getCodDepartamento(),
                 'descDepartamento' => $oDepartamento->getDescDepartamento(),
-                'fechaAlta' => $oDepartamento->getFechaCreacionDepartamento(),
-                'volumenNegocio' => $oDepartamento->getVolumenNegocio(),
-                'fechaBaja' => $oDepartamento->getFechaBajaDepartamento() ?? '—'
+                'fechaAlta' => $fechaAltaDepartamento->format('d-m-Y'),
+                'volumenNegocio' => (number_format($oDepartamento->getVolumenNegocio(), 2, ',', '.').'€'),
+                'fechaBaja' => $fechaBajaFormateada ?? '—'
             ];
         }
     }

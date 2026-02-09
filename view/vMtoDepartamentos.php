@@ -32,7 +32,7 @@
                 <tr>
                     <td><?= $departamento['codDepartamento'] ?></td>
                     <td><?= $departamento['descDepartamento'] ?></td>
-                    <td><?= $departamento['fechaAlta'] ?></td>
+                    <td><?= $departamento['fechaAlta']?></td>
                     <td><?= $departamento['volumenNegocio'] ?></td>
                     <td><?= $departamento['fechaBaja'] ?></td>
                     <td>
