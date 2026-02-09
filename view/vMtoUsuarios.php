@@ -51,7 +51,18 @@
                 fila.appendChild(celda3);
 
                 celda4=document.createElement("td");
-                celda4.textContent=usuarios[i].fechaHoraUltimaConexion.date;
+                // Formateamos la fecha para sacarla por pantalla
+                if(usuarios[i].fechaHoraUltimaConexion!==null){
+                    var fecha=new Date(usuarios[i].fechaHoraUltimaConexion);
+                    var dia = String(fecha.getDate()).padStart(2,'0');
+                    var mes = String(fecha.getMonth()+1).padStart(2, '0');
+                    var anio = String(fecha.getFullYear());
+                    var fechaFormateada = `${dia}-${mes}-${anio}`;
+                }else{
+                    var fechaFormateada="";
+                }
+
+                celda4.textContent=fechaFormateada;
                 fila.appendChild(celda4);
 
                 celda5=document.createElement("td");
