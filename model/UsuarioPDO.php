@@ -28,33 +28,32 @@ class UsuarioPDO{
      * @version 1.0.0 Fecha Última modificación: 18/12/2025.
      * @since 03/01/2025
      */
-    
-    public static function validarUsuario($codUsuario,$password){
-        $oUsuario = null; // inicializo la variable que tendrá el objeto de clase usuario en el caso de que se encuentre en la base de datos
 
-        $sentenciaSQL = "Select * from T_01Usuario where T01_CodUsuario=? and T01_Password=?";
-        $passwordEncriptado=hash("sha256", ($codUsuario.$password)); // enctripta el password pasado como parametro
-        $resultadoConsulta = DBPDO::ejecutarConsulta($sentenciaSQL, [$codUsuario,$passwordEncriptado]); // guardo en la variable resultado el resultado que me devuelve la funcion que ejecuta la consulta con los paramtros pasados por parmetro
-        
-        if($resultadoConsulta->rowCount()>0){ // si la consulta me devuelve algun resultado
-            $oRegistroUsuario = $resultadoConsulta->fetchObject(); // guardo en la variable el resultado de la consulta en forma de objeto.
-            //Se convierte la fecha en datetime
-            $fechaBD = $oRegistroUsuario ->T01_FechaHoraUltimaConexion;
-            $oFechaValida = ($fechaBD) ? new DateTime($fechaBD) : null;
+    public static function validarUsuario($codUsuario, $password)
+    {
+        $oUsuario = null;
+        $sentenciaSQL = "SELECT * FROM T_01Usuario WHERE T01_CodUsuario=? AND T01_Password=?";
+        $passwordEncriptado = hash("sha256", ($codUsuario . $password));
+        $resultadoConsulta = DBPDO::ejecutarConsulta($sentenciaSQL, [$codUsuario, $passwordEncriptado]);
+
+        if ($resultadoConsulta->rowCount() > 0) {
+            $oRegistroUsuario = $resultadoConsulta->fetchObject();
+
+            // Convertimos la fecha de la DB a objeto DateTime (si existe)
+            $fechaBD = $oRegistroUsuario->T01_FechaHoraUltimaConexion;
+            $oFechaAnterior = ($fechaBD) ? new DateTime($fechaBD) : null;
 
             $oUsuario = new Usuario(
                 $oRegistroUsuario->T01_CodUsuario,
                 $oRegistroUsuario->T01_Password,
                 $oRegistroUsuario->T01_DescUsuario,
                 $oRegistroUsuario->T01_NumConexiones,
-                $oFechaValida,
-                // He quitado el null que estaba aquí
+                $oFechaAnterior, 
                 $oRegistroUsuario->T01_Perfil,
                 $oRegistroUsuario->T01_ImagenUsuario
             );
-            
         }
-        return $oUsuario;    
+        return $oUsuario;
     }
 
     /**

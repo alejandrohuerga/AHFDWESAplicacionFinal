@@ -7,5 +7,7 @@
  * Created: 20 nov. 2025
  */
 
-DROP DATABASE IF EXISTS DBAHFDWESLoginLogoffTema5;
-DROP USER 'userAHFDWESLoginLogoffTema5'@'%';
+
+DROP DATABASE IF EXISTS DBAHFDWESAplicacionFinal;
+
+DROP USER 'userAHFDWESAplicacionFinal'@'%';

@@ -33,18 +33,16 @@ class Usuario
      * @param String $perfil Opcional. Cadena con el valor 'administrador o 'usuario' por defecto 'usuario'.
      * @param String | null Imagen del perfil del usuario.
      */
-    public function __construct($codUsuario, $password, $descUsuario, $numAccesos, $fechaHoraUltimaConexionAnterior, $perfil, $imagenUsuario)
+    public function __construct($codUsuario, $password, $descUsuario, $numAccesos, $fechaUltimaConexionDB, $perfil, $imagenUsuario)
     {
         $this->codUsuario = $codUsuario;
         $this->password = $password;
         $this->descUsuario = $descUsuario;
         $this->numAccesos = $numAccesos;
-
-        // La conexión actual siempre es "ahora" al loguearse
-        $this->fechaHoraUltimaConexion = new DateTime( "now");
-        $this->fechaHoraUltimaConexionAnterior = $fechaHoraUltimaConexionAnterior;
         $this->perfil = $perfil;
         $this->imagenUsuario = $imagenUsuario;
+        $this->fechaHoraUltimaConexionAnterior = $fechaUltimaConexionDB;
+        $this->fechaHoraUltimaConexion = new DateTime();
     }
 
     /**

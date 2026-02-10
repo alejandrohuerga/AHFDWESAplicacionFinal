@@ -72,38 +72,39 @@
         exit;
     }
 
-    $avInicioPrivado=[ // Array que almacena los datos que obtenemos del objeto usuario.
-        "descUsuario" => $_SESSION['usuarioDAW202LoginLogoff'] -> getDescUsuario(),
-        "numAccesos" => $_SESSION['usuarioDAW202LoginLogoff'] -> getNumAccesos(),
-        "fechaHoraUltimaConexionAnterior" => $_SESSION['usuarioDAW202LoginLogoff'] -> getFechaHoraUltimaConexionAnterior(),
-        "perfil" => $_SESSION['usuarioDAW202LoginLogoff'] -> getPerfil()
+    // Extraemos los datos del objeto que está en la sesión
+    $oUsuarioSesion = $_SESSION['usuarioDAW202LoginLogoff'];
+
+    $avInicioPrivado = [
+        "descUsuario" => $oUsuarioSesion->getDescUsuario(),
+        "numAccesos" => $oUsuarioSesion->getNumAccesos(),
+        "fechaHoraUltimaConexionAnterior" => $oUsuarioSesion->getFechaHoraUltimaConexionAnterior(),
+        "perfil" => $oUsuarioSesion->getPerfil()
     ];
 
-    // Array que almacena los datos para formar el mensaje de bienvenida.
-    $avMensajeBienvenida=[
-        'bienvenida' =>'',
-        'conexiones' =>'',
-        'ultimaConexion' =>''
+    $avMensajeBienvenida = [
+        'bienvenida' => "Bienvenido " . $avInicioPrivado['descUsuario'],
+        'conexiones' => '',
+        'ultimaConexion' => ''
     ];
 
-    $avMensajeBienvenida['bienvenida'] = "Bienvenido " . $avInicioPrivado['descUsuario'];
-    if($avInicioPrivado['numAccesos']<=1){
-        $avMensajeBienvenida['conexiones'] = "! Esta es la primera vez que te conectas !";
-    }else{
-        // Si fechaAnterior ya es un objeto DateTime no hace falta hacer el "new DateTime", se puede usar:
-        if($avInicioPrivado['fechaHoraUltimaConexionAnterior'] instanceof DateTime){
-            // Formatear la fecha y hora según la configuración regional española
-            // IntlDateFormatter::FULL - muestra la fecha completa (día de la semana, día, mes y año)
-            // IntlDateFormatter::LONG - mostraría la fecha (día, mes y año)
-            // IntlDateFormatter::MEDIUM - mostraría la fecha abreviada (ejemplo:12 ene 2025)
-            // IntlDateFormatter::NONE - no muestra la hora
-            $oFormatoFecha=new IntlDateFormatter('es_ES', IntlDateFormatter::FULL, IntlDateFormatter::NONE);
-            $fecha=$oFormatoFecha->format($avInicioPrivado['fechaHoraUltimaConexionAnterior']);
-            $hora = $avInicioPrivado['fechaHoraUltimaConexionAnterior']->format('H:i');
-            $avMensajeBienvenida['conexiones'] = "Esta es la " . $avInicioPrivado['numAccesos'] . " vez que te conectas";
-            $avMensajeBienvenida['ultimaConexion'] = "Usted se conecto por última vez el   " . $fecha . " a las ". $hora;
+    // LÓGICA DE MENSAJES
+    // Si el usuario acaba de registrarse, numAccesos será 1.
+    // Si acaba de loguearse por segunda vez, registrarUltimaConexion lo habrá subido a 2.
+    if ($avInicioPrivado['numAccesos'] <= 1) {
+        $avMensajeBienvenida['conexiones'] = "¡Esta es la primera vez que te conectas!";
+    } else {
+        $fechaAnterior = $avInicioPrivado['fechaHoraUltimaConexionAnterior'];
+        
+        if ($fechaAnterior instanceof DateTime) {
+            $oFormatoFecha = new IntlDateFormatter('es_ES', IntlDateFormatter::FULL, IntlDateFormatter::NONE);
+            $fechaTexto = $oFormatoFecha->format($fechaAnterior);
+            $horaTexto = $fechaAnterior->format('H:i');
+            
+            $avMensajeBienvenida['conexiones'] = "Esta es la " . $avInicioPrivado['numAccesos'] . "ª vez que te conectas";
+            $avMensajeBienvenida['ultimaConexion'] = "Usted se conectó por última vez el " . $fechaTexto . " a las " . $horaTexto;
         }
     }
-    
+
     require_once $view['layout'];
 ?>
