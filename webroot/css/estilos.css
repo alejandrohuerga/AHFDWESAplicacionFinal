@@ -861,10 +861,7 @@ input[name="fechaNasa"]{
 
 /* MTO USUARIOS*/
 
-.controlMtoUsuarios{
-    position: fixed;
-    margin-bottom: 35%;
-}
+
 
 #tablaUsuarios{
     margin-top: 1%;
@@ -878,7 +875,6 @@ input[name="fechaNasa"]{
     }
 
     
-
     & td{
         border-bottom: 1px solid black;
         border-top: 1px solid black;

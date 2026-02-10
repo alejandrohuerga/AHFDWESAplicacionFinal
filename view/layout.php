@@ -27,6 +27,7 @@
         <a href="https://github.com/alejandrohuerga/AHFDWESAplicacionFinal.git" target="_blank">
             <img src="webroot/images/icone-github-grise.png"> 
         </a>
+        <p class="nombre"><a href="http://daw202.local.ieslossauces.es/AHFDWESAplicacionFinal/doc/index.html">PHPDoc</a><p>
     </footer>
 </body>
 </html>
