@@ -143,7 +143,7 @@
                 'fechaAlta' => $fechaAltaDepartamento->format('d-m-Y'),
                 'volumenNegocio' => (number_format($oDepartamento->getVolumenNegocio(), 2, ',', '.').'€'),
                 'fechaBajaDepartamento' => $fechaBajaFormateada,
-                'estadoDepartamento' => $fechaBajaFormateada=''?'baja':'alta'
+                'estadoDepartamento' => $fechaBajaFormateada==''?'baja':'alta'
             ];
         }
     }
