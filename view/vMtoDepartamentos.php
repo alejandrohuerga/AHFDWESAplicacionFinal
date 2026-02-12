@@ -8,6 +8,12 @@
 </header>
 
 <main>
+    <div class="funcionesDep">
+        <form method="post">
+            <input type="submit" name="volver" value="Volver" />
+            <input type="submit" name="crearDep" value="Crear Departamento"/>
+        </form>
+    </div>
     <form name="formulario" method="post">
         <label class="buscar" for="DescDepBuscado">
             <input type="text" name="DescDepBuscado" class="buscar" value="<?= $descBuscada ?>"/>
@@ -70,7 +76,4 @@
             <tr><td colspan="9">No se han encontrado departamentos.</td></tr>
         <?php endif; ?>
     </table>
-    <form method="post">
-        <input type="submit" name="volver" value="Volver" />
-    </form>
 </main>

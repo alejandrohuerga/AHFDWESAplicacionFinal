@@ -27,6 +27,14 @@
         exit;
     }
 
+    // Código que se ejecuta al pulsar el botón crear departamento.
+    if(isset($_REQUEST['crearDep'])){
+        $_SESSION['paginaAnterior'] = $_SESSION['paginaEnCurso'];
+        $_SESSION['paginaEnCurso'] = 'altaDepartamento';
+        header("location:index.php");
+        exit;
+    }
+
     
     if (isset($_REQUEST['mostrar'])) {
         // Guardamos el código capturado del input hidden en la sesión

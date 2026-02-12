@@ -32,6 +32,7 @@
         'error' => 'controller/cError.php',
         'api'=>'controller/cREST.php',
         'registro' => 'controller/cRegistro.php',
+        'altaDepartamento' => 'controller/cAltaDepartamento.php',
         'modificarDepartamento' => 'controller/cModificarDepartamento.php',
         'consultarDepartamento' => 'controller/cConsultarDepartamento.php',
         'micuenta' => 'controller/cMiCuenta.php',
@@ -50,11 +51,12 @@
         'error' => 'view/vError.php',
         'api' => 'view/vREST.php',
         'registro' => 'view/vRegistro.php',
+        'altaDepartamento' => 'view/vAltaDepartamento.php',
         'modificarDepartamento' => 'view/vModificarDepartamento.php',
         'consultarDepartamento' => 'view/vConsultarDepartamento.php',
         'micuenta' => 'view/vMiCuenta.php',
         'borrarDepartamento'=>'view/vEliminarDepartamento.php',
-        'mtoUsuarios' => 'view/vMtoUsuarios.php'
+        'mtoUsuarios' => 'view/vMtoUsuarios.php',
     ];
 
     // Array que controla los diferentes perfiles de los usuarios para funcionalidad.

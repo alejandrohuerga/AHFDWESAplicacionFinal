@@ -111,6 +111,31 @@
         }
 
         /**
+         * Función para dar de alta un nuevo departamento.
+         * Función que da de alta un nuevo departamento en la base de datos.
+         * 
+         * @param String $codDepartamento código del departamento.
+         * @param String $descDepartamento descripción del departamento.
+         * @param Float $volumenDeNegocio volumen de negocio del departamento.
+         * 
+         * @version 1.0.0 Fecha última actualización 12/02/2026
+         * @since 12/02/2026
+         */
+
+        public static function altaDepartamento ($codDepartamento,$descDepartamento,$volumenDeNegocio){
+            $altaDepartamento=false;
+
+            $sentenciaSQL="INSERT INTO T_02Departamento (T02_CodDepartamento,T02_DescDepartamento,T02_FechaCreacionDepartamento,T02_VolumenDeNegocio) VALUES (?,?,NOW(),?)";
+            $resultadoConsulta=DBPDO::ejecutarConsulta($sentenciaSQL,[$codDepartamento,$descDepartamento,$volumenDeNegocio]);
+
+            if($resultadoConsulta){
+                $altaDepartamento=true;
+            }
+
+            return $altaDepartamento;
+        }
+
+        /**
          * Función para modificar un Departamento en la base de datos.
          * Parámetros: $codDepartamento, $descDepartamento, $volumenDepartamento.
          * 
