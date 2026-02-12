@@ -7,8 +7,8 @@
  * Created: 26 nov 2025
  */
 
-CREATE DATABASE IF  NOT EXISTS DBAHFDWESLoginLogoff;
-USE DBAHFDWESLoginLogoff;
+CREATE DATABASE IF  NOT EXISTS DBAHFDWESAplicacionFinal;
+USE DBAHFDWESAplicacionFinal;
 
 CREATE TABLE IF NOT EXISTS T_01Usuario (
                      T01_CodUsuario VARCHAR(15) PRIMARY KEY,
@@ -40,7 +40,7 @@ CREATE TABLE IF NOT EXISTS T_02Departamento (
                      
 
 
-USE DBAHFDWESLoginLogoffTema5;
+USE DBAHFDWESAplicacionFinal;
 
 INSERT INTO T_01Usuario (T01_CodUsuario,T01_Password,T01_DescUsuario,T01_ImagenUsuario)
                 VALUES

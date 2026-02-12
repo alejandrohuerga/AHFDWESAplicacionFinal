@@ -24,28 +24,36 @@
          */
 
         public static function apiNasa($fecha){
-            // Accedemos a la URL de la Nasa
-            // El @ evita que salga el warning por pantalla
-            $resultado=@file_get_contents("https://api.nasa.gov/planetary/apod?date=$fecha&api_key=" . API_KEY_NASA);
+            $url = "https://api.nasa.gov/planetary/apod?date=$fecha&api_key=" . self::API_KEY_NASA;
 
-            if($resultado === false){
+            if (!function_exists('curl_init')) {
+                return null; // cURL no disponible
+            }
+
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // si hay problema con certificados
+            $resultado = curl_exec($ch);
+            curl_close($ch);
+
+            if(!$resultado){
                 return null;
             }
 
-            $archivoApi=json_decode($resultado,true);
-
-            // Si el archivo se ha decodificado correctamente devuelve la foto.
-            if(isset($archivoApi)){
-                $fotoNasa=new FotoNasa(
-                    $archivoApi['title'],
-                    $archivoApi['explanation'] ?? '',
-                    $archivoApi['media_type'] ?? '',
-                    $archivoApi['service_version'] ?? '',
-                    $archivoApi['url'],
-                    $archivoApi['date']
-                );
-                return $fotoNasa;
+            $archivoApi = json_decode($resultado, true);
+            if(!$archivoApi){
+                return null;
             }
+
+            return new FotoNasa(
+                $archivoApi['title'] ?? '',
+                $archivoApi['explanation'] ?? '',
+                $archivoApi['media_type'] ?? '',
+                $archivoApi['service_version'] ?? '',
+                $archivoApi['url'] ?? '',
+                $archivoApi['date'] ?? ''
+            );
         }
     }
 ?>
