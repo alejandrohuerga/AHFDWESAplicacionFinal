@@ -40,7 +40,7 @@ CREATE TABLE IF NOT EXISTS T_02Departamento (
                      
 
 
-USE DBAHFDWESAplicacionFinal;
+USE DBAHFDWESLoginLogoff;
 
 INSERT INTO T_01Usuario (T01_CodUsuario,T01_Password,T01_DescUsuario,T01_ImagenUsuario)
                 VALUES
@@ -61,7 +61,8 @@ INSERT INTO T_01Usuario (T01_CodUsuario,T01_Password,T01_DescUsuario,T01_ImagenU
             ('antonio',SHA2('antoniopaso',256),'Antonio Jañez',null),
             ('jorge',SHA2('jorgepaso',256),'Jorge Corral',null),
             ('claudio',SHA2('claudiopaso',256),'Claudio Lozano',null),
-            ('gisela',SHA2('giselapaso',256),'Gisela Folgueral',null)
+            ('gisela',SHA2('giselapaso',256),'Gisela Folgueral',null),
+            ('admin',SHA2('adminpaso',256), 'Administrador','administrador',null)
 ;
 
 
