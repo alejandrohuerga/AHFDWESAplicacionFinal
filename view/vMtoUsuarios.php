@@ -64,7 +64,7 @@
             }
         }
 
-        var urlApi = "https://alejandrohuefer.ieslossauces.es/AHFDWESAplicacionFinal/api/wsBuscaUsuariosPorDesc.php";
+        var urlApi = "https://alejandrohuefer.ieslossauces.es//AHFDWESAplicacionFinal/api/wsBuscaUsuariosPorDesc.php";
 
         fetch(urlApi)
             .then((response) => {
