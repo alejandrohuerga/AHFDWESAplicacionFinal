@@ -94,6 +94,33 @@
         }
     }
 
+
+    // Codigo que se ejecuta si el boton de baja lógica ha sido pulsado.
+    if(isset($_REQUEST['bBajaLogica'])){
+        $oDepartamentoActual= DepartamentoPDO::buscarDepartamentoPorCod($_REQUEST['bBajaLogica']);
+        $_SESSION['departamentoActual']=$oDepartamentoActual;
+        $oDepartamento = DepartamentoPDO::bajaLogicaDepartamento($_SESSION['departamentoActual']);
+        $_SESSION['departamentoActual'] = $oDepartamento;
+        $_SESSION['paginaAnterior'] = $_SESSION['paginaEnCurso'];
+        $_SESSION['paginaEnCurso'] = 'departamento';
+        header('Location: index.php');
+        exit;
+    }
+
+    // Comprobamos que el botón "bAltaLogica" ha sido pulsado.
+    if(isset($_REQUEST['bAltaLogica'])){
+        // En caso de haber sido pulsado guardamos el departamento por código en
+        // la sesión y realizamos la rehabilitación del departamento. Recargamos la página.
+        $oDepartamentoActual = DepartamentoPDO::buscarDepartamentoPorCod($_REQUEST['bAltaLogica']);
+        $_SESSION['departamentoActual'] = $oDepartamentoActual;
+        $oDepartamento = DepartamentoPDO::rehabilitaDepartamento($_SESSION['departamentoActual']);
+        $_SESSION['departamentoActual'] = $oDepartamento;
+        $_SESSION['paginaAnterior'] = $_SESSION['paginaEnCurso'];
+        $_SESSION['paginaEnCurso'] = 'departamento';
+        header('Location: index.php');
+        exit;
+    }
+
     // --- CONVERSIÓN DE OBJETOS A ARRAY PARA LA VISTA ---
     // Este es el array que usará la vista para no tocar objetos directamente
     $aVDepartamentos = [];
@@ -103,10 +130,11 @@
         foreach ($aDepartamentosObjetos as $oDepartamento) {
             // Formateamos las fechas a datetime para sacarlo por pantalla.
             $fechaAltaDepartamento = new DateTime(($oDepartamento->getFechaCreacionDepartamento()));
+            $fechaBajaFormateada=null;
 
             if(!is_null($oDepartamento->getFechaBajaDepartamento())){
                 $fechaBajaDepartamento = new DateTime($oDepartamento->getFechaBajaDepartamento());
-                $fechaBajaFormateada = $fechaAltaDepartamento->format('d-m-Y');
+                $fechaBajaFormateada = $fechaBajaDepartamento->format('d-m-Y');
             }
 
             $aVDepartamentos[] = [
@@ -114,10 +142,13 @@
                 'descDepartamento' => $oDepartamento->getDescDepartamento(),
                 'fechaAlta' => $fechaAltaDepartamento->format('d-m-Y'),
                 'volumenNegocio' => (number_format($oDepartamento->getVolumenNegocio(), 2, ',', '.').'€'),
-                'fechaBaja' => $fechaBajaFormateada ?? '—'
+                'fechaBajaDepartamento' => $fechaBajaFormateada,
+                'estadoDepartamento' => $fechaBajaFormateada=''?'baja':'alta'
             ];
         }
     }
+
+    echo $aVDepartamentos[0]['fechaBajaDepartamento'];
     
     $descBuscada = $_SESSION['descBuscada'];
 

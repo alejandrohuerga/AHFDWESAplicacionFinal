@@ -34,7 +34,7 @@
                     <td><?= $departamento['descDepartamento'] ?></td>
                     <td><?= $departamento['fechaAlta']?></td>
                     <td><?= $departamento['volumenNegocio'] ?></td>
-                    <td><?= $departamento['fechaBaja'] ?></td>
+                    <td><?= $departamento['fechaBajaDepartamento'] ?></td>
                     <td>
                         <form method="post">
                             <input type="hidden" name="codDepartamentoVer" value="<?= $departamento['codDepartamento'] ?>">
@@ -43,7 +43,11 @@
                             </button>
                         </form>
                     </td>
-                    <td></td>
+                    <td class="<?php echo ($departamento['fechaBajaDepartamento']) ? 'baja' : ''?> iconosBajaAlta">
+                        <form method="post">
+                            <button type="submit" <?php echo ($departamento['fechaBajaDepartamento']) ? 'class="baja" name="bAltaLogica"' : 'class="alta" name="bBajaLogica"'?> value="<?php echo $departamento['codDepartamento']?>"><i <?php echo ($departamento['fechaBajaDepartamento']) ? 'class="fas fa-arrow-up"' : 'class="fas fa-arrow-down"'?>></i></button>
+                        </form>
+                    </td>
                     <td>
                         <form method="post">
                             <input type="hidden" name="codDepartamentoEditar" value="<?= $departamento['codDepartamento'] ?>">

@@ -178,10 +178,32 @@
          * @since 09/02/2026
          */
 
-        public static function bajaLogicaDepartamento ($codDepartamento){
+        public static function bajaLogicaDepartamento ($oDepartamento){
+
+            $sql = <<<SQL
+                UPDATE T_02Departamento
+                    SET T02_FechaBajaDepartamento = now()
+                    WHERE T02_CodDepartamento = :codDepartamento
+            SQL;
+            
+            try{
+                $consulta = DBPDO::ejecutarConsulta($sql, [
+                    ':codDepartamento' => $oDepartamento->getCodDepartamento()
+                ]);
+                
+                if($consulta){
+                    $oDepartamento->setFechaBajaDepartamento(new DateTime());
+                    return $oDepartamento;
+                } else{
+                    return null;
+                }
+            } catch(Exception $ex){
+                return null;
+        }
+            /*
             $bajaDepartamento = false;
             
-            $consultaSQL="UPDATE T_02Departamento SET T02_FechaBajaDepartamento = UNIX_TIMESTAMP() WHERE T02_CodDepartamento=?";
+            $consultaSQL="UPDATE T_02Departamento SET T02_FechaBajaDepartamento = NOW() WHERE T02_CodDepartamento=?";
             $resultadoConsulta=DBPDO::ejecutarConsulta($consultaSQL,[$codDepartamento]);
 
             if($resultadoConsulta!=null){
@@ -189,6 +211,7 @@
             }
 
             return $bajaDepartamento;
+            */
         }
 
         /**
@@ -202,17 +225,27 @@
          * @since 09/02/2026
          */
 
-        public static function rehabilitaDepartamento($codDepartamento){
-            $departamentoRehabilitado = false;
-
-            $consultaSQL="UPDATE T_02Departamento SET T02_FechaBajaDepartamento = NULL WHERE T02_CodDepartamento=?";
-            $resultadoConsulta=DBPDO::ejecutarConsulta($consultaSQL,[$codDepartamento]);
-
-            if($resultadoConsulta!=null){
-                $bajaDepartamento=true;
+        public static function rehabilitaDepartamento($oDepartamento){
+                $sql = <<<SQL
+                UPDATE T_02Departamento
+                    SET T02_FechaBajaDepartamento = null
+                    WHERE T02_CodDepartamento = :codDepartamento
+                SQL;
+        
+            try{
+                $consulta = DBPDO::ejecutarConsulta($sql, [
+                    ':codDepartamento' => $oDepartamento->getCodDepartamento()
+                ]);
+                
+                if($consulta){
+                    $oDepartamento->setFechaBajaDepartamento(null);
+                    return $oDepartamento;
+                } else{
+                    return null;
+                }
+            } catch(Exception $ex){
+                return null;
             }
-
-            return $codDepartamento;
         }
     }
 ?>

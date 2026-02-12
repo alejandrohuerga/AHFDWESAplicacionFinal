@@ -73,6 +73,16 @@
                 return $this->fechaBajaDepartamento;
         }
 
+
+        /**
+         * Set the value of fechaBajaDepartamento
+         */
+        public function setFechaBajaDepartamento($fechaBajaDepartamento): self
+        {
+                $this->fechaBajaDepartamento = $fechaBajaDepartamento;
+
+                return $this;
+        }
     }
 
 ?>

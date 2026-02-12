@@ -983,3 +983,21 @@ input[id="campoBusquedaUsuario"]{
 #formularioEliminar input[name="volver"]{
     width: 45%;
 }
+
+/* ALTA Y BAJA LÓGICA DEPARTAMENTO */
+
+button.baja{
+    background: red;
+    
+    margin: 10px;
+    padding: 10px;
+    border-radius: 20%;
+}
+
+.alta{
+    background: green;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 20%;
+}
+
