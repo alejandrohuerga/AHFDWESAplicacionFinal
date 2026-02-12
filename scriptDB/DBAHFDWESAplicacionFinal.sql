@@ -40,7 +40,7 @@ CREATE TABLE IF NOT EXISTS T_02Departamento (
                      
 
 
-USE DBAHFDWESLoginLogoff;
+USE DBAHFDWESAplicacionFinal;
 
 INSERT INTO T_01Usuario (T01_CodUsuario,T01_Password,T01_DescUsuario,T01_ImagenUsuario)
                 VALUES
