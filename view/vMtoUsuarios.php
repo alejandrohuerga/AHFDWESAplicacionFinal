@@ -52,7 +52,7 @@
                 fila.appendChild(celda3);
 
                 celda4 = document.createElement("td");
-                celda4.textContent = usuarios[i].fechaHoraUltimaConexion.date;
+                celda4.textContent = usuarios[i].fechaHoraUltimaConexion.date.substring(0,10);
                 fila.appendChild(celda4);
 
                 celda5 = document.createElement("td");
