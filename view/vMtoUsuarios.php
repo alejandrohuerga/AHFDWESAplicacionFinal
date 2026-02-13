@@ -220,7 +220,7 @@
                     <p><strong>Descripción:</strong> ${usuario.descUsuario}</p>
                     <p><strong>Nº Conexiones:</strong> ${usuario.numConexiones}</p>
                     <p><strong>Perfil:</strong> ${usuario.perfilUsuario}</p>
-                    <p><strong>Última Conexión:</strong> ${usuario.fechaHoraUltimaConexion.date || 'N/A'}</p>
+                    <p><strong>Última Conexión:</strong> ${usuario.fechaHoraUltimaConexion.date.substring(0,10) || 'N/A'}</p>
                 </div>
                 <button id="cerrarBtn" style="
                     width: 100%; margin-top: 20px; padding: 10px; background: #2c3e50;
