@@ -59,7 +59,6 @@
                 celda5.textContent = usuarios[i].perfilUsuario;
                 fila.appendChild(celda5);
 
-                // --- COLUMNA BORRAR (Ahora va primero) ---
                 var celdaBorrar = document.createElement("td");
                 celdaBorrar.style.textAlign = "center";
 
@@ -104,11 +103,7 @@
             }
         }
 
-<<<<<<< HEAD
-        var urlApi = "https://alejandrohuefer.ieslossauces.es//AHFDWESAplicacionFinal/api/wsBuscaUsuariosPorDesc.php";
-=======
-        var urlApi = "http://192.168.1.100/AHFDWESAplicacionFinal/api/wsBuscaUsuariosPorDesc.php";
->>>>>>> developerAHF
+        var urlApi = "https://alejandrohuefer.ieslossauces.es/AHFDWESAplicacionFinal/api/wsBuscaUsuariosPorDesc.php";
 
         fetch(urlApi)
             .then((response) => {
@@ -155,7 +150,7 @@
             document.getElementById("btnConfirmarNo").onclick = () => fondoCnf.remove();
             document.getElementById("btnConfirmarSi").onclick = () => {
                 fondoCnf.remove(); // Quitamos el de confirmación y procedemos al fetch
-                var urlApiEliminar = "http://192.168.1.100/AHFDWESAplicacionFinal/api/wsEliminarUsuario.php?codUsuario=" + codigo;
+                var urlApiEliminar = "https://alejandrohuefer.ieslossauces.es/AHFDWESAplicacionFinal/api/wsEliminarUsuario.php?codUsuario=" + codigo;
 
                 fetch(urlApiEliminar)
                     .then(r => r.json())
