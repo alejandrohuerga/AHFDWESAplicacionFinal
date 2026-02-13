@@ -27,6 +27,14 @@
         exit;
     }
 
+    // Código que se ejecuta al pulsar el botón crear departamento.
+    if(isset($_REQUEST['crearDep'])){
+        $_SESSION['paginaAnterior'] = $_SESSION['paginaEnCurso'];
+        $_SESSION['paginaEnCurso'] = 'altaDepartamento';
+        header("location:index.php");
+        exit;
+    }
+
     
     if (isset($_REQUEST['mostrar'])) {
         // Guardamos el código capturado del input hidden en la sesión
@@ -81,18 +89,9 @@
         }
 
         if($entradaOK){  
-            $aDepartamentosObjetos = DepartamentoPDO::buscaDepartamentoPorDesc($_REQUEST['DescDepBuscado']);
-            $_SESSION['depBuscados'] = $aDepartamentosObjetos; 
             $_SESSION['descBuscada'] = $_REQUEST['DescDepBuscado'];
         } 
-    } else {
-        // Si no hay búsqueda activa, cargamos lo que había en sesión o todos por defecto
-        if(isset($_SESSION['depBuscados']) && !empty($_SESSION['depBuscados'])){
-            $aDepartamentosObjetos = $_SESSION['depBuscados'];
-        } else {
-            $aDepartamentosObjetos = DepartamentoPDO::buscarTodosDepartamentos();
-        }
-    }
+    } 
 
 
     // Codigo que se ejecuta si el boton de baja lógica ha sido pulsado.
@@ -119,6 +118,15 @@
         $_SESSION['paginaEnCurso'] = 'departamento';
         header('Location: index.php');
         exit;
+    }
+
+    if (!empty($_SESSION['descBuscada'])) {
+
+        $aDepartamentosObjetos =DepartamentoPDO::buscaDepartamentoPorDesc($_SESSION['descBuscada']);
+
+    } else {
+
+        $aDepartamentosObjetos =DepartamentoPDO::buscarTodosDepartamentos();
     }
 
     // --- CONVERSIÓN DE OBJETOS A ARRAY PARA LA VISTA ---
@@ -148,7 +156,6 @@
         }
     }
 
-    echo $aVDepartamentos[0]['fechaBajaDepartamento'];
     
     $descBuscada = $_SESSION['descBuscada'];
 
