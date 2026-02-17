@@ -24,7 +24,7 @@
          */
 
         public static function apiNasa($fecha){
-            $url = "https://api.nasa.gov/planetary/apod?date=$fecha&api_key=" . self::API_KEY_NASA;
+            $url = "https://api.nasa.gov/planetary/apod?date=$fecha&api_key=" . API_KEY_NASA;
 
             if (!function_exists('curl_init')) {
                 return null; // cURL no disponible
@@ -49,6 +49,7 @@
             return new FotoNasa(
                 $archivoApi['title'] ?? '',
                 $archivoApi['explanation'] ?? '',
+                $archivoApi['urlHD'] ?? '',
                 $archivoApi['media_type'] ?? '',
                 $archivoApi['service_version'] ?? '',
                 $archivoApi['url'] ?? '',
