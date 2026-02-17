@@ -22,13 +22,13 @@
 <body>
     <?php require_once $view[$_SESSION['paginaEnCurso']];?>
     <footer>
-        <p class="nombre"><a href="https://alejandrohuefer.ieslossauces.es/">Alejandro De la Huerga Fernández</a><p>
+        <p class="nombre"><a href="https://alejandrohuefer.ieslossauces.es/" target="_blank">Alejandro De la Huerga Fernández</a><p>
         <p class="webImitada"><a href="https://www.faceit.com/es" target="_blank">Página Web imitada</a><p>
         <p class="webImitada"><a href="/AHFDWESAplicacionFinal/webroot/images/Curriculum.pdf" target="_blank">Curriculum</a><p>
         <a href="https://github.com/alejandrohuerga/AHFDWESAplicacionFinal.git" target="_blank">
             <img src="webroot/images/icone-github-grise.png"> 
         </a>
-        <p class="nombre"><a href="http://daw202.local.ieslossauces.es/AHFDWESAplicacionFinal/doc/index.html">PHPDoc</a><p>
+        <p class="nombre"><a href="http://alejandrohuefer.ieslossauces.es/AHFDWESAplicacionFinal/doc/index.html" target="_blank">PHPDoc</a><p>
     </footer>
 </body>
 </html>

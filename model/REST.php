@@ -39,6 +39,7 @@
                 $fotoNasa=new FotoNasa(
                     $archivoApi['title'],
                     $archivoApi['explanation'] ?? '',
+                    $archivoApi['hdurl'] ?? '',
                     $archivoApi['media_type'] ?? '',
                     $archivoApi['service_version'] ?? '',
                     $archivoApi['url'],

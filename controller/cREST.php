@@ -22,6 +22,9 @@
         header("location: index.php");  
         exit;
     }
+
+    
+
     $aErrores = [
         'fechaNasa' => null
     ];
@@ -33,6 +36,7 @@
     $fechaNasa = $fechaHoyFormateada; // Por defecto hoy
     $tituloNasa = "No hay datos";
     $explicacionNasa = "";
+    $urlHD ="";
     $urlFotoNasa = null;
     // Si NO se ha enviado el formulario
     if (!isset($_REQUEST['enviarNasa'])) {
@@ -42,12 +46,14 @@
             $fechaNasa = $_SESSION['fechaNasaEnCurso'];
             $tituloNasa = $_SESSION['tituloNasa'] ?? $tituloNasa;
             $explicacionNasa = $_SESSION['explicacionNasa'] ?? $explicacionNasa;
+            $urlHD = $_SESSION['urlHD'] ?? $urlHD;
         } else {
             // Primera carga: foto del día
             $oFotoNasa = REST::apiNasa($fechaHoyFormateada);
             if ($oFotoNasa) {
                 $tituloNasa = $oFotoNasa->getTitulo();
                 $explicacionNasa = $oFotoNasa->getExplicacion();
+                $urlHD=$oFotoNasa -> $oFotoNasa->getUrlHD();
                 $urlFotoNasa = $oFotoNasa->getFoto();
             }
             // Guardamos en sesión
@@ -55,6 +61,7 @@
             $_SESSION['fechaNasaEnCurso'] = $fechaHoyFormateada;
             $_SESSION['tituloNasa'] = $tituloNasa;
             $_SESSION['explicacionNasa'] = $explicacionNasa;
+            $_SESSION['urlHD'] = $urlHD;
         }
     }
 
@@ -77,28 +84,36 @@
                 $tituloNasa = $oFotoNasa->getTitulo();
                 $explicacionNasa = $oFotoNasa->getExplicacion();
                 $urlFotoNasa = $oFotoNasa->getFoto();
+                $urlHD = $oFotoNasa ->getUrlHD();
             }
             // Guardamos en sesión
             $_SESSION['urlFotoNasa'] = $urlFotoNasa;
             $_SESSION['fechaNasaEnCurso'] = $fechaNasa;
             $_SESSION['tituloNasa'] = $tituloNasa;
             $_SESSION['explicacionNasa'] = $explicacionNasa;
+            $_SESSION['urlHD'] = $urlHD;
         } else {
             // Si hay error, usamos último valor guardado
             $urlFotoNasa = $_SESSION['urlFotoNasa'] ?? null;
             $fechaNasa = $_SESSION['fechaNasaEnCurso'] ?? $fechaHoyFormateada;
             $tituloNasa = $_SESSION['tituloNasa'] ?? $tituloNasa;
             $explicacionNasa = $_SESSION['explicacionNasa'] ?? $explicacionNasa;
+            $urlHD = $_SESSION['urlHD'] ?? $urlHD;
         }
     }
+
     // Pasamos a la vista
     $avRestNasa = [
         'fechaNasa' => $fechaNasa,
-        'fotoNasa' => $urlFotoNasa,
+        'fotoNasa' => !empty($urlFotoNasa) ? $urlFotoNasa :null,
         'tituloNasa' => $tituloNasa,
         'explicacionNasa' => $explicacionNasa,
-        'errorNasa' => $aErrores['fechaNasa'] ?? null
+        'errorNasa' => $aErrores['fechaNasa'] ?? null,
+        'mensajeNoFoto' => empty($urlFotoNasa) ? "No hay imagen disponible para esta fecha." : null,
+        'urlHD' => $urlHD ?? null
     ];
+
+    
 
     require_once $view['layout'];
 ?>
