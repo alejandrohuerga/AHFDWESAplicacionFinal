@@ -15,6 +15,4 @@
     define('DNS', 'mysql:host=localhost;dbname=DBAHFDWESAplicacionFinal;charset=utf8');
     define('USUARIODB', 'userAHFDWESAplicacionFinal');
     define('PSWD', 'Huerga2002');
-    
-    
 ?>
