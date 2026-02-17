@@ -18,7 +18,7 @@ CREATE TABLE IF NOT EXISTS T_01Usuario (
     T01_FechaHoraUltimaConexion DATETIME,
     T01_NumConexiones INT NOT NULL DEFAULT 0,
     T01_Perfil VARCHAR(25) default 'usuario',
-    T01_ImagenUsuario VARCHAR(255)
+    T01_ImagenUsuario mediumblob NULL
     )engine=innodb;
     
 

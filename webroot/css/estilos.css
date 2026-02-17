@@ -1144,3 +1144,105 @@ button.baja{
         height: 60vh;
     }
 }
+
+/* FORMULARIO EDITAR CUENTA */
+
+#formularioMiCuenta{
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 3px;
+    background: black;
+    padding: 30px;
+}
+
+#formularioMiCuenta h3{
+    margin:4%;
+    text-align: center;
+}
+
+#editarCancelar{
+    margin-top: 4%;
+}
+
+.campos{
+    height: 30px;
+    width: 90%;
+    font-family: Play,sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: inherit;
+    color: rgb(241,241,241);
+    padding: 8px 24px;
+    background-color: rgb(56,56,56);
+    border: none;
+    border-radius: 4px;
+}
+
+input[name="DescUsuario"]{
+    color: black;
+    background-color: lightgoldenrodyellow;
+}
+
+input[name="imagen"]{
+    color: black;
+    background-color: lightgoldenrodyellow;
+    
+}
+
+input[name="editarCuenta"]{
+    height: 32px;
+    margin-right: 2%;
+    font-family: Play,sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: inherit;
+    color: rgb(241,241,241);
+    padding: 8px 24px;
+    background-color: rgb(255, 108, 32);
+    border: none;
+    border-radius: 4px;
+}
+
+input[name="borrarCuenta"]{
+    height: 32px;
+    margin-left: 2%;
+    font-family: Play,sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: inherit;
+    color: rgb(241,241,241);
+    padding: 8px 24px;
+    background-color:red;
+    border: none;
+    border-radius: 4px;
+}
+
+input[name="borrarCuentaPagina"]{
+    height: 32px;
+    margin-right: 2%;
+    font-family: Play,sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: inherit;
+    color: rgb(241,241,241);
+    padding: 8px 24px;
+    background-color:red;
+    border: none;
+    border-radius: 4px;
+}
+#editarCancelar{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#formularioMiCuenta h4{
+    background: yellow;
+    color: black;
+    padding: 2%;
+    border-radius: 5%;
+    text-align: center;
+    margin-bottom: 3%;
+}
+
