@@ -49,10 +49,10 @@
             return new FotoNasa(
                 $archivoApi['title'] ?? '',
                 $archivoApi['explanation'] ?? '',
-                $archivoApi['urlHD'] ?? '',
+                $archivoApi['hdurl'] ?? '',       // <- HD
                 $archivoApi['media_type'] ?? '',
                 $archivoApi['service_version'] ?? '',
-                $archivoApi['url'] ?? '',
+                $archivoApi['url'] ?? '',         // <- normal
                 $archivoApi['date'] ?? ''
             );
         }
