@@ -214,6 +214,39 @@ class UsuarioPDO{
     }
 
     /**
+     * Funcion que modifica un Usuario de la base de datos.
+     * Si el valor del parametro de la imagen no es null modifica tambien la imagen de perfil del usuario.
+     * 
+     * @param String $codUsuario codigo del usuario que queremos modificar.
+     * @param String $descUsuario descripcion del usuario a editar.
+     * @return null | oUsuario devuelve un objeto Usuario con la información modificada.
+     * 
+     * @version 1.0.0 Fecha Última modificación: 16/02/2026.
+     * @since 15/02/2026
+     */
+
+    public static function modificarUsuario ($codUsuario,$descUsuario,$imagenUsuario){
+        $oUsuario = null; 
+        $sql = "UPDATE T_01Usuario SET T01_DescUsuario = ?" . 
+            ($imagenUsuario !== null ? ", T01_ImagenUsuario = ?" : "") . 
+            " WHERE T01_CodUsuario = ?";
+
+        if ($imagenUsuario !== null) {
+            $parametros = [$descUsuario, $imagenUsuario, $codUsuario];
+        } else {
+            $parametros = [$descUsuario, $codUsuario];
+        }
+        // Ejecutamos la consulta
+        $resultadoConsulta = DBPDO::ejecutarConsulta($sql, $parametros);
+
+        if ($resultadoConsulta) { 
+            $oUsuario = self::buscarUsuarioPorCod($codUsuario); 
+        }
+
+        return $oUsuario;
+    }
+
+    /**
      * Función que elimina un usuario de la base de datos.
      * 
      * @param String $codUsuario Codigo del usuario.
@@ -232,5 +265,41 @@ class UsuarioPDO{
 
         return $usuarioEliminado; 
     }
+
+    /**
+     * Función que busca un Usuario por su codigo de Usuario.
+     * 
+     * @param String $codUsuario codigo del Usuario a buscar.
+     * @return oUsuario | null devuelve un objeto Usuario o null si no existe.
+     * 
+     */
+
+    public static function buscarUsuarioPorCod($codUsuario){
+        $oUsuario = null;
+        $sql = "SELECT * FROM T_01Usuario WHERE T01_CodUsuario = :codUsuario";
+
+        try {
+            $consulta = DBPDO::ejecutarConsulta($sql, [':codUsuario' => $codUsuario]);
+            $usuarioBD = $consulta->fetchObject();
+
+            if ($usuarioBD) {
+                $oFechaUltimaConexion = ($usuarioBD->T01_FechaHoraUltimaConexion) ? new DateTime($usuarioBD->T01_FechaHoraUltimaConexion) : null;
+                $oUsuario = new Usuario(
+                    $usuarioBD->T01_CodUsuario,
+                    $usuarioBD->T01_Password,
+                    $usuarioBD->T01_DescUsuario,
+                    $usuarioBD->T01_NumConexiones,
+                    $oFechaUltimaConexion,
+                    $usuarioBD->T01_Perfil,
+                    $usuarioBD->T01_ImagenUsuario
+                );
+            }
+        } catch (Exception $e) {
+            error_log("Error en buscarUsuarioPorCod: " . $e->getMessage());
+            return null;
+        }
+        return $oUsuario;
+    }
+
 }
 ?>

@@ -12,18 +12,26 @@
             <div class="tituloRest">
                 <form name="formularioNasa" method="post">
                     <label for="fechaNasa">Fecha: </label>
-                    <input class="formulariosApi" type="date" name="fechaNasa" value="<?php echo $avRestNasa['fechaNasa']?>"/>
+                    <input class="formulariosApi" type="date" name="fechaNasa" value="<?php echo $avRestNasa['fechaNasa'] ?>" />
                     <span style="color: red;" class="error rojo"><?php echo $avRestNasa['errorNasa'] ?></span>
                     <input type="submit" name="enviarNasa" value="BUSCAR">
-                    <input type="submit" name="detalleNasa" value="DETALLE">
+                    <?php if(!empty($avRestNasa['urlHD'])): ?>
+                        <input type="button" name="detalleNasa" value="DETALLE" onclick="window.open('<?= $avRestNasa['urlHD'] ?>', '_blank')">
+                    <?php else: ?>
+                        <span>No hay imagen en alta definición</span>
+                    <?php endif; ?>
                 </form>
-                <?php echo '<h2 id="tituloFotoNasa">' . $avRestNasa['tituloNasa']. '</h2>' ?>
+                <?php echo '<h2 id="tituloFotoNasa">' . $avRestNasa['tituloNasa'] . '</h2>' ?>
             </div>
             <div class="infoRest">
-                <img src="<?php echo $avRestNasa['fotoNasa']?>" alt="Foto de la NASA" width="300px" height="200px">
+                <?php if (!empty($avRestNasa['fotoNasa'])): ?>
+                    <img src="<?= htmlspecialchars($avRestNasa['fotoNasa']) ?>" alt="<?= htmlspecialchars($avRestNasa['tituloNasa']) ?>" style="width:300px; heigth:200px;">
+                <?php else: ?>
+                    <p><?= htmlspecialchars($avRestNasa['mensajeNoFoto']) ?></p>
+                <?php endif; ?>
             </div>
             <div id="descripcionFotoNasa">
-                <?php echo '<p id="descripcionNasa">' .  $avRestNasa['explicacionNasa']. '</p>'?>
+                <?php echo '<p id="descripcionNasa">' .  $avRestNasa['explicacionNasa'] . '</p>' ?>
             </div>
             <div class="infoApi">
                 <p><b>Instrucciones de uso:</b> <a target="blank" href=" https://api.nasa.gov" id="urlNasa"> https://api.nasa.gov</a></p>

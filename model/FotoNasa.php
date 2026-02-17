@@ -1,5 +1,6 @@
-<?php 
-    /**
+<?php
+
+/**
      * Clase que representa la foto del día de la nasa con su título y URL.
      * Permite acceder a los distintos atributos de la foto.
      * 
@@ -7,16 +8,17 @@
      * @since 18/01/2026
      * @version 1.0.0 Última actualización 18/01/2026
      */
-    
-    class FotoNasa{
-        private $titulo;
-        private $explicacion;
-        private $media_type;
-        private $version_servicio;
-        private $foto;
-        private $fecha;
+class FotoNasa
+{
+    private $titulo;
+    private $explicacion;
+    private $urlHD;
+    private $media_type;
+    private $version_servicio;
+    private $foto;
+    private $fecha;
 
-        /**
+    /**
          * Funcition __construct
          * Función constructor para poder crear un objeto FotoNasa.
          * 
@@ -31,62 +33,61 @@
          * @author Alejandro De la Huerga.
          * @version 1.0.0
          */
+    public function __construct($titulo, $explicacion, $urlHD, $media_type, $version_servicio, $foto, $fecha)
+    {
+        $this->titulo = $titulo;
+        $this->explicacion = $explicacion;
+        $this->urlHD = $urlHD;
+        $this->media_type = $media_type;
+        $this->version_servicio = $version_servicio;
+        $this->foto = $foto;
+        $this->fecha = $fecha;
+    }
 
-        public function __construct( $titulo,  $explicacion,  $media_type,  $version_servicio,  $foto,  $fecha){
-            $this->titulo = $titulo;
-            $this->explicacion = $explicacion;
-            $this->media_type = $media_type;
-            $this->version_servicio = $version_servicio;
-            $this->foto = $foto;
-            $this->fecha = $fecha;
-        }
-
-        /**
+    /**
          * Get the value of titulo
          */
-        public function getTitulo()
-        {
-                return $this->titulo;
-        }
+    public function getTitulo()
+    {
+        return $this->titulo;
+    }
 
-        /**
+    /**
          * Get the value of explicacion
          */
-        public function getExplicacion()
-        {
-                return $this->explicacion;
-        }
+    public function getExplicacion()
+    {
+        return $this->explicacion;
+    }
 
-        /**
-         * Get the value of media_type
-         */
-        public function getMediaType()
-        {
-                return $this->media_type;
-        }
+    public function getUrlHD()
+    {
+        return $this->urlHD;
+    }
 
-        /**
-         * Get the value of version_servicio
-         */
-        public function getVersionServicio()
-        {
-                return $this->version_servicio;
-        }
+    public function getMedia_type()
+    {
+        return $this->media_type;
+    }
 
-        /**
+    public function getVersion_servicio()
+    {
+        return $this->version_servicio;
+    }
+
+    /**
          * Get the value of foto
          */
-        public function getFoto()
-        {
-                return $this->foto;
-        }
-
-        /**
-         * Get the value of fecha
-         */
-        public function getFecha()
-        {
-                return $this->fecha;
-        }
+    public function getFoto()
+    {
+        return $this->foto;
     }
-?>
+
+    /**
+     * Get the value of fecha
+    */
+    public function getFecha()
+    {
+        return $this->fecha;
+    }
+}

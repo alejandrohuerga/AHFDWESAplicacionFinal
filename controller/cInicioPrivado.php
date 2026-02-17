@@ -67,7 +67,7 @@
 
     if(isset($_REQUEST['micuenta'])){
         $_SESSION['paginaAnterior']= $_SESSION['paginaEnCurso'];
-        $_SESSION['paginaEnCurso'] = 'wip';
+        $_SESSION['paginaEnCurso'] = 'micuenta';
         header('Location: index.php');
         exit;
     }
