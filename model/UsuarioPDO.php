@@ -232,5 +232,7 @@ class UsuarioPDO{
 
         return $usuarioEliminado; 
     }
+
+    
 }
 ?>
