@@ -53,7 +53,7 @@
             if ($oFotoNasa) {
                 $tituloNasa = $oFotoNasa->getTitulo();
                 $explicacionNasa = $oFotoNasa->getExplicacion();
-                $urlHD=$oFotoNasa -> $oFotoNasa->getUrlHD();
+                $urlHD = $oFotoNasa->getUrlHD();
                 $urlFotoNasa = $oFotoNasa->getFoto();
             }
             // Guardamos en sesión
