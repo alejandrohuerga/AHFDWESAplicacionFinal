@@ -24,6 +24,7 @@
          */
 
         public static function apiNasa($fecha){
+<<<<<<< HEAD
             $url = "https://api.nasa.gov/planetary/apod?date=$fecha&api_key=" . API_KEY_NASA;
 
             if (!function_exists('curl_init')) {
@@ -38,10 +39,33 @@
             curl_close($ch);
 
             if(!$resultado){
+=======
+            $url = "https://api.nasa.gov/planetary/apod?api_key=" . API_KEY_NASA . "&date=$fecha";
+
+            // Inicializar cURL
+            $ch = curl_init();
+            curl_setopt_array($ch, [
+                CURLOPT_URL => $url,
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_FOLLOWLOCATION => true,
+                CURLOPT_TIMEOUT => 10,
+                CURLOPT_CONNECTTIMEOUT => 10,
+                CURLOPT_SSL_VERIFYPEER => true,
+                CURLOPT_SSL_VERIFYHOST => 2,
+                CURLOPT_USERAGENT => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) PHP-App'
+            ]);
+
+            $resultado = curl_exec($ch);
+            $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+            curl_close($ch);
+
+            if ($resultado === false || $httpCode !== 200) {
+>>>>>>> developerAHF
                 return null;
             }
 
             $archivoApi = json_decode($resultado, true);
+<<<<<<< HEAD
             if(!$archivoApi){
                 return null;
             }
@@ -55,6 +79,64 @@
                 $archivoApi['url'] ?? '',         // <- normal
                 $archivoApi['date'] ?? ''
             );
+=======
+            if (!isset($archivoApi['title'], $archivoApi['media_type'])) {
+                return null;
+            }
+
+            // Solo procesamos si es imagen
+            if ($archivoApi['media_type'] !== 'image') {
+                return "NoHayImagen";
+            }
+
+            // Descargar imagen en binario
+            $imagenBase64 = "";
+            if (!empty($archivoApi['url'])) {
+                $chImg = curl_init();
+                curl_setopt_array($chImg, [
+                    CURLOPT_URL => $archivoApi['url'],
+                    CURLOPT_RETURNTRANSFER => true,
+                    CURLOPT_SSL_VERIFYPEER => true
+                ]);
+                $binario = curl_exec($chImg);
+                curl_close($chImg);
+
+                if ($binario) {
+                    $imagenBase64 = 'data:image/jpeg;base64,' . base64_encode($binario);
+                }
+            }
+
+            // Descargar imagen HD si existe
+            $imagenBase64HD = "";
+            if (!empty($archivoApi['hdurl'])) {
+                $chImgHD = curl_init();
+                curl_setopt_array($chImgHD, [
+                    CURLOPT_URL => $archivoApi['hdurl'],
+                    CURLOPT_RETURNTRANSFER => true,
+                    CURLOPT_SSL_VERIFYPEER => true
+                ]);
+                $binarioHD = curl_exec($chImgHD);
+                curl_close($chImgHD);
+
+                if ($binarioHD) {
+                    $imagenBase64HD = 'data:image/jpeg;base64,' . base64_encode($binarioHD);
+                }
+            }
+
+            // Crear objeto FotoNasa
+            $fotoNasa = new FotoNasa(
+                $archivoApi['title'],
+                $archivoApi['explanation'] ?? '',
+                $archivoApi['hdurl'] ?? '',
+                $archivoApi['media_type'] ?? '',
+                $archivoApi['service_version'] ?? '',
+                $archivoApi['url'],
+                $archivoApi['date']
+            );
+
+            return $fotoNasa;
+>>>>>>> developerAHF
         }
     }
+    
 ?>
